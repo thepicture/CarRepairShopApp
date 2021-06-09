@@ -21,7 +21,10 @@ namespace CarRepairShopApp
 
         private void BtnExit_Click(object sender, RoutedEventArgs e)
         {
-            App.Current.Shutdown();
+            if (MessageBox.Show("Точно выйти из программы?", "Предупреждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                App.Current.Shutdown();
+            }
         }
 
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
@@ -51,7 +54,7 @@ namespace CarRepairShopApp
         {
             if (loginRegex.IsMatch(TBoxLogin.Text))
             {
-                TBoxLogin.Background = Brushes.White;
+                TBoxLogin.Background = Brushes.Transparent;
                 BtnRegisterConfirm.IsEnabled = true;
             }
             else
@@ -59,6 +62,7 @@ namespace CarRepairShopApp
                 TBoxLogin.Background = Brushes.LightPink;
                 BtnRegisterConfirm.IsEnabled = false;
             }
+            UpdateState();
         }
 
         readonly Regex nameRegex = new Regex(pattern: @"\w+\s\w+\s\w+");
@@ -66,7 +70,7 @@ namespace CarRepairShopApp
         {
             if (nameRegex.IsMatch(NameBox.Text))
             {
-                NameBox.Background = Brushes.White;
+                NameBox.Background = Brushes.Transparent;
                 BtnRegisterConfirm.IsEnabled = true;
             }
             else
@@ -74,6 +78,7 @@ namespace CarRepairShopApp
                 NameBox.Background = Brushes.LightPink;
                 BtnRegisterConfirm.IsEnabled = false;
             }
+            UpdateState();
         }
 
         private void BtnRegister_Click(object sender, RoutedEventArgs e)
@@ -94,7 +99,7 @@ namespace CarRepairShopApp
         {
             if (passwordRegex.IsMatch(PasswordBoxFirst.Password))
             {
-                PasswordBoxFirst.Background = Brushes.White;
+                PasswordBoxFirst.Background = Brushes.Transparent;
                 BtnRegisterConfirm.IsEnabled = true;
             }
             else
@@ -106,7 +111,7 @@ namespace CarRepairShopApp
                && PasswordBoxFirst.Password.Length > 0
                && PasswordBoxSecond.Password.Length > 0)
             {
-                PasswordBoxSecond.Background = Brushes.White;
+                PasswordBoxSecond.Background = Brushes.Transparent;
                 BtnRegisterConfirm.IsEnabled = true;
             }
             else
@@ -114,6 +119,7 @@ namespace CarRepairShopApp
                 PasswordBoxSecond.Background = Brushes.LightPink;
                 BtnRegisterConfirm.IsEnabled = false;
             }
+            UpdateState();
         }
 
         readonly Regex passwordRegex = new Regex(pattern: @"^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,100}$");
@@ -127,12 +133,12 @@ namespace CarRepairShopApp
             CheckPasswords();
         }
 
-        private void BtnRegisterConfirm_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void UpdateState()
         {
-            if (PasswordBoxFirst.Background == Brushes.White
-                && PasswordBoxSecond.Background == Brushes.White
-                && NameBox.Background == Brushes.White
-                && TBoxLogin.Background == Brushes.White)
+            if (PasswordBoxFirst.Background == Brushes.Transparent
+                && PasswordBoxSecond.Background == Brushes.Transparent
+                && NameBox.Background == Brushes.Transparent
+                && TBoxLogin.Background == Brushes.Transparent)
             {
                 BtnRegisterConfirm.IsEnabled = true;
             }
@@ -140,6 +146,24 @@ namespace CarRepairShopApp
             {
                 BtnRegisterConfirm.IsEnabled = false;
             }
+        }
+
+        private void BtnRegisterConfirm_Click(object sender, RoutedEventArgs e)
+        {
+            User user = new User
+            {
+                USER_LOGIN = TBoxLogin.Text,
+                USER_NAME = NameBox.Text,
+                USER_PASSWORD = PasswordBoxFirst.Password,
+                Role = ComboRole.SelectedItem as Role
+            };
+            Manager.Context.User.Add(user);
+            Manager.Context.SaveChanges();
+            MessageBox.Show("Пользователь " + user.USER_NAME +
+                " успешно зарегистрирован!", "Успешно!",
+                MessageBoxButton.OK,
+                MessageBoxImage.Information);
+            RegisterGrid.Visibility = Visibility.Collapsed;
         }
     }
 }

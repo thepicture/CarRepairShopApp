@@ -139,7 +139,7 @@
                         Content="Зарегистрироваться"
                         Grid.Column="1"
                         IsEnabled="False"
-                        DataContextChanged="BtnRegisterConfirm_DataContextChanged"></Button>
+                        Click="BtnRegisterConfirm_Click"></Button>
                     </Grid>
                 </StackPanel>
             </Grid>
