@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9f3002e1cf864141bbff9d5207aa8fd8" Name="Diagram1">
+        <EntityTypeShape EntityType="BaseModel.Auto" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.Client" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.Contract" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.Master" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.Order" Width="1.5" PointX="7.5" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.Phone" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.Role" Width="1.5" PointX="9.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.Service" Width="1.5" PointX="9.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.ServiceOfModel" Width="1.5" PointX="7.5" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.Status" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.TypeOfCar" Width="1.5" PointX="5.25" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.User" Width="1.5" PointX="12" PointY="5.875" IsExpanded="true" />
+        <AssociationConnector Association="BaseModel.FK_Auto_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseModel.FK_TypeOfCar_Auto" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseModel.FK_Phone_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseModel.FK_Order_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseModel.FK_User_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseModel.FK_ServiceOfModel_Service" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseModel.FK_ServiceOfModel_TypeOfCar" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseModel.AutoOfMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseModel.ContractOfClient" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseModel.ContractOfMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseModel.OrderOfClient" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseModel.OrderOfMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseModel.ServiceOfOrder" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

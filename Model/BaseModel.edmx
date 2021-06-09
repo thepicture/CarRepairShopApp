@@ -1,0 +1,1008 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Auto">
+          <Key>
+            <PropertyRef Name="A_ID" />
+          </Key>
+          <Property Name="A_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CL_ID" Type="int" Nullable="false" />
+          <Property Name="A_NAME" Type="nvarchar" MaxLength="60" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AutoOfMaster">
+          <Key>
+            <PropertyRef Name="M_ID" />
+            <PropertyRef Name="A_ID" />
+          </Key>
+          <Property Name="M_ID" Type="int" Nullable="false" />
+          <Property Name="A_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="CL_ID" />
+          </Key>
+          <Property Name="CL_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CL_NAME" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="CL_PASSNUM" Type="int" Nullable="false" />
+          <Property Name="CL_PASSCODE" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contract">
+          <Key>
+            <PropertyRef Name="CO_ID" />
+          </Key>
+          <Property Name="CO_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CO_ISCHECKED" Type="bit" Nullable="false" />
+          <Property Name="CO_IMAGESCAN" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ContractOfClient">
+          <Key>
+            <PropertyRef Name="CO_ID" />
+            <PropertyRef Name="CL_ID" />
+          </Key>
+          <Property Name="CO_ID" Type="int" Nullable="false" />
+          <Property Name="CL_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ContractOfMaster">
+          <Key>
+            <PropertyRef Name="M_ID" />
+            <PropertyRef Name="CO_ID" />
+          </Key>
+          <Property Name="M_ID" Type="int" Nullable="false" />
+          <Property Name="CO_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Master">
+          <Key>
+            <PropertyRef Name="M_ID" />
+          </Key>
+          <Property Name="M_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="M_NAME" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="M_EXPERIENCE" Type="tinyint" Nullable="false" />
+          <Property Name="M_PASSNUM" Type="int" Nullable="false" />
+          <Property Name="M_PASSCODE" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="O_ID" />
+          </Key>
+          <Property Name="O_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ST_ID" Type="int" Nullable="false" />
+          <Property Name="O_CREATEDATE" Type="date" Nullable="false" />
+          <Property Name="O_ISCHECKED" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderOfClient">
+          <Key>
+            <PropertyRef Name="O_ID" />
+            <PropertyRef Name="CL_ID" />
+          </Key>
+          <Property Name="O_ID" Type="int" Nullable="false" />
+          <Property Name="CL_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderOfMaster">
+          <Key>
+            <PropertyRef Name="M_ID" />
+            <PropertyRef Name="O_ID" />
+          </Key>
+          <Property Name="M_ID" Type="int" Nullable="false" />
+          <Property Name="O_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Phone">
+          <Key>
+            <PropertyRef Name="P_ID" />
+          </Key>
+          <Property Name="P_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CL_ID" Type="int" Nullable="false" />
+          <Property Name="P_NUMBER" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="ROLE_ID" />
+          </Key>
+          <Property Name="ROLE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="SE_ID" />
+          </Key>
+          <Property Name="SE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SE_NAME" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SE_DESCRIPTION" Type="nvarchar" MaxLength="1024" />
+        </EntityType>
+        <EntityType Name="ServiceOfModel">
+          <Key>
+            <PropertyRef Name="SE_ID" />
+            <PropertyRef Name="T_ID" />
+          </Key>
+          <Property Name="SE_ID" Type="int" Nullable="false" />
+          <Property Name="T_ID" Type="int" Nullable="false" />
+          <Property Name="COST" Type="decimal" Precision="20" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiceOfOrder">
+          <Key>
+            <PropertyRef Name="O_ID" />
+            <PropertyRef Name="SE_ID" />
+          </Key>
+          <Property Name="O_ID" Type="int" Nullable="false" />
+          <Property Name="SE_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="ST_ID" />
+          </Key>
+          <Property Name="ST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ST_STATE" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TypeOfCar">
+          <Key>
+            <PropertyRef Name="T_ID" />
+          </Key>
+          <Property Name="T_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="A_ID" Type="int" Nullable="false" />
+          <Property Name="T_NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USER_LOGIN" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="USER_PASSWORD" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="USER_NAME" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ROLE_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Auto_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Auto" Type="Self.Auto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="CL_ID" />
+            </Principal>
+            <Dependent Role="Auto">
+              <PropertyRef Name="CL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AutoOfMaster_Auto">
+          <End Role="Auto" Type="Self.Auto" Multiplicity="1" />
+          <End Role="AutoOfMaster" Type="Self.AutoOfMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Auto">
+              <PropertyRef Name="A_ID" />
+            </Principal>
+            <Dependent Role="AutoOfMaster">
+              <PropertyRef Name="A_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AutoOfMaster_Master">
+          <End Role="Master" Type="Self.Master" Multiplicity="1" />
+          <End Role="AutoOfMaster" Type="Self.AutoOfMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Master">
+              <PropertyRef Name="M_ID" />
+            </Principal>
+            <Dependent Role="AutoOfMaster">
+              <PropertyRef Name="M_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContractOfClient_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="ContractOfClient" Type="Self.ContractOfClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="CL_ID" />
+            </Principal>
+            <Dependent Role="ContractOfClient">
+              <PropertyRef Name="CL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContractOfClient_Contract">
+          <End Role="Contract" Type="Self.Contract" Multiplicity="1" />
+          <End Role="ContractOfClient" Type="Self.ContractOfClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="CO_ID" />
+            </Principal>
+            <Dependent Role="ContractOfClient">
+              <PropertyRef Name="CO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContractOfMaster_Contract">
+          <End Role="Contract" Type="Self.Contract" Multiplicity="1" />
+          <End Role="ContractOfMaster" Type="Self.ContractOfMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="CO_ID" />
+            </Principal>
+            <Dependent Role="ContractOfMaster">
+              <PropertyRef Name="CO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContractOfMaster_Master">
+          <End Role="Master" Type="Self.Master" Multiplicity="1" />
+          <End Role="ContractOfMaster" Type="Self.ContractOfMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Master">
+              <PropertyRef Name="M_ID" />
+            </Principal>
+            <Dependent Role="ContractOfMaster">
+              <PropertyRef Name="M_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="ST_ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderOfClient_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="OrderOfClient" Type="Self.OrderOfClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="CL_ID" />
+            </Principal>
+            <Dependent Role="OrderOfClient">
+              <PropertyRef Name="CL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderOfClient_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="OrderOfClient" Type="Self.OrderOfClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="O_ID" />
+            </Principal>
+            <Dependent Role="OrderOfClient">
+              <PropertyRef Name="O_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderOfMaster_Master">
+          <End Role="Master" Type="Self.Master" Multiplicity="1" />
+          <End Role="OrderOfMaster" Type="Self.OrderOfMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Master">
+              <PropertyRef Name="M_ID" />
+            </Principal>
+            <Dependent Role="OrderOfMaster">
+              <PropertyRef Name="M_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderOfMaster_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="OrderOfMaster" Type="Self.OrderOfMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="O_ID" />
+            </Principal>
+            <Dependent Role="OrderOfMaster">
+              <PropertyRef Name="O_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Phone_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Phone" Type="Self.Phone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="CL_ID" />
+            </Principal>
+            <Dependent Role="Phone">
+              <PropertyRef Name="CL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceOfModel_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="ServiceOfModel" Type="Self.ServiceOfModel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="SE_ID" />
+            </Principal>
+            <Dependent Role="ServiceOfModel">
+              <PropertyRef Name="SE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceOfModel_TypeOfCar">
+          <End Role="TypeOfCar" Type="Self.TypeOfCar" Multiplicity="1" />
+          <End Role="ServiceOfModel" Type="Self.ServiceOfModel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfCar">
+              <PropertyRef Name="T_ID" />
+            </Principal>
+            <Dependent Role="ServiceOfModel">
+              <PropertyRef Name="T_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceOfOrder_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="ServiceOfOrder" Type="Self.ServiceOfOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="O_ID" />
+            </Principal>
+            <Dependent Role="ServiceOfOrder">
+              <PropertyRef Name="O_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceOfOrder_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="ServiceOfOrder" Type="Self.ServiceOfOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="SE_ID" />
+            </Principal>
+            <Dependent Role="ServiceOfOrder">
+              <PropertyRef Name="SE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TypeOfCar_Auto">
+          <End Role="Auto" Type="Self.Auto" Multiplicity="1" />
+          <End Role="TypeOfCar" Type="Self.TypeOfCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Auto">
+              <PropertyRef Name="A_ID" />
+            </Principal>
+            <Dependent Role="TypeOfCar">
+              <PropertyRef Name="A_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="ROLE_ID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="ROLE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BaseModelStoreContainer">
+          <EntitySet Name="Auto" EntityType="Self.Auto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AutoOfMaster" EntityType="Self.AutoOfMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contract" EntityType="Self.Contract" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContractOfClient" EntityType="Self.ContractOfClient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContractOfMaster" EntityType="Self.ContractOfMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Master" EntityType="Self.Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderOfClient" EntityType="Self.OrderOfClient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderOfMaster" EntityType="Self.OrderOfMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Phone" EntityType="Self.Phone" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceOfModel" EntityType="Self.ServiceOfModel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceOfOrder" EntityType="Self.ServiceOfOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeOfCar" EntityType="Self.TypeOfCar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Auto_Client" Association="Self.FK_Auto_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Auto" EntitySet="Auto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AutoOfMaster_Auto" Association="Self.FK_AutoOfMaster_Auto">
+            <End Role="Auto" EntitySet="Auto" />
+            <End Role="AutoOfMaster" EntitySet="AutoOfMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AutoOfMaster_Master" Association="Self.FK_AutoOfMaster_Master">
+            <End Role="Master" EntitySet="Master" />
+            <End Role="AutoOfMaster" EntitySet="AutoOfMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractOfClient_Client" Association="Self.FK_ContractOfClient_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="ContractOfClient" EntitySet="ContractOfClient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractOfClient_Contract" Association="Self.FK_ContractOfClient_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="ContractOfClient" EntitySet="ContractOfClient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractOfMaster_Contract" Association="Self.FK_ContractOfMaster_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="ContractOfMaster" EntitySet="ContractOfMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractOfMaster_Master" Association="Self.FK_ContractOfMaster_Master">
+            <End Role="Master" EntitySet="Master" />
+            <End Role="ContractOfMaster" EntitySet="ContractOfMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Status" Association="Self.FK_Order_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderOfClient_Client" Association="Self.FK_OrderOfClient_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="OrderOfClient" EntitySet="OrderOfClient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderOfClient_Order" Association="Self.FK_OrderOfClient_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderOfClient" EntitySet="OrderOfClient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderOfMaster_Master" Association="Self.FK_OrderOfMaster_Master">
+            <End Role="Master" EntitySet="Master" />
+            <End Role="OrderOfMaster" EntitySet="OrderOfMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderOfMaster_Order" Association="Self.FK_OrderOfMaster_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderOfMaster" EntitySet="OrderOfMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Phone_Client" Association="Self.FK_Phone_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Phone" EntitySet="Phone" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceOfModel_Service" Association="Self.FK_ServiceOfModel_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="ServiceOfModel" EntitySet="ServiceOfModel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceOfModel_TypeOfCar" Association="Self.FK_ServiceOfModel_TypeOfCar">
+            <End Role="TypeOfCar" EntitySet="TypeOfCar" />
+            <End Role="ServiceOfModel" EntitySet="ServiceOfModel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceOfOrder_Order" Association="Self.FK_ServiceOfOrder_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="ServiceOfOrder" EntitySet="ServiceOfOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceOfOrder_Service" Association="Self.FK_ServiceOfOrder_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="ServiceOfOrder" EntitySet="ServiceOfOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TypeOfCar_Auto" Association="Self.FK_TypeOfCar_Auto">
+            <End Role="Auto" EntitySet="Auto" />
+            <End Role="TypeOfCar" EntitySet="TypeOfCar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Auto">
+          <Key>
+            <PropertyRef Name="A_ID" />
+          </Key>
+          <Property Name="A_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CL_ID" Type="Int32" Nullable="false" />
+          <Property Name="A_NAME" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Auto_Client" FromRole="Auto" ToRole="Client" />
+          <NavigationProperty Name="TypeOfCar" Relationship="Self.FK_TypeOfCar_Auto" FromRole="Auto" ToRole="TypeOfCar" />
+          <NavigationProperty Name="Master" Relationship="Self.AutoOfMaster" FromRole="Auto" ToRole="Master" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="CL_ID" />
+          </Key>
+          <Property Name="CL_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CL_NAME" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CL_PASSNUM" Type="Int32" Nullable="false" />
+          <Property Name="CL_PASSCODE" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Auto" Relationship="Self.FK_Auto_Client" FromRole="Client" ToRole="Auto" />
+          <NavigationProperty Name="Phone" Relationship="Self.FK_Phone_Client" FromRole="Client" ToRole="Phone" />
+          <NavigationProperty Name="Contract" Relationship="Self.ContractOfClient" FromRole="Client" ToRole="Contract" />
+          <NavigationProperty Name="Order" Relationship="Self.OrderOfClient" FromRole="Client" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Contract">
+          <Key>
+            <PropertyRef Name="CO_ID" />
+          </Key>
+          <Property Name="CO_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CO_ISCHECKED" Type="Boolean" Nullable="false" />
+          <Property Name="CO_IMAGESCAN" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.ContractOfClient" FromRole="Contract" ToRole="Client" />
+          <NavigationProperty Name="Master" Relationship="Self.ContractOfMaster" FromRole="Contract" ToRole="Master" />
+        </EntityType>
+        <EntityType Name="Master">
+          <Key>
+            <PropertyRef Name="M_ID" />
+          </Key>
+          <Property Name="M_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="M_NAME" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="M_EXPERIENCE" Type="Byte" Nullable="false" />
+          <Property Name="M_PASSNUM" Type="Int32" Nullable="false" />
+          <Property Name="M_PASSCODE" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Auto" Relationship="Self.AutoOfMaster" FromRole="Master" ToRole="Auto" />
+          <NavigationProperty Name="Contract" Relationship="Self.ContractOfMaster" FromRole="Master" ToRole="Contract" />
+          <NavigationProperty Name="Order" Relationship="Self.OrderOfMaster" FromRole="Master" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="O_ID" />
+          </Key>
+          <Property Name="O_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ST_ID" Type="Int32" Nullable="false" />
+          <Property Name="O_CREATEDATE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="O_ISCHECKED" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_Order_Status" FromRole="Order" ToRole="Status" />
+          <NavigationProperty Name="Client" Relationship="Self.OrderOfClient" FromRole="Order" ToRole="Client" />
+          <NavigationProperty Name="Master" Relationship="Self.OrderOfMaster" FromRole="Order" ToRole="Master" />
+          <NavigationProperty Name="Service" Relationship="Self.ServiceOfOrder" FromRole="Order" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="Phone">
+          <Key>
+            <PropertyRef Name="P_ID" />
+          </Key>
+          <Property Name="P_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CL_ID" Type="Int32" Nullable="false" />
+          <Property Name="P_NUMBER" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Phone_Client" FromRole="Phone" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="ROLE_ID" />
+          </Key>
+          <Property Name="ROLE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="SE_ID" />
+          </Key>
+          <Property Name="SE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SE_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SE_DESCRIPTION" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ServiceOfModel" Relationship="Self.FK_ServiceOfModel_Service" FromRole="Service" ToRole="ServiceOfModel" />
+          <NavigationProperty Name="Order" Relationship="Self.ServiceOfOrder" FromRole="Service" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="ServiceOfModel">
+          <Key>
+            <PropertyRef Name="SE_ID" />
+            <PropertyRef Name="T_ID" />
+          </Key>
+          <Property Name="SE_ID" Type="Int32" Nullable="false" />
+          <Property Name="T_ID" Type="Int32" Nullable="false" />
+          <Property Name="COST" Type="Decimal" Precision="20" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Service" Relationship="Self.FK_ServiceOfModel_Service" FromRole="ServiceOfModel" ToRole="Service" />
+          <NavigationProperty Name="TypeOfCar" Relationship="Self.FK_ServiceOfModel_TypeOfCar" FromRole="ServiceOfModel" ToRole="TypeOfCar" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="ST_ID" />
+          </Key>
+          <Property Name="ST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ST_STATE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Order_Status" FromRole="Status" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TypeOfCar">
+          <Key>
+            <PropertyRef Name="T_ID" />
+          </Key>
+          <Property Name="T_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="A_ID" Type="Int32" Nullable="false" />
+          <Property Name="T_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Auto" Relationship="Self.FK_TypeOfCar_Auto" FromRole="TypeOfCar" ToRole="Auto" />
+          <NavigationProperty Name="ServiceOfModel" Relationship="Self.FK_ServiceOfModel_TypeOfCar" FromRole="TypeOfCar" ToRole="ServiceOfModel" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USER_LOGIN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="USER_PASSWORD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ROLE_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+          <Property Name="USER_NAME" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Auto_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Auto" Type="Self.Auto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="CL_ID" />
+            </Principal>
+            <Dependent Role="Auto">
+              <PropertyRef Name="CL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TypeOfCar_Auto">
+          <End Role="Auto" Type="Self.Auto" Multiplicity="1" />
+          <End Role="TypeOfCar" Type="Self.TypeOfCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Auto">
+              <PropertyRef Name="A_ID" />
+            </Principal>
+            <Dependent Role="TypeOfCar">
+              <PropertyRef Name="A_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Phone_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Phone" Type="Self.Phone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="CL_ID" />
+            </Principal>
+            <Dependent Role="Phone">
+              <PropertyRef Name="CL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="ST_ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="ROLE_ID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="ROLE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceOfModel_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="ServiceOfModel" Type="Self.ServiceOfModel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="SE_ID" />
+            </Principal>
+            <Dependent Role="ServiceOfModel">
+              <PropertyRef Name="SE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceOfModel_TypeOfCar">
+          <End Role="TypeOfCar" Type="Self.TypeOfCar" Multiplicity="1" />
+          <End Role="ServiceOfModel" Type="Self.ServiceOfModel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfCar">
+              <PropertyRef Name="T_ID" />
+            </Principal>
+            <Dependent Role="ServiceOfModel">
+              <PropertyRef Name="T_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AutoOfMaster">
+          <End Role="Auto" Type="Self.Auto" Multiplicity="*" />
+          <End Role="Master" Type="Self.Master" Multiplicity="*" />
+        </Association>
+        <Association Name="ContractOfClient">
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+        </Association>
+        <Association Name="ContractOfMaster">
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <End Role="Master" Type="Self.Master" Multiplicity="*" />
+        </Association>
+        <Association Name="OrderOfClient">
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+        </Association>
+        <Association Name="OrderOfMaster">
+          <End Role="Master" Type="Self.Master" Multiplicity="*" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+        </Association>
+        <Association Name="ServiceOfOrder">
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="CarRepairShopBaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Auto" EntityType="Self.Auto" />
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="Contract" EntityType="Self.Contract" />
+          <EntitySet Name="Master" EntityType="Self.Master" />
+          <EntitySet Name="Order" EntityType="Self.Order" />
+          <EntitySet Name="Phone" EntityType="Self.Phone" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="Service" EntityType="Self.Service" />
+          <EntitySet Name="ServiceOfModel" EntityType="Self.ServiceOfModel" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TypeOfCar" EntityType="Self.TypeOfCar" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK_Auto_Client" Association="Self.FK_Auto_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Auto" EntitySet="Auto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TypeOfCar_Auto" Association="Self.FK_TypeOfCar_Auto">
+            <End Role="Auto" EntitySet="Auto" />
+            <End Role="TypeOfCar" EntitySet="TypeOfCar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Phone_Client" Association="Self.FK_Phone_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Phone" EntitySet="Phone" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Status" Association="Self.FK_Order_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceOfModel_Service" Association="Self.FK_ServiceOfModel_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="ServiceOfModel" EntitySet="ServiceOfModel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceOfModel_TypeOfCar" Association="Self.FK_ServiceOfModel_TypeOfCar">
+            <End Role="TypeOfCar" EntitySet="TypeOfCar" />
+            <End Role="ServiceOfModel" EntitySet="ServiceOfModel" />
+          </AssociationSet>
+          <AssociationSet Name="AutoOfMaster" Association="Self.AutoOfMaster">
+            <End Role="Auto" EntitySet="Auto" />
+            <End Role="Master" EntitySet="Master" />
+          </AssociationSet>
+          <AssociationSet Name="ContractOfClient" Association="Self.ContractOfClient">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="ContractOfMaster" Association="Self.ContractOfMaster">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="Master" EntitySet="Master" />
+          </AssociationSet>
+          <AssociationSet Name="OrderOfClient" Association="Self.OrderOfClient">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="OrderOfMaster" Association="Self.OrderOfMaster">
+            <End Role="Master" EntitySet="Master" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="ServiceOfOrder" Association="Self.ServiceOfOrder">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="Service" EntitySet="Service" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BaseModelStoreContainer" CdmEntityContainer="CarRepairShopBaseEntities">
+          <EntitySetMapping Name="Auto">
+            <EntityTypeMapping TypeName="BaseModel.Auto">
+              <MappingFragment StoreEntitySet="Auto">
+                <ScalarProperty Name="A_ID" ColumnName="A_ID" />
+                <ScalarProperty Name="CL_ID" ColumnName="CL_ID" />
+                <ScalarProperty Name="A_NAME" ColumnName="A_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="BaseModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="CL_ID" ColumnName="CL_ID" />
+                <ScalarProperty Name="CL_NAME" ColumnName="CL_NAME" />
+                <ScalarProperty Name="CL_PASSNUM" ColumnName="CL_PASSNUM" />
+                <ScalarProperty Name="CL_PASSCODE" ColumnName="CL_PASSCODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contract">
+            <EntityTypeMapping TypeName="BaseModel.Contract">
+              <MappingFragment StoreEntitySet="Contract">
+                <ScalarProperty Name="CO_ID" ColumnName="CO_ID" />
+                <ScalarProperty Name="CO_ISCHECKED" ColumnName="CO_ISCHECKED" />
+                <ScalarProperty Name="CO_IMAGESCAN" ColumnName="CO_IMAGESCAN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Master">
+            <EntityTypeMapping TypeName="BaseModel.Master">
+              <MappingFragment StoreEntitySet="Master">
+                <ScalarProperty Name="M_ID" ColumnName="M_ID" />
+                <ScalarProperty Name="M_NAME" ColumnName="M_NAME" />
+                <ScalarProperty Name="M_EXPERIENCE" ColumnName="M_EXPERIENCE" />
+                <ScalarProperty Name="M_PASSNUM" ColumnName="M_PASSNUM" />
+                <ScalarProperty Name="M_PASSCODE" ColumnName="M_PASSCODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order">
+            <EntityTypeMapping TypeName="BaseModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="O_ID" ColumnName="O_ID" />
+                <ScalarProperty Name="ST_ID" ColumnName="ST_ID" />
+                <ScalarProperty Name="O_CREATEDATE" ColumnName="O_CREATEDATE" />
+                <ScalarProperty Name="O_ISCHECKED" ColumnName="O_ISCHECKED" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Phone">
+            <EntityTypeMapping TypeName="BaseModel.Phone">
+              <MappingFragment StoreEntitySet="Phone">
+                <ScalarProperty Name="P_ID" ColumnName="P_ID" />
+                <ScalarProperty Name="CL_ID" ColumnName="CL_ID" />
+                <ScalarProperty Name="P_NUMBER" ColumnName="P_NUMBER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="BaseModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="ROLE_ID" ColumnName="ROLE_ID" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Service">
+            <EntityTypeMapping TypeName="BaseModel.Service">
+              <MappingFragment StoreEntitySet="Service">
+                <ScalarProperty Name="SE_ID" ColumnName="SE_ID" />
+                <ScalarProperty Name="SE_NAME" ColumnName="SE_NAME" />
+                <ScalarProperty Name="SE_DESCRIPTION" ColumnName="SE_DESCRIPTION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceOfModel">
+            <EntityTypeMapping TypeName="BaseModel.ServiceOfModel">
+              <MappingFragment StoreEntitySet="ServiceOfModel">
+                <ScalarProperty Name="SE_ID" ColumnName="SE_ID" />
+                <ScalarProperty Name="T_ID" ColumnName="T_ID" />
+                <ScalarProperty Name="COST" ColumnName="COST" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="BaseModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="ST_ID" ColumnName="ST_ID" />
+                <ScalarProperty Name="ST_STATE" ColumnName="ST_STATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BaseModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeOfCar">
+            <EntityTypeMapping TypeName="BaseModel.TypeOfCar">
+              <MappingFragment StoreEntitySet="TypeOfCar">
+                <ScalarProperty Name="T_ID" ColumnName="T_ID" />
+                <ScalarProperty Name="A_ID" ColumnName="A_ID" />
+                <ScalarProperty Name="T_NAME" ColumnName="T_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="BaseModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="USER_NAME" ColumnName="USER_NAME" />
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+                <ScalarProperty Name="USER_LOGIN" ColumnName="USER_LOGIN" />
+                <ScalarProperty Name="USER_PASSWORD" ColumnName="USER_PASSWORD" />
+                <ScalarProperty Name="ROLE_ID" ColumnName="ROLE_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AutoOfMaster" TypeName="BaseModel.AutoOfMaster" StoreEntitySet="AutoOfMaster">
+            <EndProperty Name="Auto">
+              <ScalarProperty Name="A_ID" ColumnName="A_ID" />
+            </EndProperty>
+            <EndProperty Name="Master">
+              <ScalarProperty Name="M_ID" ColumnName="M_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ContractOfClient" TypeName="BaseModel.ContractOfClient" StoreEntitySet="ContractOfClient">
+            <EndProperty Name="Client">
+              <ScalarProperty Name="CL_ID" ColumnName="CL_ID" />
+            </EndProperty>
+            <EndProperty Name="Contract">
+              <ScalarProperty Name="CO_ID" ColumnName="CO_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ContractOfMaster" TypeName="BaseModel.ContractOfMaster" StoreEntitySet="ContractOfMaster">
+            <EndProperty Name="Contract">
+              <ScalarProperty Name="CO_ID" ColumnName="CO_ID" />
+            </EndProperty>
+            <EndProperty Name="Master">
+              <ScalarProperty Name="M_ID" ColumnName="M_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="OrderOfClient" TypeName="BaseModel.OrderOfClient" StoreEntitySet="OrderOfClient">
+            <EndProperty Name="Client">
+              <ScalarProperty Name="CL_ID" ColumnName="CL_ID" />
+            </EndProperty>
+            <EndProperty Name="Order">
+              <ScalarProperty Name="O_ID" ColumnName="O_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="OrderOfMaster" TypeName="BaseModel.OrderOfMaster" StoreEntitySet="OrderOfMaster">
+            <EndProperty Name="Master">
+              <ScalarProperty Name="M_ID" ColumnName="M_ID" />
+            </EndProperty>
+            <EndProperty Name="Order">
+              <ScalarProperty Name="O_ID" ColumnName="O_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ServiceOfOrder" TypeName="BaseModel.ServiceOfOrder" StoreEntitySet="ServiceOfOrder">
+            <EndProperty Name="Order">
+              <ScalarProperty Name="O_ID" ColumnName="O_ID" />
+            </EndProperty>
+            <EndProperty Name="Service">
+              <ScalarProperty Name="SE_ID" ColumnName="SE_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
