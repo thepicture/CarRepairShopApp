@@ -1,0 +1,10 @@
+﻿<Application x:Class="CarRepairShopApp.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:CarRepairShopApp"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <!--Styles for the application.-->
+        <Style TargetType="TextBlock"></Style>
+    </Application.Resources>
+</Application>
