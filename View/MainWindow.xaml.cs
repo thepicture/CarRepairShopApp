@@ -322,6 +322,10 @@ namespace CarRepairShopApp
             {
                 ButtonName.Text = button.Content.ToString();
             }
+            if (e.Source is MenuItem menuItem)
+            {
+                ButtonName.Text = menuItem.Header.ToString();
+            }
         }
 
         /// <summary>

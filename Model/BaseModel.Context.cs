@@ -31,6 +31,7 @@ namespace CarRepairShopApp.Model
         public virtual DbSet<Master> Master { get; set; }
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<Phone> Phone { get; set; }
+        public virtual DbSet<PhotoOfService> PhotoOfService { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<Service> Service { get; set; }
         public virtual DbSet<ServiceOfModel> ServiceOfModel { get; set; }
@@ -38,6 +39,5 @@ namespace CarRepairShopApp.Model
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TypeOfCar> TypeOfCar { get; set; }
         public virtual DbSet<User> User { get; set; }
-        public virtual DbSet<PhotoOfService> PhotoOfService { get; set; }
     }
 }

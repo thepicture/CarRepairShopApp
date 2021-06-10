@@ -5,8 +5,119 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarRepairShopApp.View"
         mc:Ignorable="d"
-        Title="AddEditServiceWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="AddEditServiceWindow"
+        WindowStartupLocation="CenterScreen"
+        Height="550"
+        Width="800">
+    <Grid Name="MainGrid"
+          Background="WhiteSmoke"
+          MouseMove="MainGrid_MouseMove"
+          MouseLeave="MainGrid_MouseLeave">
+        <!--View for adding or editing services.-->
+        <StackPanel VerticalAlignment="Center"
+                    Margin="30"
+                    Name="LoginPanel">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Наименование"
+                           Style="{StaticResource CommonBlock}"
+                           Grid.Column="0"></TextBlock>
+                <TextBox Name="ServiceNameBox"
+                             Text="{Binding SE_NAME}"
+                             Grid.Column="1"
+                             MaxLength="100"></TextBox>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Описание"
+                           Style="{StaticResource CommonBlock}"
+                           Grid.Column="0"></TextBlock>
+                <TextBox Name="ServiceDescriptionBox"
+                             Grid.Column="1"
+                             Text="{Binding SE_DESCRIPTION}"
+                             VerticalContentAlignment="Top"
+                             MaxLength="1024"
+                             TextWrapping="Wrap"
+                             Height="80"></TextBox>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Фотографии услуги"
+                           Style="{StaticResource CommonBlock}"
+                           Grid.Column="0"></TextBlock>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <!--Photos View.-->
+                    <ListView Margin="5"
+                              Height="210"
+                              Name="ServicePhotoView"
+                              Background="WhiteSmoke"
+                              ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                              ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel></WrapPanel>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition Height="auto"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Image Stretch="UniformToFill"
+                                           Margin="5"
+                                           Width="150"
+                                           Height="150"
+                                           Source="{Binding PHOTO}">
+                                    </Image>
+                                    <Button Content="Удалить"
+                                            Name="BtnDeleteServicePhoto"
+                                            Click="BtnDeleteServicePhoto_Click"
+                                            Grid.Row="1"></Button>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <StackPanel Grid.Row="1">
+                        <Button Name="BtnAddServicePhoto"
+                             Content="Добавить фото к услуге ..."
+                             Click="BtnAddServicePhoto_Click"></Button>
+                        <Button Name="BtnRegisterServiceToCar"
+                             Content="Присвоить услугу автомобилю ..."
+                             Click="BtnRegisterServiceToCar_Click"></Button>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            <Button Name="BtnSaveService"
+                    Content="Сохранить изменения"
+                    Click="BtnSaveService_Click"></Button>
+        </StackPanel>
+        <!--StatusBar for MainWindow-->
+        <DockPanel VerticalAlignment="Bottom">
+            <StatusBar DockPanel.Dock="Bottom">
+                <StatusBarItem>
+                    <TextBlock Name="ButtonName"/>
+                </StatusBarItem>
+            </StatusBar>
+        </DockPanel>
+        <Button Content="Отмена"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Name="ExitButton"
+                Click="ExitButton_Click"></Button>
     </Grid>
 </Window>

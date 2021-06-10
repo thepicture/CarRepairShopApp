@@ -17,8 +17,8 @@ namespace CarRepairShopApp.Model
         public int USER_ID { get; set; }
         public string USER_LOGIN { get; set; }
         public string USER_PASSWORD { get; set; }
-        public int ROLE_ID { get; set; }
         public string USER_NAME { get; set; }
+        public int ROLE_ID { get; set; }
         public byte[] USER_PHOTO { get; set; }
     
         public virtual Role Role { get; set; }

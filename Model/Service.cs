@@ -17,9 +17,9 @@ namespace CarRepairShopApp.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Service()
         {
+            this.PhotoOfService = new HashSet<PhotoOfService>();
             this.ServiceOfModel = new HashSet<ServiceOfModel>();
             this.Order = new HashSet<Order>();
-            this.PhotoOfService = new HashSet<PhotoOfService>();
         }
     
         public int SE_ID { get; set; }
@@ -27,10 +27,10 @@ namespace CarRepairShopApp.Model
         public string SE_DESCRIPTION { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PhotoOfService> PhotoOfService { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ServiceOfModel> ServiceOfModel { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Order { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PhotoOfService> PhotoOfService { get; set; }
     }
 }

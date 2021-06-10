@@ -15,6 +15,7 @@
         Name="LoginRegisterRecoveryWindow"
         Closing="LoginRegisterRecoveryWindow_Closing">
     <Grid Name="MainGrid"
+          Background="WhiteSmoke"
           MouseMove="MainGrid_MouseMove"
           MouseLeave="MainGrid_MouseLeave">
         <!--Login section-->

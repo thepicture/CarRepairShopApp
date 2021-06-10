@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="BaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="BaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Auto">
           <Key>
             <PropertyRef Name="A_ID" />
@@ -103,9 +103,8 @@
         <EntityType Name="PhotoOfService">
           <Key>
             <PropertyRef Name="PHOTO_ID" />
-            <PropertyRef Name="SERVICE_ID" />
           </Key>
-          <Property Name="PHOTO_ID" Type="int" Nullable="false" />
+          <Property Name="PHOTO_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SERVICE_ID" Type="int" Nullable="false" />
           <Property Name="PHOTO" Type="varbinary(max)" Nullable="false" />
         </EntityType>
@@ -519,7 +518,8 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -530,10 +530,10 @@
           <Property Name="A_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CL_ID" Type="Int32" Nullable="false" />
           <Property Name="A_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="A_PHOTO" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Client" Relationship="Self.FK_Auto_Client" FromRole="Auto" ToRole="Client" />
           <NavigationProperty Name="TypeOfCar" Relationship="Self.FK_TypeOfCar_Auto" FromRole="Auto" ToRole="TypeOfCar" />
           <NavigationProperty Name="Master" Relationship="Self.AutoOfMaster" FromRole="Auto" ToRole="Master" />
-          <Property Name="A_PHOTO" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Client">
           <Key>
@@ -543,11 +543,11 @@
           <Property Name="CL_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CL_PASSNUM" Type="Int32" Nullable="false" />
           <Property Name="CL_PASSCODE" Type="Int32" Nullable="false" />
+          <Property Name="CL_PHOTO" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Auto" Relationship="Self.FK_Auto_Client" FromRole="Client" ToRole="Auto" />
           <NavigationProperty Name="Phone" Relationship="Self.FK_Phone_Client" FromRole="Client" ToRole="Phone" />
           <NavigationProperty Name="Contract" Relationship="Self.ContractOfClient" FromRole="Client" ToRole="Contract" />
           <NavigationProperty Name="Order" Relationship="Self.OrderOfClient" FromRole="Client" ToRole="Order" />
-          <Property Name="CL_PHOTO" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Contract">
           <Key>
@@ -568,10 +568,10 @@
           <Property Name="M_EXPERIENCE" Type="Byte" Nullable="false" />
           <Property Name="M_PASSNUM" Type="Int32" Nullable="false" />
           <Property Name="M_PASSCODE" Type="Int32" Nullable="false" />
+          <Property Name="M_PHOTO" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Auto" Relationship="Self.AutoOfMaster" FromRole="Master" ToRole="Auto" />
           <NavigationProperty Name="Contract" Relationship="Self.ContractOfMaster" FromRole="Master" ToRole="Contract" />
           <NavigationProperty Name="Order" Relationship="Self.OrderOfMaster" FromRole="Master" ToRole="Order" />
-          <Property Name="M_PHOTO" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -595,6 +595,15 @@
           <Property Name="P_NUMBER" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Client" Relationship="Self.FK_Phone_Client" FromRole="Phone" ToRole="Client" />
         </EntityType>
+        <EntityType Name="PhotoOfService">
+          <Key>
+            <PropertyRef Name="PHOTO_ID" />
+          </Key>
+          <Property Name="PHOTO_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SERVICE_ID" Type="Int32" Nullable="false" />
+          <Property Name="PHOTO" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="Service" Relationship="Self.FK_PhotoOfService_Service" FromRole="PhotoOfService" ToRole="Service" />
+        </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="ROLE_ID" />
@@ -610,9 +619,9 @@
           <Property Name="SE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SE_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SE_DESCRIPTION" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PhotoOfService" Relationship="Self.FK_PhotoOfService_Service" FromRole="Service" ToRole="PhotoOfService" />
           <NavigationProperty Name="ServiceOfModel" Relationship="Self.FK_ServiceOfModel_Service" FromRole="Service" ToRole="ServiceOfModel" />
           <NavigationProperty Name="Order" Relationship="Self.ServiceOfOrder" FromRole="Service" ToRole="Order" />
-          <NavigationProperty Name="PhotoOfService" Relationship="BaseModel.FK_PhotoOfService_Service" FromRole="Service" ToRole="PhotoOfService" />
         </EntityType>
         <EntityType Name="ServiceOfModel">
           <Key>
@@ -660,10 +669,10 @@
           <Property Name="USER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="USER_LOGIN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="USER_PASSWORD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="USER_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ROLE_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
-          <Property Name="USER_NAME" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="USER_PHOTO" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
         </EntityType>
         <Association Name="FK_Auto_Client">
           <End Role="Client" Type="Self.Client" Multiplicity="1" />
@@ -710,6 +719,18 @@
             </Principal>
             <Dependent Role="Order">
               <PropertyRef Name="ST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhotoOfService_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="PhotoOfService" Type="Self.PhotoOfService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="SE_ID" />
+            </Principal>
+            <Dependent Role="PhotoOfService">
+              <PropertyRef Name="SERVICE_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -780,6 +801,7 @@
           <EntitySet Name="Master" EntityType="Self.Master" />
           <EntitySet Name="Order" EntityType="Self.Order" />
           <EntitySet Name="Phone" EntityType="Self.Phone" />
+          <EntitySet Name="PhotoOfService" EntityType="Self.PhotoOfService" />
           <EntitySet Name="Role" EntityType="Self.Role" />
           <EntitySet Name="Service" EntityType="Self.Service" />
           <EntitySet Name="ServiceOfModel" EntityType="Self.ServiceOfModel" />
@@ -802,6 +824,10 @@
           <AssociationSet Name="FK_Order_Status" Association="Self.FK_Order_Status">
             <End Role="Status" EntitySet="Status" />
             <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhotoOfService_Service" Association="Self.FK_PhotoOfService_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="PhotoOfService" EntitySet="PhotoOfService" />
           </AssociationSet>
           <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
             <End Role="Role" EntitySet="Role" />
@@ -839,34 +865,7 @@
             <End Role="Order" EntitySet="Order" />
             <End Role="Service" EntitySet="Service" />
           </AssociationSet>
-          <EntitySet Name="PhotoOfService" EntityType="BaseModel.PhotoOfService" />
-          <AssociationSet Name="FK_PhotoOfService_Service" Association="BaseModel.FK_PhotoOfService_Service">
-            <End Role="Service" EntitySet="Service" />
-            <End Role="PhotoOfService" EntitySet="PhotoOfService" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="PhotoOfService">
-          <Key>
-            <PropertyRef Name="PHOTO_ID" />
-            <PropertyRef Name="SERVICE_ID" />
-          </Key>
-          <Property Name="PHOTO_ID" Type="Int32" Nullable="false" />
-          <Property Name="SERVICE_ID" Type="Int32" Nullable="false" />
-          <Property Name="PHOTO" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="Service" Relationship="BaseModel.FK_PhotoOfService_Service" FromRole="PhotoOfService" ToRole="Service" />
-        </EntityType>
-        <Association Name="FK_PhotoOfService_Service">
-          <End Type="BaseModel.Service" Role="Service" Multiplicity="1" />
-          <End Type="BaseModel.PhotoOfService" Role="PhotoOfService" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Service">
-              <PropertyRef Name="SE_ID" />
-            </Principal>
-            <Dependent Role="PhotoOfService">
-              <PropertyRef Name="SERVICE_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -876,21 +875,21 @@
           <EntitySetMapping Name="Auto">
             <EntityTypeMapping TypeName="BaseModel.Auto">
               <MappingFragment StoreEntitySet="Auto">
-                <ScalarProperty Name="A_PHOTO" ColumnName="A_PHOTO" />
                 <ScalarProperty Name="A_ID" ColumnName="A_ID" />
                 <ScalarProperty Name="CL_ID" ColumnName="CL_ID" />
                 <ScalarProperty Name="A_NAME" ColumnName="A_NAME" />
+                <ScalarProperty Name="A_PHOTO" ColumnName="A_PHOTO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Client">
             <EntityTypeMapping TypeName="BaseModel.Client">
               <MappingFragment StoreEntitySet="Client">
-                <ScalarProperty Name="CL_PHOTO" ColumnName="CL_PHOTO" />
                 <ScalarProperty Name="CL_ID" ColumnName="CL_ID" />
                 <ScalarProperty Name="CL_NAME" ColumnName="CL_NAME" />
                 <ScalarProperty Name="CL_PASSNUM" ColumnName="CL_PASSNUM" />
                 <ScalarProperty Name="CL_PASSCODE" ColumnName="CL_PASSCODE" />
+                <ScalarProperty Name="CL_PHOTO" ColumnName="CL_PHOTO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -906,12 +905,12 @@
           <EntitySetMapping Name="Master">
             <EntityTypeMapping TypeName="BaseModel.Master">
               <MappingFragment StoreEntitySet="Master">
-                <ScalarProperty Name="M_PHOTO" ColumnName="M_PHOTO" />
                 <ScalarProperty Name="M_ID" ColumnName="M_ID" />
                 <ScalarProperty Name="M_NAME" ColumnName="M_NAME" />
                 <ScalarProperty Name="M_EXPERIENCE" ColumnName="M_EXPERIENCE" />
                 <ScalarProperty Name="M_PASSNUM" ColumnName="M_PASSNUM" />
                 <ScalarProperty Name="M_PASSCODE" ColumnName="M_PASSCODE" />
+                <ScalarProperty Name="M_PHOTO" ColumnName="M_PHOTO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -931,6 +930,15 @@
                 <ScalarProperty Name="P_ID" ColumnName="P_ID" />
                 <ScalarProperty Name="CL_ID" ColumnName="CL_ID" />
                 <ScalarProperty Name="P_NUMBER" ColumnName="P_NUMBER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhotoOfService">
+            <EntityTypeMapping TypeName="BaseModel.PhotoOfService">
+              <MappingFragment StoreEntitySet="PhotoOfService">
+                <ScalarProperty Name="PHOTO_ID" ColumnName="PHOTO_ID" />
+                <ScalarProperty Name="SERVICE_ID" ColumnName="SERVICE_ID" />
+                <ScalarProperty Name="PHOTO" ColumnName="PHOTO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -991,12 +999,12 @@
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="BaseModel.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="USER_PHOTO" ColumnName="USER_PHOTO" />
-                <ScalarProperty Name="USER_NAME" ColumnName="USER_NAME" />
                 <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
                 <ScalarProperty Name="USER_LOGIN" ColumnName="USER_LOGIN" />
                 <ScalarProperty Name="USER_PASSWORD" ColumnName="USER_PASSWORD" />
+                <ScalarProperty Name="USER_NAME" ColumnName="USER_NAME" />
                 <ScalarProperty Name="ROLE_ID" ColumnName="ROLE_ID" />
+                <ScalarProperty Name="USER_PHOTO" ColumnName="USER_PHOTO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1048,15 +1056,6 @@
               <ScalarProperty Name="SE_ID" ColumnName="SE_ID" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="PhotoOfService">
-            <EntityTypeMapping TypeName="BaseModel.PhotoOfService">
-              <MappingFragment StoreEntitySet="PhotoOfService">
-                <ScalarProperty Name="PHOTO" ColumnName="PHOTO" />
-                <ScalarProperty Name="SERVICE_ID" ColumnName="SERVICE_ID" />
-                <ScalarProperty Name="PHOTO_ID" ColumnName="PHOTO_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

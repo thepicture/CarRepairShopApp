@@ -9,8 +9,13 @@
         Height="450"
         Width="800"
         WindowStartupLocation="CenterScreen"
-        Name="MainAdminWindow">
-    <Grid>
+        Name="MainAdminWindow"
+        MinHeight="450"
+        MinWidth="600">
+    <Grid Name="MainGrid"
+          Background="WhiteSmoke"
+          MouseMove="MainGrid_MouseMove"
+          MouseLeave="MainGrid_MouseLeave">
         <Grid.RowDefinitions>
             <RowDefinition Height="20"></RowDefinition>
             <RowDefinition Height="150"></RowDefinition>
@@ -88,12 +93,21 @@
                             Name="BtnAddService"
                             Click="BtnAddService_Click"></Button>
                     <Button Width="80"
-                            Content="Изменить"></Button>
+                            Content="Изменить"
+                            Name="BtnEditService"
+                            Click="BtnEditService_Click"
+                            IsEnabled="False"></Button>
                     <Button Width="80"
-                            Content="Удалить"></Button>
+                            Content="Удалить"
+                            Name="BtnDeleteService"
+                            IsEnabled="False"
+                            Click="BtnDeleteService_Click"></Button>
                 </StackPanel>
                 <DataGrid Name="ServiceGrid"
-                          Grid.Row="1">
+                          BorderBrush="Gray"
+                          Grid.Row="1"
+                          SelectionChanged="ServiceGrid_SelectionChanged"
+                          HeadersVisibility="Column">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Услуга" Binding="{Binding SE_NAME}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Описание" Binding="{Binding SE_DESCRIPTION}"></DataGridTextColumn>
@@ -101,5 +115,13 @@
                 </DataGrid>
             </Grid>
         </Grid>
+        <DockPanel VerticalAlignment="Bottom"
+                   Grid.Row="2">
+            <StatusBar DockPanel.Dock="Bottom">
+                <StatusBarItem>
+                    <TextBlock Name="ButtonName"/>
+                </StatusBarItem>
+            </StatusBar>
+        </DockPanel>
     </Grid>
 </Window>
