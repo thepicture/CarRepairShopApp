@@ -65,19 +65,41 @@
                         <ColumnDefinition Width="100"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Image>
-                        <Image.Source>
-                            <Binding Path="USER_IMAGE">
-                                <Binding.TargetNullValue>
-                                    <ImageSource>
-                                        Resources/user_picture.png
-                                    </ImageSource>
-                                </Binding.TargetNullValue>
-                            </Binding>
-                        </Image.Source>
-                    </Image>
+                    <Image Name="UserImage"></Image>
+                    <Grid Grid.Column="1">
+                        <StackPanel>
+                            <TextBlock Name="UserNameBlock"
+                                       Margin="5"
+                                       FontWeight="Bold"></TextBlock>
+                            <TextBlock Name="UserRoleBlock"
+                                       Margin="5"></TextBlock>
+                        </StackPanel>
+                    </Grid>
                 </Grid>
             </GroupBox>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal">
+                    <Button Width="80"
+                            Content="Добавить"
+                            Name="BtnAddService"
+                            Click="BtnAddService_Click"></Button>
+                    <Button Width="80"
+                            Content="Изменить"></Button>
+                    <Button Width="80"
+                            Content="Удалить"></Button>
+                </StackPanel>
+                <DataGrid Name="ServiceGrid"
+                          Grid.Row="1">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Услуга" Binding="{Binding SE_NAME}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Описание" Binding="{Binding SE_DESCRIPTION}"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
         </Grid>
     </Grid>
 </Window>

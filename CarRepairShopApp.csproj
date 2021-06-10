@@ -65,6 +65,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="View\AddEditServiceWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AdminWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -77,8 +81,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\OrderHelper.cs" />
     <Compile Include="Model\PhotoOfService.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddEditServiceWindow.xaml.cs">
+      <DependentUpon>AddEditServiceWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\AdminWindow.xaml.cs">
       <DependentUpon>AdminWindow.xaml</DependentUpon>

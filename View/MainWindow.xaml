@@ -44,6 +44,7 @@
                            Grid.Column="0"></TextBlock>
                 <PasswordBox Name="PBoxPassword"
                              Grid.Column="1"
+                             Password="123456"
                              MaxLength="50"></PasswordBox>
             </Grid>
             <Grid>
