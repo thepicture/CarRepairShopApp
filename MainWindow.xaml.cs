@@ -1,8 +1,10 @@
 ﻿using CarRepairShopApp.Model;
+using System.ComponentModel;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace CarRepairShopApp
@@ -12,6 +14,9 @@ namespace CarRepairShopApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// Initializes the ComboBoxes.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -19,25 +24,40 @@ namespace CarRepairShopApp
             ComboRole.ItemsSource = Manager.Context.Role.ToList().Take(3).Reverse().Take(2).Reverse();
         }
 
+        /// <summary>
+        /// Closes the current application.
+        /// </summary>
         private void BtnExit_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Точно выйти из программы?", "Предупреждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-            {
-                App.Current.Shutdown();
-            }
+            Close();
         }
 
+        /// <summary>
+        /// Checks if the login is correct and passes to appropriate window with respect to users role.
+        /// </summary>
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
             if (ComboLogin.SelectedItem is User currentUser)
             {
-                if (PBoxPassword.Password == currentUser.USER_PASSWORD)
+                if (PBoxPassword.Password.Equals(currentUser.USER_PASSWORD))
                 {
                     MessageBox.Show($"Вы успешно авторизованы, "
                         + currentUser.USER_NAME + "!",
                         "Успешно!",
                         MessageBoxButton.OK,
                         MessageBoxImage.Information);
+                    if (currentUser.Role.NAME.Equals("Администратор"))
+                    {
+
+                    }
+                    else if (currentUser.Role.NAME.Equals("Механик"))
+                    {
+
+                    }
+                    else if (currentUser.Role.NAME.Equals("Клиент"))
+                    {
+
+                    }
                 }
                 else
                 {
@@ -50,6 +70,9 @@ namespace CarRepairShopApp
         }
 
         readonly Regex loginRegex = new Regex(pattern: @".{1,100}");
+        /// <summary>
+        /// Identifies when the input login is correct and non-empty. Otherwise turns the TextBox background to red.
+        /// </summary>
         private void TBoxLogin_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (loginRegex.IsMatch(TBoxLogin.Text))
@@ -66,6 +89,9 @@ namespace CarRepairShopApp
         }
 
         readonly Regex nameRegex = new Regex(pattern: @"\w+\s\w+\s\w+");
+        /// <summary>
+        /// Identifies when the NameBox is correct and non-empty. Otherwise turns the TextBox background to red.
+        /// </summary>
         private void NameBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (nameRegex.IsMatch(NameBox.Text))
@@ -81,6 +107,9 @@ namespace CarRepairShopApp
             UpdateState();
         }
 
+        /// <summary>
+        /// Opens the register panel.
+        /// </summary>
         private void BtnRegister_Click(object sender, RoutedEventArgs e)
         {
             RegisterPanel.Visibility = Visibility.Visible;
@@ -92,11 +121,17 @@ namespace CarRepairShopApp
             LoginPanel.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// Closes the register panel.
+        /// </summary>
         private void BtnRegisterClose_Click(object sender, RoutedEventArgs e)
         {
             CloseRegistration();
         }
 
+        /// <summary>
+        /// Checks if the first and second passwords are correct with respect to regex expression.
+        /// </summary>
         private void CheckPasswords()
         {
             if (passwordRegex.IsMatch(PasswordBoxFirst.Password))
@@ -135,6 +170,9 @@ namespace CarRepairShopApp
             CheckPasswords();
         }
 
+        /// <summary>
+        /// Identifies when all of the TextBoxes are correct and non-empty. Otherwise turns all of the TextBoxes backgrounds to red.
+        /// </summary>
         private void UpdateState()
         {
             if (PasswordBoxFirst.Background == Brushes.Transparent
@@ -182,6 +220,107 @@ namespace CarRepairShopApp
                 TBoxLogin.Text = NameBox.Text = PasswordBoxFirst.Password = PasswordBoxSecond.Password = null;
                 ComboRole.SelectedIndex = 0;
             }
+        }
+
+        private void BtnForgotPassword_Click(object sender, RoutedEventArgs e)
+        {
+            RecoveryPasswordPanel.Visibility = Visibility.Visible;
+            TBoxRecoveryLogin_TextChanged(null, null);
+            Title = "Восстановление пароля в системе";
+            LoginPanel.Visibility = Visibility.Collapsed;
+        }
+
+        /// <summary>
+        /// Identifies when the recovery login is correct and non-empty. Otherwise turns the TextBox background to red.
+        /// </summary>
+        private void TBoxRecoveryLogin_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (loginRegex.IsMatch(TBoxRecoveryLogin.Text))
+            {
+                TBoxRecoveryLogin.Background = Brushes.Transparent;
+                BtnRecover.IsEnabled = true;
+            }
+            else
+            {
+                TBoxRecoveryLogin.Background = Brushes.LightPink;
+                BtnRecover.IsEnabled = false;
+            }
+        }
+
+        private void BtnRecover_Click(object sender, RoutedEventArgs e)
+        {
+            User user = Manager.Context.User.ToList().Where(u => u.USER_LOGIN.Equals(TBoxRecoveryLogin.Text)).FirstOrDefault();
+            if (user != null)
+            {
+                MessageBox.Show("Ваш пароль: " + user.USER_PASSWORD
+                    + "\nПожалуйста, запишите его в безопасное место!",
+                    "Пароль восстановлен!",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+                CloseRecoverySection();
+            }
+            else
+            {
+                MessageBox.Show("Пользователь в системе с логином "
+                    + TBoxRecoveryLogin.Text
+                    + " не найден!\n" +
+                    "Проверьте правильность ввода или убедитесь, что пользователь зарегистрирован в системе.",
+                    "Ошибка",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
+        }
+
+        private void BtnCloseRecovery_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Точно покинуть окно восстановления пароля?\n" +
+              "Введённые данные будут утеряны!",
+              "Внимание",
+              MessageBoxButton.YesNo,
+              MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                CloseRecoverySection();
+            }
+        }
+
+        private void CloseRecoverySection()
+        {
+
+            RecoveryPasswordPanel.Visibility = Visibility.Collapsed;
+            LoginPanel.Visibility = Visibility.Visible;
+            Title = "Авторизация в системе";
+            TBoxRecoveryLogin.Text = null;
+        }
+
+        private void LoginRegisterRecoveryWindow_Closing(object sender, CancelEventArgs e)
+        {
+            if (MessageBox.Show("Точно выйти из программы?", "Предупреждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                App.Current.Shutdown();
+            }
+            else
+            {
+                e.Cancel = true;
+            }
+        }
+
+        /// <summary>
+        /// Shows the button content in the StatusBar.
+        /// </summary>
+        private void MainGrid_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Source is Button button)
+            {
+                ButtonName.Text = button.Content.ToString();
+            }
+        }
+
+        /// <summary>
+        /// Make the StatusBar empty.
+        /// </summary>
+        private void MainGrid_MouseLeave(object sender, MouseEventArgs e)
+        {
+            ButtonName.Text = null;
         }
     }
 }
