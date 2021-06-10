@@ -19,6 +19,7 @@ namespace CarRepairShopApp.Model
         {
             this.ServiceOfModel = new HashSet<ServiceOfModel>();
             this.Order = new HashSet<Order>();
+            this.PhotoOfService = new HashSet<PhotoOfService>();
         }
     
         public int SE_ID { get; set; }
@@ -29,5 +30,7 @@ namespace CarRepairShopApp.Model
         public virtual ICollection<ServiceOfModel> ServiceOfModel { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Order { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PhotoOfService> PhotoOfService { get; set; }
     }
 }

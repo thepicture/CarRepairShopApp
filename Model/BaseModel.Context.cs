@@ -38,5 +38,6 @@ namespace CarRepairShopApp.Model
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TypeOfCar> TypeOfCar { get; set; }
         public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<PhotoOfService> PhotoOfService { get; set; }
     }
 }

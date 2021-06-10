@@ -12,15 +12,12 @@ namespace CarRepairShopApp.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class PhotoOfService
     {
-        public int USER_ID { get; set; }
-        public string USER_LOGIN { get; set; }
-        public string USER_PASSWORD { get; set; }
-        public int ROLE_ID { get; set; }
-        public string USER_NAME { get; set; }
-        public byte[] USER_PHOTO { get; set; }
+        public int PHOTO_ID { get; set; }
+        public int SERVICE_ID { get; set; }
+        public byte[] PHOTO { get; set; }
     
-        public virtual Role Role { get; set; }
+        public virtual Service Service { get; set; }
     }
 }

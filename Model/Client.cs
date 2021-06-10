@@ -27,6 +27,7 @@ namespace CarRepairShopApp.Model
         public string CL_NAME { get; set; }
         public int CL_PASSNUM { get; set; }
         public int CL_PASSCODE { get; set; }
+        public byte[] CL_PHOTO { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Auto> Auto { get; set; }

@@ -31,6 +31,8 @@
         <AssociationConnector Association="BaseModel.OrderOfClient" ManuallyRouted="false" />
         <AssociationConnector Association="BaseModel.OrderOfMaster" ManuallyRouted="false" />
         <AssociationConnector Association="BaseModel.ServiceOfOrder" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BaseModel.PhotoOfService" Width="1.5" PointX="12" PointY="3.25" />
+        <AssociationConnector Association="BaseModel.FK_PhotoOfService_Service" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

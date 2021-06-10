@@ -11,7 +11,13 @@
         WindowStartupLocation="CenterScreen"
         Name="MainAdminWindow">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="150"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
         <Grid Name="MenuGrid">
+            <!--Menu bar on the top of the admin panel.-->
             <Menu>
                 <MenuItem Header="Главная">
                     <MenuItem Header="Изменить аватар"></MenuItem>
@@ -43,6 +49,35 @@
                     </MenuItem>
                 </MenuItem>
             </Menu>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <!--Information about the admin.-->
+            <GroupBox Grid.Column="0"
+                          HorizontalAlignment="Stretch"
+                          Margin="5"
+                          Header="Информация о пользователе">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image>
+                        <Image.Source>
+                            <Binding Path="USER_IMAGE">
+                                <Binding.TargetNullValue>
+                                    <ImageSource>
+                                        Resources/user_picture.png
+                                    </ImageSource>
+                                </Binding.TargetNullValue>
+                            </Binding>
+                        </Image.Source>
+                    </Image>
+                </Grid>
+            </GroupBox>
         </Grid>
     </Grid>
 </Window>
