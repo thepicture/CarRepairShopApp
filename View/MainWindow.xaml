@@ -10,7 +10,7 @@
         Width="500"
         MinHeight="300"
         MinWidth="500"
-        Icon="Resources/wrench.png"
+        Icon="/Resources/wrench.png"
         WindowStartupLocation="CenterScreen"
         Name="LoginRegisterRecoveryWindow"
         Closing="LoginRegisterRecoveryWindow_Closing">
