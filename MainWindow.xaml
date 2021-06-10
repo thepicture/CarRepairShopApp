@@ -5,16 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarRepairShopApp"
         mc:Ignorable="d"
-        Title="Авторизация"
-        Height="500"
+        Title="Авторизация в системе"
+        Height="300"
         Width="500"
-        MinHeight="500"
+        MinHeight="300"
         MinWidth="500"
         Icon="Resources/wrench.png"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <StackPanel VerticalAlignment="Center"
-                    Margin="30">
+                    Margin="30"
+                    Name="LoginPanel">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
@@ -60,89 +61,91 @@
             <Button Name="BtnForgotPassword"
                     Content="Забыли пароль?"
                     HorizontalAlignment="Right"></Button>
-            <Grid Name="RegisterGrid"
-                  Visibility="Collapsed">
-                <StackPanel>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="Логин"
+        </StackPanel>
+        <StackPanel>
+            <StackPanel VerticalAlignment="Center"
+                    Margin="30"
+                    Name="RegisterPanel"
+                            Visibility="Collapsed">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Логин"
                            Style="{StaticResource CommonBlock}"
                            Grid.Column="0"></TextBlock>
-                        <TextBox Name="TBoxLogin"
+                    <TextBox Name="TBoxLogin"
                           Grid.Column="1"
                           TextChanged="TBoxLogin_TextChanged"
                           MaxLength="100"></TextBox>
-                    </Grid>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="Роль"
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Роль"
                            Style="{StaticResource CommonBlock}"
                            Grid.Column="0"></TextBlock>
-                        <ComboBox Name="ComboRole"
+                    <ComboBox Name="ComboRole"
                           Grid.Column="1"
                           DisplayMemberPath="NAME"
                           SelectedIndex="0"></ComboBox>
-                    </Grid>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="ФИО"
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="ФИО"
                            Style="{StaticResource CommonBlock}"
                            Grid.Column="0"></TextBlock>
-                        <TextBox Name="NameBox"
+                    <TextBox Name="NameBox"
                           Grid.Column="1"
                           TextChanged="NameBox_TextChanged"
                           MaxLength="100"></TextBox>
-                    </Grid>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="Пароль"
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Пароль"
                            Style="{StaticResource CommonBlock}"
                            Grid.Column="0"></TextBlock>
-                        <PasswordBox Name="PasswordBoxFirst"
+                    <PasswordBox Name="PasswordBoxFirst"
                           Grid.Column="1"
                           PasswordChanged="PasswordBoxFirst_PasswordChanged"></PasswordBox>
-                    </Grid>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="Повторите пароль"
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Повторите пароль"
                            Style="{StaticResource CommonBlock}"
                            Grid.Column="0"></TextBlock>
-                        <PasswordBox Name="PasswordBoxSecond"
+                    <PasswordBox Name="PasswordBoxSecond"
                           Grid.Column="1"
                           PasswordChanged="PasswordBoxSecond_PasswordChanged"></PasswordBox>
-                    </Grid>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Button Name="BtnRegisterClose"
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button Name="BtnRegisterClose"
                         Content="Закрыть окно регистрации"
                         Grid.Column="0"
                         Click="BtnRegisterClose_Click"></Button>
-                        <Button Name="BtnRegisterConfirm"
+                    <Button Name="BtnRegisterConfirm"
                         Content="Зарегистрироваться"
                         Grid.Column="1"
                         IsEnabled="False"
                         Click="BtnRegisterConfirm_Click"></Button>
-                    </Grid>
-                </StackPanel>
-            </Grid>
+                </Grid>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>

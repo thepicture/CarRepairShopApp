@@ -16,7 +16,7 @@ namespace CarRepairShopApp
         {
             InitializeComponent();
             ComboLogin.ItemsSource = Manager.Context.User.ToList();
-            ComboRole.ItemsSource = Manager.Context.Role.ToList();
+            ComboRole.ItemsSource = Manager.Context.Role.ToList().Take(3).Reverse().Take(2).Reverse();
         }
 
         private void BtnExit_Click(object sender, RoutedEventArgs e)
@@ -83,16 +83,18 @@ namespace CarRepairShopApp
 
         private void BtnRegister_Click(object sender, RoutedEventArgs e)
         {
-            RegisterGrid.Visibility = Visibility.Visible;
+            RegisterPanel.Visibility = Visibility.Visible;
             TBoxLogin_TextChanged(null, null);
             NameBox_TextChanged(null, null);
             PasswordBoxFirst_PasswordChanged(null, null);
             PasswordBoxSecond_PasswordChanged(null, null);
+            Title = "Регистрация в системе";
+            LoginPanel.Visibility = Visibility.Collapsed;
         }
 
         private void BtnRegisterClose_Click(object sender, RoutedEventArgs e)
         {
-            RegisterGrid.Visibility = Visibility.Collapsed;
+            CloseRegistration();
         }
 
         private void CheckPasswords()
@@ -163,7 +165,23 @@ namespace CarRepairShopApp
                 " успешно зарегистрирован!", "Успешно!",
                 MessageBoxButton.OK,
                 MessageBoxImage.Information);
-            RegisterGrid.Visibility = Visibility.Collapsed;
+            CloseRegistration();
+        }
+
+        private void CloseRegistration()
+        {
+            if (MessageBox.Show("Точно покинуть окно регистрации?\n" +
+                "Введённые данные будут утеряны!",
+                "Внимание",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                RegisterPanel.Visibility = Visibility.Collapsed;
+                LoginPanel.Visibility = Visibility.Visible;
+                Title = "Авторизация в системе";
+                TBoxLogin.Text = NameBox.Text = PasswordBoxFirst.Password = PasswordBoxSecond.Password = null;
+                ComboRole.SelectedIndex = 0;
+            }
         }
     }
 }
