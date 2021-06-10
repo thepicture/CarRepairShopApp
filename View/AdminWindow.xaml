@@ -1,0 +1,48 @@
+﻿<Window x:Class="CarRepairShopApp.View.AdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarRepairShopApp.View"
+        mc:Ignorable="d"
+        Title="AdminWindow"
+        Height="450"
+        Width="800"
+        WindowStartupLocation="CenterScreen"
+        Name="MainAdminWindow">
+    <Grid>
+        <Grid Name="MenuGrid">
+            <Menu>
+                <MenuItem Header="Главная">
+                    <MenuItem Header="Изменить аватар"></MenuItem>
+                    <MenuItem Header="Выход"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="Действия">
+                    <MenuItem Header="Услуги">
+                        <MenuItem Header="Добавить"></MenuItem>
+                        <MenuItem Header="Изменить"></MenuItem>
+                        <MenuItem Header="Удалить"></MenuItem>
+                    </MenuItem>
+                    <MenuItem Header="Механики">
+                        <MenuItem Header="Добавить"></MenuItem>
+                        <MenuItem Header="Изменить"></MenuItem>
+                        <MenuItem Header="Удалить"></MenuItem>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Отчеты">
+                    <MenuItem Header="Механики">
+                        <MenuItem Header="Создать статистику продаж каждого механика"></MenuItem>
+                    </MenuItem>
+                    <MenuItem Header="Услуги">
+                        <MenuItem Header="Создать отчёт по услугам"></MenuItem>
+                        <MenuItem Header="ТОП-10 услуг"></MenuItem>
+                    </MenuItem>
+                    <MenuItem Header="Клиенты">
+                        <MenuItem Header="Создать статистику по покупкам клиентов"></MenuItem>
+                        <MenuItem Header="ТОП-10 клиентов"></MenuItem>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
+        </Grid>
+    </Grid>
+</Window>

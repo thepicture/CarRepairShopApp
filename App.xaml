@@ -34,5 +34,8 @@
             <Setter Property="Width" Value="150"></Setter>
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
         </Style>
+        <Style TargetType="MenuItem">
+            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+        </Style>
     </Application.Resources>
 </Application>

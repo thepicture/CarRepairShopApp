@@ -1,4 +1,5 @@
 ﻿using CarRepairShopApp.Model;
+using CarRepairShopApp.View;
 using System.ComponentModel;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -21,7 +22,8 @@ namespace CarRepairShopApp
         {
             InitializeComponent();
             ComboLogin.ItemsSource = Manager.Context.User.ToList();
-            ComboRole.ItemsSource = Manager.Context.Role.ToList().Take(3).Reverse().Take(2).Reverse();
+            /// A code above is a little bit hard, because it uses recurrent formula. The code loads all except Administrator role.
+            ComboRole.ItemsSource = Manager.Context.Role.ToList().Take(Manager.Context.Role.ToList().Count).Reverse().Take(Manager.Context.Role.ToList().Count - 1).Reverse();
         }
 
         /// <summary>
@@ -46,9 +48,16 @@ namespace CarRepairShopApp
                         "Успешно!",
                         MessageBoxButton.OK,
                         MessageBoxImage.Information);
+                    Manager.CurrentUser = currentUser;
                     if (currentUser.Role.NAME.Equals("Администратор"))
                     {
-
+                        AdminWindow adminWindow = new AdminWindow
+                        {
+                            Owner = this,
+                            Title = currentUser.USER_NAME + " — панель администратора"
+                        };
+                        adminWindow.Show();
+                        Hide();
                     }
                     else if (currentUser.Role.NAME.Equals("Механик"))
                     {
