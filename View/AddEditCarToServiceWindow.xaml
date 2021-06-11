@@ -22,14 +22,15 @@
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
             <DataGrid Name="ModelGrid"
-                      SelectionMode="Single">
+                      SelectionMode="Single"
+                      SelectionChanged="ModelGrid_SelectionChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Автомобиль" Binding="{Binding GetCarNameByType}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Модель" Binding="{Binding T_NAME}"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
             <StackPanel Grid.Row="1">
-                <GroupBox Header="Цена услуги для выбранной модели"
+                <GroupBox Header="Цена услуги для выбранной модели (руб.)"
                           Margin="5">
                     <TextBox MaxLength="20"
                          Name="ModelCost"
@@ -49,8 +50,8 @@
             <DataGrid Name="ServiceModelGrid"
                   Grid.Column="1">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Автомобиль" Binding="{Binding GetCarNameByType}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Модель" Binding="{Binding T_NAME}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Автомобиль" Binding="{Binding GetCarName}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Модель" Binding="{Binding GetTypeName}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Цена услуги" Binding="{Binding COST}"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>

@@ -28,6 +28,7 @@
         <Style TargetType="Button">
             <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
             <Setter Property="Margin" Value="5"></Setter>
+            <Setter Property="ToolTipService.IsEnabled" Value="False"></Setter>
         </Style>
         <Style TargetType="DatePicker">
             <Setter Property="Margin" Value="5"></Setter>

@@ -1,18 +1,8 @@
 ﻿using CarRepairShopApp.Model;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace CarRepairShopApp.View
 {
@@ -28,8 +18,24 @@ namespace CarRepairShopApp.View
             ServiceModelGrid.ItemsSource = Manager.CurrentService.ServiceOfModel.ToList();
         }
 
-        Regex costRegex = new Regex(pattern: @"[0-9]+");
+
         private void ModelCost_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CheckIfTheCostAndSelectionAreValid();
+        }
+
+        private void BtnAddSelectedModelsToService_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.CurrentService.ServiceOfModel.Add(new ServiceOfModel
+            {
+                T_ID = (ModelGrid.SelectedItem as TypeOfCar).T_ID,
+                COST = decimal.Parse(ModelCost.Text)
+            });
+            ServiceModelGrid.ItemsSource = Manager.CurrentService.ServiceOfModel.ToList();
+        }
+
+        readonly Regex costRegex = new Regex(pattern: @"[1-9][0-9]{0,19}");
+        private void CheckIfTheCostAndSelectionAreValid()
         {
             if (ModelGrid.SelectedItems.Count > 0 && costRegex.IsMatch(ModelCost.Text))
             {
@@ -41,13 +47,9 @@ namespace CarRepairShopApp.View
             }
         }
 
-        private void BtnAddSelectedModelsToService_Click(object sender, RoutedEventArgs e)
+        private void ModelGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ModelGrid.SelectedItems.Cast<TypeOfCar>().ToList().ForEach(m => Manager.CurrentService.ServiceOfModel.Add(new ServiceOfModel
-            {
-                TypeOfCar = m,
-                COST = decimal.Parse(ModelCost.Text)
-            }));
+            CheckIfTheCostAndSelectionAreValid();
         }
     }
 }

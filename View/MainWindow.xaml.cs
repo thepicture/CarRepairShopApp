@@ -1,6 +1,6 @@
 ﻿using CarRepairShopApp.Model;
 using CarRepairShopApp.View;
-using System.Collections.Generic;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -310,13 +310,13 @@ namespace CarRepairShopApp
                 "Предупреждение",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Question)
-                == MessageBoxResult.Yes)
+                != MessageBoxResult.Yes)
             {
-                App.Current.Shutdown();
+                e.Cancel = true;
             }
             else
             {
-                e.Cancel = true;
+                Environment.Exit(0);
             }
         }
 

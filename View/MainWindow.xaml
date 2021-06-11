@@ -54,20 +54,22 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Button Name="BtnExit"
-                        ToolTipService.ToolTip="Закончить работу с информационной системой."
-                        ToolTipService.IsEnabled="False"
+                        ToolTip="Закончить работу с информационной системой."
                         Content="Выход"
                         Grid.Column="0"
                         Click="BtnExit_Click"></Button>
                 <Button Name="BtnLogin"
+                        ToolTip="Авторизоваться в системе под указанными логином и паролем."
                         Content="Войти"
                         Grid.Column="1"
                         Click="BtnLogin_Click"></Button>
             </Grid>
             <Button Name="BtnRegister"
+                    ToolTip="Зарегистрироваться для доступа к информационной системе."
                     Content="Регистрация"
                     Click="BtnRegister_Click"></Button>
             <Button Name="BtnForgotPassword"
+                    ToolTip="Восстановить пароль у существующей учётной записи."
                     Content="Забыли пароль?"
                     HorizontalAlignment="Right"
                     Click="BtnForgotPassword_Click"></Button>
@@ -176,7 +178,8 @@
             </Grid>
             <Button Name="BtnRecover"
                     Content="Восстановить"
-                    Click="BtnRecover_Click"></Button>
+                    Click="BtnRecover_Click"
+                    ToolTip="Восстановить учётную запись, если она существует."></Button>
             <Button Name="BtnCloseRecovery"
                     Content="Закрыть окно восстановления"
                     Click="BtnCloseRecovery_Click"></Button>
