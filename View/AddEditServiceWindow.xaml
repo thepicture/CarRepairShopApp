@@ -8,15 +8,22 @@
         Title="AddEditServiceWindow"
         WindowStartupLocation="CenterScreen"
         Height="550"
-        Width="800">
+        Width="800"
+        MinHeight="550"
+        MinWidth="600">
     <Grid Name="MainGrid"
           Background="WhiteSmoke"
           MouseMove="MainGrid_MouseMove"
           MouseLeave="MainGrid_MouseLeave">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="107*"/>
+        </Grid.ColumnDefinitions>
         <!--View for adding or editing services.-->
         <StackPanel VerticalAlignment="Center"
-                    Margin="30"
-                    Name="LoginPanel">
+                    Margin="30,46,30,45"
+                    Name="LoginPanel"
+                    Grid.Column="1">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
@@ -107,7 +114,7 @@
                     Click="BtnSaveService_Click"></Button>
         </StackPanel>
         <!--StatusBar for MainWindow-->
-        <DockPanel VerticalAlignment="Bottom">
+        <DockPanel VerticalAlignment="Bottom" Grid.ColumnSpan="2">
             <StatusBar DockPanel.Dock="Bottom">
                 <StatusBarItem>
                     <TextBlock Name="ButtonName"/>
@@ -118,6 +125,6 @@
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
                 Name="ExitButton"
-                Click="ExitButton_Click"></Button>
+                Click="ExitButton_Click" Grid.Column="1" Margin="0,5,5,0"></Button>
     </Grid>
 </Window>

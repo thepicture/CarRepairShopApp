@@ -23,6 +23,7 @@ namespace CarRepairShopApp.View
             UserNameBlock.Text = Manager.CurrentUser.USER_NAME;
             UserRoleBlock.Text = "Роль: " + Manager.CurrentUser.Role.NAME;
             ServiceGrid.ItemsSource = Manager.Context.Service.ToList();
+            MastersGrid.ItemsSource = Manager.Context.Master.ToList();
         }
 
         private void InitializeUserPhoto()
@@ -78,7 +79,15 @@ namespace CarRepairShopApp.View
 
         private void ServiceGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            BtnEditService.IsEnabled = BtnDeleteService.IsEnabled = true;
+            if (ServiceGrid.SelectedItems.Count > 1)
+            {
+                BtnEditService.IsEnabled = ModifyServiceItem.IsEnabled = false;
+            }
+            else
+            {
+                BtnEditService.IsEnabled = ModifyServiceItem.IsEnabled = true;
+            }
+            BtnDeleteService.IsEnabled = DeleteServiceItem.IsEnabled = true;
         }
 
         private void BtnEditService_Click(object sender, RoutedEventArgs e)
@@ -117,6 +126,7 @@ namespace CarRepairShopApp.View
                         Manager.Context.SaveChanges();
                         UpdateEntries();
                         BtnEditService.IsEnabled = BtnDeleteService.IsEnabled = false;
+                        ModifyServiceItem.IsEnabled = DeleteServiceItem.IsEnabled = false;
                     }
                     catch (Exception ex)
                     {
@@ -190,6 +200,67 @@ namespace CarRepairShopApp.View
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void AddServiceItem_Click(object sender, RoutedEventArgs e)
+        {
+            BtnAddService_Click(null, null);
+        }
+
+        private void ModifyServiceItem_Click(object sender, RoutedEventArgs e)
+        {
+            BtnEditService_Click(null, null);
+        }
+
+        private void DeleteServiceItem_Click(object sender, RoutedEventArgs e)
+        {
+            BtnDeleteService_Click(null, null);
+        }
+
+        private void MastersGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (MastersGrid.SelectedItems.Count > 1)
+            {
+                BtnEditMaster.IsEnabled = EditMasterItem.IsEnabled = false;
+            }
+            else
+            {
+                BtnDeleteMaster.IsEnabled = DeleteMasterItem.IsEnabled = true;
+            }
+        }
+
+        private void BtnDeleteMaster_Click(object sender, RoutedEventArgs e)
+        {
+            List<Master> masters = MastersGrid.SelectedItems.Cast<Master>().ToList();
+            if (MessageBox.Show("Действительно удалить следующее число мастеров: "
+               + masters.Count
+               + "?"
+               + "\nЭто действие отменить нельзя!",
+               "Внимание",
+               MessageBoxButton.YesNo,
+               MessageBoxImage.Warning)
+                == MessageBoxResult.Yes)
+            {
+                Manager.Context.Master.RemoveRange(masters);
+                try
+                {
+                    Manager.Context.SaveChanges();
+                    MastersGrid.ItemsSource = Manager.Context.Master.ToList();
+                    MessageBox.Show("Выбранные мастеры успешно удалены!",
+                        "Успешно!",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Данные не были удалены! Пожалуйста, попробуйте ещё раз." +
+                        "\nОшибка:"
+                        + ex.Message,
+                        "Ошибка удаления",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                }
+            }
         }
     }
 }

@@ -20,7 +20,9 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="20"></RowDefinition>
             <RowDefinition Height="150"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Name="MenuGrid">
             <!--Menu bar on the top of the admin panel.-->
@@ -38,14 +40,25 @@
                 </MenuItem>
                 <MenuItem Header="Действия">
                     <MenuItem Header="Услуги">
-                        <MenuItem Header="Добавить"></MenuItem>
-                        <MenuItem Header="Изменить"></MenuItem>
-                        <MenuItem Header="Удалить"></MenuItem>
+                        <MenuItem Header="Добавить"
+                                  Name="AddServiceItem"
+                                  Click="AddServiceItem_Click"></MenuItem>
+                        <MenuItem Header="Изменить"
+                                  Name="ModifyServiceItem"
+                                  Click="ModifyServiceItem_Click"
+                                  IsEnabled="False"></MenuItem>
+                        <MenuItem Header="Удалить"
+                                  Name="DeleteServiceItem"
+                                  Click="DeleteServiceItem_Click"
+                                  IsEnabled="False"></MenuItem>
                     </MenuItem>
                     <MenuItem Header="Механики">
-                        <MenuItem Header="Добавить"></MenuItem>
-                        <MenuItem Header="Изменить"></MenuItem>
-                        <MenuItem Header="Удалить"></MenuItem>
+                        <MenuItem Header="Добавить"
+                                  Name="AddMasterItem"></MenuItem>
+                        <MenuItem Header="Изменить"
+                                  Name="EditMasterItem"></MenuItem>
+                        <MenuItem Header="Удалить"
+                                  Name="DeleteMasterItem"></MenuItem>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="Отчеты">
@@ -119,19 +132,74 @@
                           SelectionChanged="ServiceGrid_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Услуга"
-                                            Binding="{Binding SE_NAME}">
-                            
+                                            Binding="{Binding SE_NAME}"
+                                            Width="*">
+
                         </DataGridTextColumn>
                         <DataGridTextColumn Header="Описание"
-                                            Binding="{Binding SE_DESCRIPTION}">
-                            
+                                            Binding="{Binding SE_DESCRIPTION}"
+                                            Width="*">
+
                         </DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
         </Grid>
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+            <Button Width="80"
+                Height="20"
+                Content="Добавить"
+                Name="BtnAddMaster"></Button>
+            <Button Width="80"
+                Height="20"
+                Content="Изменить"
+                Name="BtnEditMaster"></Button>
+            <Button Width="80"
+                Height="20"
+                Content="Удалить"
+                Name="BtnDeleteMaster"
+                Click="BtnDeleteMaster_Click"></Button>
+        </StackPanel>
+        <Grid Grid.Row="3">
+            <DataGrid Name="MastersGrid"
+                      SelectionChanged="MastersGrid_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ФИО мастера"
+                                        Binding="{Binding M_NAME}"
+                                        Width="*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Стаж работы"
+                                        Binding="{Binding M_EXPERIENCE}"
+                                        Width="*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Номер серии паспорта"
+                                        Binding="{Binding M_PASSNUM}"
+                                        Width="*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Код паспорта"
+                                        Binding="{Binding M_PASSCODE}"
+                                        Width="*"></DataGridTextColumn>
+                    <DataGridTemplateColumn Header="Аватар">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Width="100"
+                                       Height="100"
+                                       Margin="5">
+                                    <Image.Source>
+                                        <Binding Path="M_PHOTO">
+                                            <Binding.TargetNullValue>
+                                                <ImageSource>pack://application:,,,/Resources/user_picture.png</ImageSource>
+                                            </Binding.TargetNullValue>
+                                        </Binding>
+                                    </Image.Source>
+                                </Image>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
         <DockPanel VerticalAlignment="Bottom"
-                   Grid.Row="2">
+                   Grid.Row="4">
             <StatusBar DockPanel.Dock="Bottom">
                 <StatusBarItem>
                     <TextBlock Name="ButtonName"/>

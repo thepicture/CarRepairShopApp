@@ -107,6 +107,14 @@ namespace CarRepairShopApp.View
             {
                 builder.AppendLine("Укажите наименование услуги");
             }
+            if (builder.Length > 0)
+            {
+                MessageBox.Show(builder.ToString(),
+                    Title + " неуспешно",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+                return;
+            }
             if (_currentService.SE_ID.Equals(0))
             {
                 Manager.Context.Service.Add(_currentService);

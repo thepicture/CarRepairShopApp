@@ -18,7 +18,6 @@ namespace CarRepairShopApp.View
             ServiceModelGrid.ItemsSource = Manager.CurrentService.ServiceOfModel.ToList();
         }
 
-
         private void ModelCost_TextChanged(object sender, TextChangedEventArgs e)
         {
             CheckIfTheCostAndSelectionAreValid();
@@ -50,6 +49,30 @@ namespace CarRepairShopApp.View
         private void ModelGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             CheckIfTheCostAndSelectionAreValid();
+        }
+
+        private void BtnDeleteModelFromService_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.CurrentService.ServiceOfModel.Remove(ServiceModelGrid.SelectedItem as ServiceOfModel);
+            ServiceModelGrid.ItemsSource = Manager.CurrentService.ServiceOfModel.ToList();
+            BtnDeleteModelFromService.IsEnabled = false;
+        }
+
+        private void ServiceModelGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            BtnDeleteModelFromService.IsEnabled = true;
+        }
+
+        private void CloseEditCarToServiceWindow_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Точно закрыть окно указание стоимости услуги для моделей автомобилей?",
+                "Внимание",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question)
+                == MessageBoxResult.Yes)
+            {
+                Close();
+            }
         }
     }
 }
