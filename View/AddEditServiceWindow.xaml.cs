@@ -3,6 +3,7 @@ using Microsoft.Win32;
 using System;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -27,7 +28,7 @@ namespace CarRepairShopApp.View
         }
 
         /// <summary>
-        /// Shows the button content in the StatusBar.
+        /// Shows hints in the StatusBar.
         /// </summary>
         private void MainGrid_MouseMove(object sender, MouseEventArgs e)
         {
@@ -91,11 +92,21 @@ namespace CarRepairShopApp.View
 
         private void BtnRegisterServiceToCar_Click(object sender, RoutedEventArgs e)
         {
-
+            Manager.CurrentService = _currentService;
+            AddEditCarToServiceWindow carWindow = new AddEditCarToServiceWindow()
+            {
+                Title = "Добавить автомобиль к услуге " + _currentService.SE_NAME
+            };
+            carWindow.ShowDialog();
         }
 
         private void BtnSaveService_Click(object sender, RoutedEventArgs e)
         {
+            StringBuilder builder = new StringBuilder();
+            if (ServiceNameBox.Text.Length == 0)
+            {
+                builder.AppendLine("Укажите наименование услуги");
+            }
             if (_currentService.SE_ID.Equals(0))
             {
                 Manager.Context.Service.Add(_currentService);

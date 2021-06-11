@@ -11,7 +11,8 @@
         WindowStartupLocation="CenterScreen"
         Name="MainAdminWindow"
         MinHeight="450"
-        MinWidth="600">
+        MinWidth="700"
+        Closing="MainAdminWindow_Closing">
     <Grid Name="MainGrid"
           Background="WhiteSmoke"
           MouseMove="MainGrid_MouseMove"
@@ -25,8 +26,15 @@
             <!--Menu bar on the top of the admin panel.-->
             <Menu>
                 <MenuItem Header="Главная">
-                    <MenuItem Header="Изменить аватар"></MenuItem>
-                    <MenuItem Header="Выход"></MenuItem>
+                    <MenuItem Header="Изменить аватар"
+                              Name="ChangePictureItem"
+                              Click="ChangePictureItem_Click"></MenuItem>
+                    <MenuItem Header="Удалить аватар"
+                              Name="DeletePictureItem"
+                              Click="DeletePictureItem_Click"></MenuItem>
+                    <MenuItem Header="Выход"
+                              Name="ExitButton"
+                              Click="ExitButton_Click"></MenuItem>
                 </MenuItem>
                 <MenuItem Header="Действия">
                     <MenuItem Header="Услуги">
@@ -70,7 +78,10 @@
                         <ColumnDefinition Width="100"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Image Name="UserImage"></Image>
+                    <Image Name="UserImage"
+                           Width="100"
+                           Height="100"
+                           Stretch="UniformToFill"></Image>
                     <Grid Grid.Column="1">
                         <StackPanel>
                             <TextBlock Name="UserNameBlock"
@@ -104,13 +115,17 @@
                             Click="BtnDeleteService_Click"></Button>
                 </StackPanel>
                 <DataGrid Name="ServiceGrid"
-                          BorderBrush="Gray"
                           Grid.Row="1"
-                          SelectionChanged="ServiceGrid_SelectionChanged"
-                          HeadersVisibility="Column">
+                          SelectionChanged="ServiceGrid_SelectionChanged">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Услуга" Binding="{Binding SE_NAME}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Описание" Binding="{Binding SE_DESCRIPTION}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Услуга"
+                                            Binding="{Binding SE_NAME}">
+                            
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Описание"
+                                            Binding="{Binding SE_DESCRIPTION}">
+                            
+                        </DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

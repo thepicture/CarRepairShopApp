@@ -1,4 +1,5 @@
 ﻿using CarRepairShopApp.Model;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -33,10 +34,12 @@ namespace CarRepairShopApp.View
                 image.StreamSource = new MemoryStream(Manager.CurrentUser.USER_PHOTO);
                 image.EndInit();
                 UserImage.Source = image;
+                DeletePictureItem.IsEnabled = true;
             }
             else
             {
                 UserImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/user_picture.png"));
+                DeletePictureItem.IsEnabled = false;
             }
         }
 
@@ -51,13 +54,17 @@ namespace CarRepairShopApp.View
         }
 
         /// <summary>
-        /// Shows the button content in the StatusBar.
+        /// Shows hints in the StatusBar.
         /// </summary>
         private void MainGrid_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Source is Button button)
             {
                 ButtonName.Text = button.Content.ToString();
+            }
+            if (e.Source is MenuItem menuItem)
+            {
+                ButtonName.Text = menuItem.Header.ToString();
             }
         }
 
@@ -121,6 +128,68 @@ namespace CarRepairShopApp.View
                     }
                 }
             }
+        }
+
+        private void ChangePictureItem_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            if ((bool)dialog.ShowDialog())
+            {
+                try
+                {
+                    Manager.CurrentUser.USER_PHOTO = File.ReadAllBytes(dialog.FileName);
+                    Manager.Context.SaveChanges();
+                    InitializeUserPhoto();
+                    MessageBox.Show("Аватар успешно изменен!",
+                        "Успешно!",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Information);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Пожалуйста, прикрепите изображение.",
+                        "Ошибка",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void DeletePictureItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Точно удалить текущий аватар?",
+                "Внимание",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question)
+                == MessageBoxResult.Yes)
+            {
+                Manager.CurrentUser.USER_PHOTO = null;
+                Manager.Context.SaveChanges();
+                InitializeUserPhoto();
+            }
+        }
+
+        private void MainAdminWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (MessageBox.Show("Точно завершить текущую сессию пользователя "
+                + Manager.CurrentUser.USER_NAME
+                + "?",
+                "Внимание",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question)
+                != MessageBoxResult.Yes)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                Manager.MainLoginRegisterWindow.Show();
+            }
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

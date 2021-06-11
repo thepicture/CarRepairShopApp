@@ -1,5 +1,6 @@
 ﻿using CarRepairShopApp.Model;
 using CarRepairShopApp.View;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -22,7 +23,7 @@ namespace CarRepairShopApp
         {
             InitializeComponent();
             ComboLogin.ItemsSource = Manager.Context.User.ToList();
-            /// A code above is a little bit hard, because it uses recurrent formula. The code loads all except Administrator role.
+            /// A code above uses recurrent formula. The code loads all except Administrator role.
             ComboRole.ItemsSource = Manager.Context.Role.ToList().Take(Manager.Context.Role.ToList().Count).Reverse().Take(Manager.Context.Role.ToList().Count - 1).Reverse();
         }
 
@@ -67,6 +68,8 @@ namespace CarRepairShopApp
                     {
 
                     }
+                    Manager.MainLoginRegisterWindow = this;
+                    PBoxPassword.Password = null;
                 }
                 else
                 {
@@ -303,7 +306,11 @@ namespace CarRepairShopApp
 
         private void LoginRegisterRecoveryWindow_Closing(object sender, CancelEventArgs e)
         {
-            if (MessageBox.Show("Точно выйти из программы?", "Предупреждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            if (MessageBox.Show("Точно выйти из программы?",
+                "Предупреждение",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question)
+                == MessageBoxResult.Yes)
             {
                 App.Current.Shutdown();
             }
@@ -314,17 +321,20 @@ namespace CarRepairShopApp
         }
 
         /// <summary>
-        /// Shows the button content in the StatusBar.
+        /// Shows hints in the StatusBar.
         /// </summary>
         private void MainGrid_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Source is Button button)
             {
-                ButtonName.Text = button.Content.ToString();
-            }
-            if (e.Source is MenuItem menuItem)
-            {
-                ButtonName.Text = menuItem.Header.ToString();
+                if (button.ToolTip != null)
+                {
+                    ButtonName.Text = button.ToolTip.ToString();
+                }
+                else
+                {
+                    ButtonName.Text = button.Content.ToString();
+                }
             }
         }
 

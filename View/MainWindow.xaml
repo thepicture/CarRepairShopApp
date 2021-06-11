@@ -14,8 +14,8 @@
         WindowStartupLocation="CenterScreen"
         Name="LoginRegisterRecoveryWindow"
         Closing="LoginRegisterRecoveryWindow_Closing">
-    <Grid Name="MainGrid"
-          Background="WhiteSmoke"
+    <Grid Background="WhiteSmoke"
+          Name="MainGrid"
           MouseMove="MainGrid_MouseMove"
           MouseLeave="MainGrid_MouseLeave">
         <!--Login section-->
@@ -54,6 +54,8 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Button Name="BtnExit"
+                        ToolTipService.ToolTip="Закончить работу с информационной системой."
+                        ToolTipService.IsEnabled="False"
                         Content="Выход"
                         Grid.Column="0"
                         Click="BtnExit_Click"></Button>

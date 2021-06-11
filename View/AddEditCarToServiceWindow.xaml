@@ -1,0 +1,61 @@
+﻿<Window x:Class="CarRepairShopApp.View.AddEditCarToServiceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarRepairShopApp.View"
+        mc:Ignorable="d"
+        Title="AddEditCarToServiceWindow"
+        Height="450"
+        Width="800"
+        WindowStartupLocation="CenterScreen"
+        MinHeight="250"
+        MinWidth="600">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <DataGrid Name="ModelGrid"
+                      SelectionMode="Single">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Автомобиль" Binding="{Binding GetCarNameByType}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Модель" Binding="{Binding T_NAME}"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel Grid.Row="1">
+                <GroupBox Header="Цена услуги для выбранной модели"
+                          Margin="5">
+                    <TextBox MaxLength="20"
+                         Name="ModelCost"
+                         TextChanged="ModelCost_TextChanged"></TextBox>
+                </GroupBox>
+                <Button Content="Добавить выбранные модели"
+                    Name="BtnAddSelectedModelsToService"
+                        IsEnabled="False"
+                    Click="BtnAddSelectedModelsToService_Click"></Button>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <DataGrid Name="ServiceModelGrid"
+                  Grid.Column="1">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Автомобиль" Binding="{Binding GetCarNameByType}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Модель" Binding="{Binding T_NAME}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Цена услуги" Binding="{Binding COST}"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Content="Убрать выбранные модели из текущей услуги"
+                    Grid.Row="1"></Button>
+        </Grid>
+    </Grid>
+</Window>
