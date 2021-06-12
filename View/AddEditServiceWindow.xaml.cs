@@ -122,6 +122,12 @@ namespace CarRepairShopApp.View
             try
             {
                 Manager.Context.SaveChanges();
+                MessageBox.Show("Услуга "
+                    + ServiceNameBox.Text
+                    + " успешно сохранена!",
+                    "Успешно!",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
                 Close();
             }
             catch (Exception ex)

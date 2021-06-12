@@ -16,14 +16,14 @@
           MouseMove="MainGrid_MouseMove"
           MouseLeave="MainGrid_MouseLeave">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="25*"/>
-            <ColumnDefinition Width="107*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
         <!--View for adding or editing services.-->
         <StackPanel VerticalAlignment="Center"
-                    Margin="30,46,30,45"
                     Name="LoginPanel"
-                    Grid.Column="1">
+                    HorizontalAlignment="Center"
+                    Grid.ColumnSpan="2">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
@@ -55,7 +55,7 @@
             </Grid>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Фотографии услуги"
@@ -68,9 +68,10 @@
                     </Grid.RowDefinitions>
                     <!--Photos View.-->
                     <ListView Margin="5"
-                              Height="210"
+                              Height="200"
                               Name="ServicePhotoView"
                               Background="WhiteSmoke"
+                              HorizontalAlignment="Stretch"
                               ScrollViewer.HorizontalScrollBarVisibility="Visible"
                               ScrollViewer.VerticalScrollBarVisibility="Disabled">
                         <ListView.ItemsPanel>
@@ -106,12 +107,12 @@
                         <Button Name="BtnRegisterServiceToCar"
                              Content="Присвоить услугу автомобилю ..."
                              Click="BtnRegisterServiceToCar_Click"></Button>
-                    </StackPanel>
-                </Grid>
-            </Grid>
             <Button Name="BtnSaveService"
                     Content="Сохранить изменения"
                     Click="BtnSaveService_Click"></Button>
+                    </StackPanel>
+                </Grid>
+            </Grid>
         </StackPanel>
         <!--StatusBar for MainWindow-->
         <DockPanel VerticalAlignment="Bottom" Grid.ColumnSpan="2">

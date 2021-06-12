@@ -98,13 +98,12 @@ namespace CarRepairShopApp.View
                 Title = "Редактирование услуги " + service.SE_NAME
             };
             addEditServiceWindow.ShowDialog();
-            UpdateEntries();
         }
 
         private void UpdateEntries()
         {
-            Manager.Context.ChangeTracker.Entries().ToList().ForEach(s => s.Reload());
             ServiceGrid.ItemsSource = Manager.Context.Service.ToList();
+            MastersGrid.ItemsSource = Manager.Context.Master.ToList();
         }
 
         private void BtnDeleteService_Click(object sender, RoutedEventArgs e)
@@ -225,8 +224,9 @@ namespace CarRepairShopApp.View
             }
             else
             {
-                BtnDeleteMaster.IsEnabled = DeleteMasterItem.IsEnabled = true;
+                BtnEditMaster.IsEnabled = EditMasterItem.IsEnabled = true;
             }
+            BtnDeleteMaster.IsEnabled = DeleteMasterItem.IsEnabled = true;
         }
 
         private void BtnDeleteMaster_Click(object sender, RoutedEventArgs e)
@@ -261,6 +261,27 @@ namespace CarRepairShopApp.View
                         MessageBoxImage.Error);
                 }
             }
+        }
+
+        private void BtnAddMaster_Click(object sender, RoutedEventArgs e)
+        {
+            AddEditMasterWindow masterWindow = new AddEditMasterWindow(null)
+            {
+                Title = "Добавление нового механика"
+            };
+            masterWindow.ShowDialog();
+            UpdateEntries();
+        }
+
+        private void BtnEditMaster_Click(object sender, RoutedEventArgs e)
+        {
+            Master master = MastersGrid.SelectedItem as Master;
+            AddEditMasterWindow masterWindow = new AddEditMasterWindow(master)
+            {
+                Title = "Изменение данных о механике " + master.M_NAME
+            };
+            masterWindow.ShowDialog();
+            UpdateEntries();
         }
     }
 }

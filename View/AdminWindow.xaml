@@ -56,9 +56,11 @@
                         <MenuItem Header="Добавить"
                                   Name="AddMasterItem"></MenuItem>
                         <MenuItem Header="Изменить"
-                                  Name="EditMasterItem"></MenuItem>
+                                  Name="EditMasterItem"
+                                  IsEnabled="False"></MenuItem>
                         <MenuItem Header="Удалить"
-                                  Name="DeleteMasterItem"></MenuItem>
+                                  Name="DeleteMasterItem"
+                                  IsEnabled="False"></MenuItem>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="Отчеты">
@@ -151,16 +153,20 @@
             <Button Width="80"
                 Height="20"
                 Content="Добавить"
-                Name="BtnAddMaster"></Button>
+                Name="BtnAddMaster"
+                Click="BtnAddMaster_Click"></Button>
             <Button Width="80"
                 Height="20"
                 Content="Изменить"
-                Name="BtnEditMaster"></Button>
+                Name="BtnEditMaster"
+                IsEnabled="False"
+                Click="BtnEditMaster_Click"></Button>
             <Button Width="80"
                 Height="20"
                 Content="Удалить"
                 Name="BtnDeleteMaster"
-                Click="BtnDeleteMaster_Click"></Button>
+                Click="BtnDeleteMaster_Click"
+                IsEnabled="False"></Button>
         </StackPanel>
         <Grid Grid.Row="3">
             <DataGrid Name="MastersGrid"

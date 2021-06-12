@@ -100,13 +100,12 @@ namespace CarRepairShopApp
             UpdateState();
         }
 
-        readonly Regex nameRegex = new Regex(pattern: @"\w+\s\w+\s\w+");
         /// <summary>
         /// Identifies when the NameBox is correct and non-empty. Otherwise turns the TextBox background to red.
         /// </summary>
         private void NameBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (nameRegex.IsMatch(NameBox.Text))
+            if (RegexHelper.NameRegex.IsMatch(NameBox.Text))
             {
                 NameBox.Background = Brushes.Transparent;
                 BtnRegisterConfirm.IsEnabled = true;
