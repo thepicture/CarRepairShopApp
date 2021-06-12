@@ -283,5 +283,20 @@ namespace CarRepairShopApp.View
             masterWindow.ShowDialog();
             UpdateEntries();
         }
+
+        private void AddMasterItem_Click(object sender, RoutedEventArgs e)
+        {
+            BtnAddMaster_Click(null, null);
+        }
+
+        private void EditMasterItem_Click(object sender, RoutedEventArgs e)
+        {
+            BtnEditMaster_Click(null, null);
+        }
+
+        private void DeleteMasterItem_Click(object sender, RoutedEventArgs e)
+        {
+            BtnDeleteMaster_Click(null, null);
+        }
     }
 }

@@ -54,12 +54,15 @@
                     </MenuItem>
                     <MenuItem Header="Механики">
                         <MenuItem Header="Добавить"
-                                  Name="AddMasterItem"></MenuItem>
+                                  Name="AddMasterItem"
+                                  Click="AddMasterItem_Click"></MenuItem>
                         <MenuItem Header="Изменить"
                                   Name="EditMasterItem"
+                                  Click="EditMasterItem_Click"
                                   IsEnabled="False"></MenuItem>
                         <MenuItem Header="Удалить"
                                   Name="DeleteMasterItem"
+                                  Click="DeleteMasterItem_Click"
                                   IsEnabled="False"></MenuItem>
                     </MenuItem>
                 </MenuItem>
@@ -189,7 +192,8 @@
                             <DataTemplate>
                                 <Image Width="100"
                                        Height="100"
-                                       Margin="5">
+                                       Margin="5"
+                                       Stretch="UniformToFill">
                                     <Image.Source>
                                         <Binding Path="M_PHOTO">
                                             <Binding.TargetNullValue>

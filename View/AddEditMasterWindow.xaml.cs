@@ -42,6 +42,7 @@ namespace CarRepairShopApp.View
                 try
                 {
                     MasterPhoto.Source = new BitmapImage(new Uri(dialog.FileName));
+                    _currentMaster.M_PHOTO = File.ReadAllBytes(dialog.FileName);
                     MessageBox.Show("Изображение успешно обновлено!",
                         "Успешно!",
                         MessageBoxButton.OK,

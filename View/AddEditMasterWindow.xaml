@@ -65,6 +65,7 @@
                         <TextBox Name="MasterPassNumBox"
                              Text="{Binding M_PASSNUM}"
                              Grid.Column="1"
+                             Width="33"
                              MaxLength="4"></TextBox>
                         <TextBlock Text="Код паспорта"
                            Style="{StaticResource CommonBlock}"
@@ -72,6 +73,7 @@
                         <TextBox Name="MasterPassCodeBox"
                              Text="{Binding M_PASSCODE}"
                              Grid.Column="3"
+                             Width="45"
                              MaxLength="6"></TextBox>
                     </StackPanel>
                     </Grid>
