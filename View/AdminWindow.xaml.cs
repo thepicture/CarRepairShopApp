@@ -300,26 +300,36 @@ namespace CarRepairShopApp.View
             BtnDeleteMaster_Click(null, null);
         }
 
+        private string GetSelectedPath()
+        {
+            using (System.Windows.Forms.FolderBrowserDialog dialog = new System.Windows.Forms.FolderBrowserDialog())
+            {
+                dialog.Description = "Укажите папку сохранения отчёта:";
+                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    return dialog.SelectedPath;
+                }
+                else
+                {
+                    MessageBox.Show("Операция формирования отчёта была отменена!",
+                        "Внимание",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Information);
+                    return null;
+                }
+            }
+        }
+
         /// <summary>
         /// Forms the .pdf and .docx documents with order statistic of masters and shows the .docx document after operations.
         /// </summary>
         private void MastersOrderReportForm_Click(object sender, RoutedEventArgs e)
         {
-            string filePath;
-            using (System.Windows.Forms.FolderBrowserDialog dialog = new System.Windows.Forms.FolderBrowserDialog())
-                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    filePath = dialog.SelectedPath;
-                }
-                else
-                {
-                    MessageBox.Show("Операция была отменена!",
-                        "Внимание",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Information);
-                    return;
-                }
-
+            string filePath = GetSelectedPath();
+            if (filePath == null)
+            {
+                return;
+            }
             var allMasters = Manager.Context.Master.ToList();
             var allServices = Manager.Context.Service.ToList();
 
@@ -375,11 +385,79 @@ namespace CarRepairShopApp.View
             }
             catch (Exception)
             {
-                MessageBox.Show("Сохранение неуспешно. Убедитесь, что в вашей системе установлен пакет Microsoft Office.",
-                    "Ошибка",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
+                ShowErrorInformationAboutMSOffice();
             }
+        }
+
+        private void ServicesReportForm_Click(object sender, RoutedEventArgs e)
+        {
+            string filePath = GetSelectedPath();
+            if (filePath == null)
+            {
+                return;
+            }
+            var allServices = Manager.Context.Service.ToList();
+
+            var application = new Word.Application();
+
+            Word.Document document = application.Documents.Add();
+
+            Word.Paragraph paragraph = document.Paragraphs.Add();
+            Word.Range serviceRange = paragraph.Range;
+            serviceRange.Text = "Информация о средней цене каждой услуги за " + DateTime.Now.ToString();
+            serviceRange.set_Style("Заголовок 1");
+            serviceRange.InsertParagraphAfter();
+
+            Word.Paragraph tableParagraph = document.Paragraphs.Add();
+            Word.Range tableRange = tableParagraph.Range;
+            Word.Table serviceTable = document.Tables.Add(tableRange, allServices.Count + 1, 2); ;
+            serviceTable.Borders.InsideLineStyle = serviceTable.Borders.OutsideLineStyle = Word.WdLineStyle.wdLineStyleSingle;
+            serviceTable.Range.Cells.VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+
+            Word.Range cellRange;
+
+            cellRange = serviceTable.Cell(1, 1).Range;
+            cellRange.Text = "Услуга";
+            cellRange = serviceTable.Cell(1, 2).Range;
+            cellRange.Text = "Средняя цена";
+
+            serviceTable.Rows[1].Range.Bold = 1;
+            serviceTable.Rows[1].Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
+            for (int i = 0; i < allServices.Count; i++)
+            {
+                var currentService = allServices[i];
+
+                cellRange = serviceTable.Cell(i + 2, 1).Range;
+                cellRange.Text = currentService.SE_NAME;
+                cellRange = serviceTable.Cell(i + 2, 2).Range;
+                if (currentService.ServiceOfModel.Count() == 0)
+                {
+                    cellRange.Text = "Цен не найдено";
+                    continue;
+                }
+                cellRange.Text = Math.Floor(currentService.ServiceOfModel.Sum(s => s.COST) / currentService.ServiceOfModel.Count()).ToString() + " руб.";
+            }
+            application.Visible = true;
+
+            string currentDate = DateTime.Now.ToString("dd-MM-yyyy_hh-mm");
+
+            try
+            {
+                document.SaveAs(filePath + @"\Отчёт-по-услугам_" + currentDate + ".docx");
+                document.SaveAs(filePath + @"\Отчёт-по-услугам_" + currentDate + ".pdf", Word.WdExportFormat.wdExportFormatPDF);
+            }
+            catch (Exception)
+            {
+                ShowErrorInformationAboutMSOffice();
+            }
+        }
+
+        private static void ShowErrorInformationAboutMSOffice()
+        {
+            MessageBox.Show("Сохранение неуспешно. Убедитесь, что в вашей системе установлен пакет Microsoft Office.",
+                "Ошибка",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
         }
     }
 }

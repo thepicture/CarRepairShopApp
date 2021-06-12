@@ -10,7 +10,7 @@
         Height="550"
         Width="800"
         MinHeight="550"
-        MinWidth="600">
+        MinWidth="900">
     <Grid Name="MainGrid"
           Background="WhiteSmoke"
           MouseMove="MainGrid_MouseMove"
@@ -35,7 +35,8 @@
                 <TextBox Name="ServiceNameBox"
                              Text="{Binding SE_NAME}"
                              Grid.Column="1"
-                             MaxLength="100"></TextBox>
+                             MaxLength="100"
+                         Width="400"></TextBox>
             </Grid>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -51,7 +52,8 @@
                              VerticalContentAlignment="Top"
                              MaxLength="1024"
                              TextWrapping="Wrap"
-                             Height="80"></TextBox>
+                             Height="80"
+                             Width="400"></TextBox>
             </Grid>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -69,6 +71,7 @@
                     <!--Photos View.-->
                     <ListView Margin="5"
                               Height="200"
+                              Width="400"
                               Name="ServicePhotoView"
                               Background="WhiteSmoke"
                               HorizontalAlignment="Stretch"
