@@ -305,6 +305,21 @@ namespace CarRepairShopApp.View
         /// </summary>
         private void MastersOrderReportForm_Click(object sender, RoutedEventArgs e)
         {
+            string filePath;
+            using (System.Windows.Forms.FolderBrowserDialog dialog = new System.Windows.Forms.FolderBrowserDialog())
+                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    filePath = dialog.SelectedPath;
+                }
+                else
+                {
+                    MessageBox.Show("Операция была отменена!",
+                        "Внимание",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Information);
+                    return;
+                }
+
             var allMasters = Manager.Context.Master.ToList();
             var allServices = Manager.Context.Service.ToList();
 
@@ -351,8 +366,20 @@ namespace CarRepairShopApp.View
             }
             application.Visible = true;
 
-            document.SaveAs(@"C:\Test.docx");
-            document.SaveAs(@"C:\Test.pdf", Word.WdExportFormat.wdExportFormatPDF);
+            string currentDate = DateTime.Now.ToString("dd-MM-yyyy_hh-mm");
+
+            try
+            {
+                document.SaveAs(filePath + @"\Отчёт-по-механикам_" + currentDate + ".docx");
+                document.SaveAs(filePath + @"\Отчёт-по-механикам_" + currentDate + ".pdf", Word.WdExportFormat.wdExportFormatPDF);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Сохранение неуспешно. Убедитесь, что в вашей системе установлен пакет Microsoft Office.",
+                    "Ошибка",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
         }
     }
 }
