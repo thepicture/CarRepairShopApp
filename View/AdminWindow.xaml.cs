@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using Word = Microsoft.Office.Interop.Word;
 
 namespace CarRepairShopApp.View
 {
@@ -297,6 +298,61 @@ namespace CarRepairShopApp.View
         private void DeleteMasterItem_Click(object sender, RoutedEventArgs e)
         {
             BtnDeleteMaster_Click(null, null);
+        }
+
+        /// <summary>
+        /// Forms the .pdf and .docx documents with order statistic of masters and shows the .docx document after operations.
+        /// </summary>
+        private void MastersOrderReportForm_Click(object sender, RoutedEventArgs e)
+        {
+            var allMasters = Manager.Context.Master.ToList();
+            var allServices = Manager.Context.Service.ToList();
+
+            var application = new Word.Application();
+
+            Word.Document document = application.Documents.Add();
+
+            foreach (var master in allMasters)
+            {
+                Word.Paragraph paragraph = document.Paragraphs.Add();
+                Word.Range masterRange = paragraph.Range;
+                masterRange.Text = master.M_NAME;
+                masterRange.set_Style("Заголовок 1");
+                masterRange.InsertParagraphAfter();
+
+                Word.Paragraph tableParagraph = document.Paragraphs.Add();
+                Word.Range tableRange = tableParagraph.Range;
+                Word.Table ordersOfMasterTable = document.Tables.Add(tableRange, allServices.Count + 1, 2); ;
+                ordersOfMasterTable.Borders.InsideLineStyle = ordersOfMasterTable.Borders.OutsideLineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                ordersOfMasterTable.Range.Cells.VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+
+                Word.Range cellRange;
+
+                cellRange = ordersOfMasterTable.Cell(1, 1).Range;
+                cellRange.Text = "Услуга";
+                cellRange = ordersOfMasterTable.Cell(1, 2).Range;
+                cellRange.Text = "Количество продаж";
+
+                ordersOfMasterTable.Rows[1].Range.Bold = 1;
+                ordersOfMasterTable.Rows[1].Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                for (int i = 0; i < allServices.Count; i++)
+                {
+                    var currentService = allServices[i];
+
+                    cellRange = ordersOfMasterTable.Cell(i + 2, 1).Range;
+                    cellRange.Text = currentService.SE_NAME;
+                    cellRange = ordersOfMasterTable.Cell(i + 2, 2).Range;
+                    cellRange.Text = master.Order.Where(o => o.Service.Contains(currentService)).Count().ToString();
+                }
+                if (master != allMasters.LastOrDefault())
+                {
+                    document.Words.Last.InsertBreak(Word.WdBreakType.wdPageBreak);
+                }
+            }
+            application.Visible = true;
+
+            document.SaveAs(@"C:\Test.docx");
+            document.SaveAs(@"C:\Test.pdf", Word.WdExportFormat.wdExportFormatPDF);
         }
     }
 }

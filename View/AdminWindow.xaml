@@ -68,15 +68,13 @@
                 </MenuItem>
                 <MenuItem Header="Отчеты">
                     <MenuItem Header="Механики">
-                        <MenuItem Header="Создать статистику продаж каждого механика"></MenuItem>
+                        <MenuItem Header="Создать статистику продаж каждого механика"
+                                  Name="MastersOrderReportForm"
+                                  Click="MastersOrderReportForm_Click"></MenuItem>
                     </MenuItem>
                     <MenuItem Header="Услуги">
                         <MenuItem Header="Создать отчёт по услугам"></MenuItem>
-                        <MenuItem Header="ТОП-10 услуг"></MenuItem>
-                    </MenuItem>
-                    <MenuItem Header="Клиенты">
-                        <MenuItem Header="Создать статистику по покупкам клиентов"></MenuItem>
-                        <MenuItem Header="ТОП-10 клиентов"></MenuItem>
+                        <MenuItem Header="ТОП-10 услуг по стоимости"></MenuItem>
                     </MenuItem>
                 </MenuItem>
             </Menu>
