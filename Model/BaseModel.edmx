@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Auto">
           <Key>
             <PropertyRef Name="A_ID" />
@@ -39,6 +39,7 @@
           <Property Name="CO_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CO_ISCHECKED" Type="bit" Nullable="false" />
           <Property Name="CO_IMAGESCAN" Type="varbinary(max)" Nullable="false" />
+          <Property Name="CO_DATE" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="ContractOfClient">
           <Key>
@@ -518,8 +519,7 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -558,6 +558,7 @@
           <Property Name="CO_IMAGESCAN" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <NavigationProperty Name="Client" Relationship="Self.ContractOfClient" FromRole="Contract" ToRole="Client" />
           <NavigationProperty Name="Master" Relationship="Self.ContractOfMaster" FromRole="Contract" ToRole="Master" />
+          <Property Name="CO_DATE" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Master">
           <Key>
@@ -896,6 +897,7 @@
           <EntitySetMapping Name="Contract">
             <EntityTypeMapping TypeName="BaseModel.Contract">
               <MappingFragment StoreEntitySet="Contract">
+                <ScalarProperty Name="CO_DATE" ColumnName="CO_DATE" />
                 <ScalarProperty Name="CO_ID" ColumnName="CO_ID" />
                 <ScalarProperty Name="CO_ISCHECKED" ColumnName="CO_ISCHECKED" />
                 <ScalarProperty Name="CO_IMAGESCAN" ColumnName="CO_IMAGESCAN" />

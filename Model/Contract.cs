@@ -24,6 +24,7 @@ namespace CarRepairShopApp.Model
         public int CO_ID { get; set; }
         public bool CO_ISCHECKED { get; set; }
         public byte[] CO_IMAGESCAN { get; set; }
+        public System.DateTime CO_DATE { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Client> Client { get; set; }

@@ -62,7 +62,13 @@ namespace CarRepairShopApp
                     }
                     else if (currentUser.Role.NAME.Equals("Механик"))
                     {
-
+                        MasterWindow masterWindow = new MasterWindow
+                        {
+                            Owner = this,
+                            Title = currentUser.USER_NAME + " — панель механика"
+                        };
+                        masterWindow.Show();
+                        Hide();
                     }
                     else if (currentUser.Role.NAME.Equals("Клиент"))
                     {
