@@ -11,11 +11,10 @@
         MinWidth="600"
         MinHeight="450"
         WindowStartupLocation="CenterScreen">
-    <Grid>
-        <Grid Name="MainGrid"
-          Background="WhiteSmoke"
-          MouseMove="MainGrid_MouseMove"
-          MouseLeave="MainGrid_MouseLeave">
+    <Grid Background="WhiteSmoke"
+          Name="MainGrid">
+        <Grid MouseMove="MainGrid_MouseMove"
+              MouseLeave="MainGrid_MouseLeave">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="25*"/>
                 <ColumnDefinition Width="107*"/>

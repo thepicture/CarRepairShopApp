@@ -14,183 +14,186 @@
         WindowStartupLocation="CenterScreen"
         Name="LoginRegisterRecoveryWindow"
         Closing="LoginRegisterRecoveryWindow_Closing">
-    <Grid Background="WhiteSmoke"
-          Name="MainGrid"
-          MouseMove="MainGrid_MouseMove"
-          MouseLeave="MainGrid_MouseLeave">
-        <!--Login section-->
-        <StackPanel VerticalAlignment="Center"
+    <Grid>
+        <Grid Background="WhiteSmoke"
+              Name="MainGrid">
+            <Grid MouseMove="MainGrid_MouseMove"
+                  MouseLeave="MainGrid_MouseLeave">
+                <!--Login section-->
+                <StackPanel VerticalAlignment="Center"
                     Margin="30"
                     Name="LoginPanel">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Логин"
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Логин"
                            Style="{StaticResource CommonBlock}"
                            Grid.Column="0"></TextBlock>
-                <ComboBox Name="ComboLogin"
+                        <ComboBox Name="ComboLogin"
                           DisplayMemberPath="USER_LOGIN"
                           SelectedIndex="0"
                           Grid.Column="1"></ComboBox>
-            </Grid>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Пароль"
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Пароль"
                            Style="{StaticResource CommonBlock}"
                            Grid.Column="0"></TextBlock>
-                <PasswordBox Name="PBoxPassword"
+                        <PasswordBox Name="PBoxPassword"
                              Grid.Column="1"
                              Password="123456"
                              MaxLength="50"></PasswordBox>
-            </Grid>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Button Name="BtnExit"
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button Name="BtnExit"
                         ToolTip="Закончить работу с информационной системой."
                         Content="Выход"
                         Grid.Column="0"
                         Click="BtnExit_Click"></Button>
-                <Button Name="BtnLogin"
+                        <Button Name="BtnLogin"
                         ToolTip="Авторизоваться в системе под указанными логином и паролем."
                         Content="Войти"
                         Grid.Column="1"
                         Click="BtnLogin_Click"></Button>
-            </Grid>
-            <Button Name="BtnRegister"
+                    </Grid>
+                    <Button Name="BtnRegister"
                     ToolTip="Зарегистрироваться для доступа к информационной системе."
                     Content="Регистрация"
                     Click="BtnRegister_Click"></Button>
-            <Button Name="BtnForgotPassword"
+                    <Button Name="BtnForgotPassword"
                     ToolTip="Восстановить пароль у существующей учётной записи."
                     Content="Забыли пароль?"
                     HorizontalAlignment="Right"
                     Click="BtnForgotPassword_Click"></Button>
-        </StackPanel>
-        <!--Register section-->
-        <StackPanel VerticalAlignment="Center"
+                </StackPanel>
+                <!--Register section-->
+                <StackPanel VerticalAlignment="Center"
                     Margin="30"
                     Name="RegisterPanel"
                     Visibility="Collapsed">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Логин"
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Логин"
                            Style="{StaticResource CommonBlock}"
                            Grid.Column="0"></TextBlock>
-                <TextBox Name="TBoxLogin"
+                        <TextBox Name="TBoxLogin"
                           Grid.Column="1"
                           TextChanged="TBoxLogin_TextChanged"
                           MaxLength="100"></TextBox>
-            </Grid>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Роль"
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Роль"
                            Style="{StaticResource CommonBlock}"
                            Grid.Column="0"></TextBlock>
-                <ComboBox Name="ComboRole"
+                        <ComboBox Name="ComboRole"
                           Grid.Column="1"
                           DisplayMemberPath="NAME"
                           SelectedIndex="0"></ComboBox>
-            </Grid>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="ФИО"
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="ФИО"
                            Style="{StaticResource CommonBlock}"
                            Grid.Column="0"></TextBlock>
-                <TextBox Name="NameBox"
+                        <TextBox Name="NameBox"
                           Grid.Column="1"
                           TextChanged="NameBox_TextChanged"
                           MaxLength="100"></TextBox>
-            </Grid>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Пароль"
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Пароль"
                            Style="{StaticResource CommonBlock}"
                            Grid.Column="0"></TextBlock>
-                <PasswordBox Name="PasswordBoxFirst"
+                        <PasswordBox Name="PasswordBoxFirst"
                           Grid.Column="1"
                           PasswordChanged="PasswordBoxFirst_PasswordChanged"></PasswordBox>
-            </Grid>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Повторите пароль"
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Повторите пароль"
                            Style="{StaticResource CommonBlock}"
                            Grid.Column="0"></TextBlock>
-                <PasswordBox Name="PasswordBoxSecond"
+                        <PasswordBox Name="PasswordBoxSecond"
                           Grid.Column="1"
                           PasswordChanged="PasswordBoxSecond_PasswordChanged"></PasswordBox>
-            </Grid>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Button Name="BtnRegisterClose"
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button Name="BtnRegisterClose"
                         Content="Закрыть окно регистрации"
                         Grid.Column="0"
                         Click="BtnRegisterClose_Click"></Button>
-                <Button Name="BtnRegisterConfirm"
+                        <Button Name="BtnRegisterConfirm"
                         Content="Зарегистрироваться"
                         Grid.Column="1"
                         IsEnabled="False"
                         Click="BtnRegisterConfirm_Click"></Button>
-            </Grid>
-        </StackPanel>
-        <!--Password recovery section-->
-        <StackPanel VerticalAlignment="Center"
+                    </Grid>
+                </StackPanel>
+                <!--Password recovery section-->
+                <StackPanel VerticalAlignment="Center"
                     Margin="30"
                     Name="RecoveryPasswordPanel"
                     Visibility="Collapsed">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Логин"
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Логин"
                            Style="{StaticResource CommonBlock}"
                            Grid.Column="0"></TextBlock>
-                <TextBox Name="TBoxRecoveryLogin"
+                        <TextBox Name="TBoxRecoveryLogin"
                           Grid.Column="1"
                           TextChanged="TBoxRecoveryLogin_TextChanged"
                           MaxLength="100"></TextBox>
-            </Grid>
-            <Button Name="BtnRecover"
+                    </Grid>
+                    <Button Name="BtnRecover"
                     Content="Восстановить"
                     Click="BtnRecover_Click"
                     ToolTip="Восстановить учётную запись, если она существует."></Button>
-            <Button Name="BtnCloseRecovery"
+                    <Button Name="BtnCloseRecovery"
                     Content="Закрыть окно восстановления"
                     Click="BtnCloseRecovery_Click"></Button>
-        </StackPanel>
-        <!--StatusBar for MainWindow-->
-        <DockPanel VerticalAlignment="Bottom">
-            <StatusBar DockPanel.Dock="Bottom">
-                <StatusBarItem>
-                    <TextBlock Name="ButtonName"/>
-                </StatusBarItem>
-            </StatusBar>
-        </DockPanel>
+                </StackPanel>
+                <!--StatusBar for MainWindow-->
+                <DockPanel VerticalAlignment="Bottom">
+                    <StatusBar DockPanel.Dock="Bottom">
+                        <StatusBarItem>
+                            <TextBlock Name="ButtonName"/>
+                        </StatusBarItem>
+                    </StatusBar>
+                </DockPanel>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

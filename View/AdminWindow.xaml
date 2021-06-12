@@ -14,206 +14,207 @@
         MinWidth="700"
         Closing="MainAdminWindow_Closing">
     <Grid Name="MainGrid"
-          Background="WhiteSmoke"
-          MouseMove="MainGrid_MouseMove"
-          MouseLeave="MainGrid_MouseLeave">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20"></RowDefinition>
-            <RowDefinition Height="150"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid Name="MenuGrid">
-            <!--Menu bar on the top of the admin panel.-->
-            <Menu>
-                <MenuItem Header="Главная">
-                    <MenuItem Header="Изменить аватар"
+          Background="WhiteSmoke">
+        <Grid MouseMove="MainGrid_MouseMove"
+              MouseLeave="MainGrid_MouseLeave">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"></RowDefinition>
+                <RowDefinition Height="150"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Name="MenuGrid">
+                <!--Menu bar on the top of the admin panel.-->
+                <Menu>
+                    <MenuItem Header="Главная">
+                        <MenuItem Header="Изменить аватар"
                               Name="ChangePictureItem"
                               Click="ChangePictureItem_Click"></MenuItem>
-                    <MenuItem Header="Удалить аватар"
+                        <MenuItem Header="Удалить аватар"
                               Name="DeletePictureItem"
                               Click="DeletePictureItem_Click"></MenuItem>
-                    <MenuItem Header="Выход"
+                        <MenuItem Header="Выход"
                               Name="ExitButton"
                               Click="ExitButton_Click"></MenuItem>
-                </MenuItem>
-                <MenuItem Header="Действия">
-                    <MenuItem Header="Услуги">
-                        <MenuItem Header="Добавить"
+                    </MenuItem>
+                    <MenuItem Header="Действия">
+                        <MenuItem Header="Услуги">
+                            <MenuItem Header="Добавить"
                                   Name="AddServiceItem"
                                   Click="AddServiceItem_Click"></MenuItem>
-                        <MenuItem Header="Изменить"
+                            <MenuItem Header="Изменить"
                                   Name="ModifyServiceItem"
                                   Click="ModifyServiceItem_Click"
                                   IsEnabled="False"></MenuItem>
-                        <MenuItem Header="Удалить"
+                            <MenuItem Header="Удалить"
                                   Name="DeleteServiceItem"
                                   Click="DeleteServiceItem_Click"
                                   IsEnabled="False"></MenuItem>
-                    </MenuItem>
-                    <MenuItem Header="Механики">
-                        <MenuItem Header="Добавить"
+                        </MenuItem>
+                        <MenuItem Header="Механики">
+                            <MenuItem Header="Добавить"
                                   Name="AddMasterItem"
                                   Click="AddMasterItem_Click"></MenuItem>
-                        <MenuItem Header="Изменить"
+                            <MenuItem Header="Изменить"
                                   Name="EditMasterItem"
                                   Click="EditMasterItem_Click"
                                   IsEnabled="False"></MenuItem>
-                        <MenuItem Header="Удалить"
+                            <MenuItem Header="Удалить"
                                   Name="DeleteMasterItem"
                                   Click="DeleteMasterItem_Click"
                                   IsEnabled="False"></MenuItem>
+                        </MenuItem>
                     </MenuItem>
-                </MenuItem>
-                <MenuItem Header="Отчеты">
-                    <MenuItem Header="Механики">
-                        <MenuItem Header="Создать статистику продаж каждого механика"
+                    <MenuItem Header="Отчеты">
+                        <MenuItem Header="Механики">
+                            <MenuItem Header="Создать статистику продаж каждого механика"
                                   Name="MastersOrderReportForm"
                                   Click="MastersOrderReportForm_Click"></MenuItem>
-                    </MenuItem>
-                    <MenuItem Header="Услуги">
-                        <MenuItem Header="Создать отчёт по услугам"
+                        </MenuItem>
+                        <MenuItem Header="Услуги">
+                            <MenuItem Header="Создать отчёт по услугам"
                                   Name="ServicesReportForm"
                                   Click="ServicesReportForm_Click"></MenuItem>
+                        </MenuItem>
                     </MenuItem>
-                </MenuItem>
-            </Menu>
-        </Grid>
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <!--Information about the admin.-->
-            <GroupBox Grid.Column="0"
+                </Menu>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <!--Information about the admin.-->
+                <GroupBox Grid.Column="0"
                           HorizontalAlignment="Stretch"
                           Margin="5"
                           Header="Информация о пользователе">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Image Name="UserImage"
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Image Name="UserImage"
                            Width="100"
                            Height="100"
                            Stretch="UniformToFill"></Image>
-                    <Grid Grid.Column="1">
-                        <StackPanel>
-                            <TextBlock Name="UserNameBlock"
+                        <Grid Grid.Column="1">
+                            <StackPanel>
+                                <TextBlock Name="UserNameBlock"
                                        Margin="5"
                                        FontWeight="Bold"></TextBlock>
-                            <TextBlock Name="UserRoleBlock"
+                                <TextBlock Name="UserRoleBlock"
                                        Margin="5"></TextBlock>
-                        </StackPanel>
+                            </StackPanel>
+                        </Grid>
                     </Grid>
-                </Grid>
-            </GroupBox>
-            <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                </Grid.RowDefinitions>
-                <StackPanel Orientation="Horizontal">
-                    <Button Width="80"
+                </GroupBox>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Width="80"
                             Content="Добавить"
                             Name="BtnAddService"
                             Click="BtnAddService_Click"></Button>
-                    <Button Width="80"
+                        <Button Width="80"
                             Content="Изменить"
                             Name="BtnEditService"
                             Click="BtnEditService_Click"
                             IsEnabled="False"></Button>
-                    <Button Width="80"
+                        <Button Width="80"
                             Content="Удалить"
                             Name="BtnDeleteService"
                             IsEnabled="False"
                             Click="BtnDeleteService_Click"></Button>
-                </StackPanel>
-                <DataGrid Name="ServiceGrid"
+                    </StackPanel>
+                    <DataGrid Name="ServiceGrid"
                           Grid.Row="1"
                           SelectionChanged="ServiceGrid_SelectionChanged">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Услуга"
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Услуга"
                                             Binding="{Binding SE_NAME}"
                                             Width="*">
 
-                        </DataGridTextColumn>
-                        <DataGridTextColumn Header="Описание"
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Описание"
                                             Binding="{Binding SE_DESCRIPTION}"
                                             Width="*">
 
-                        </DataGridTextColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
             </Grid>
-        </Grid>
-        <StackPanel Grid.Row="2"
+            <StackPanel Grid.Row="2"
                     Orientation="Horizontal"
                     HorizontalAlignment="Center">
-            <Button Width="80"
+                <Button Width="80"
                 Height="20"
                 Content="Добавить"
                 Name="BtnAddMaster"
                 Click="BtnAddMaster_Click"></Button>
-            <Button Width="80"
+                <Button Width="80"
                 Height="20"
                 Content="Изменить"
                 Name="BtnEditMaster"
                 IsEnabled="False"
                 Click="BtnEditMaster_Click"></Button>
-            <Button Width="80"
+                <Button Width="80"
                 Height="20"
                 Content="Удалить"
                 Name="BtnDeleteMaster"
                 Click="BtnDeleteMaster_Click"
                 IsEnabled="False"></Button>
-        </StackPanel>
-        <Grid Grid.Row="3">
-            <DataGrid Name="MastersGrid"
+            </StackPanel>
+            <Grid Grid.Row="3">
+                <DataGrid Name="MastersGrid"
                       SelectionChanged="MastersGrid_SelectionChanged">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="ФИО мастера"
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ФИО мастера"
                                         Binding="{Binding M_NAME}"
                                         Width="*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Стаж работы"
+                        <DataGridTextColumn Header="Стаж работы"
                                         Binding="{Binding M_EXPERIENCE}"
                                         Width="*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Номер серии паспорта"
+                        <DataGridTextColumn Header="Номер серии паспорта"
                                         Binding="{Binding M_PASSNUM}"
                                         Width="*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Код паспорта"
+                        <DataGridTextColumn Header="Код паспорта"
                                         Binding="{Binding M_PASSCODE}"
                                         Width="*"></DataGridTextColumn>
-                    <DataGridTemplateColumn Header="Аватар">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Image Width="100"
+                        <DataGridTemplateColumn Header="Аватар">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Width="100"
                                        Height="100"
                                        Margin="5"
                                        Stretch="UniformToFill">
-                                    <Image.Source>
-                                        <Binding Path="M_PHOTO">
-                                            <Binding.TargetNullValue>
-                                                <ImageSource>pack://application:,,,/Resources/user_picture.png</ImageSource>
-                                            </Binding.TargetNullValue>
-                                        </Binding>
-                                    </Image.Source>
-                                </Image>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-        </Grid>
-        <DockPanel VerticalAlignment="Bottom"
+                                        <Image.Source>
+                                            <Binding Path="M_PHOTO">
+                                                <Binding.TargetNullValue>
+                                                    <ImageSource>pack://application:,,,/Resources/user_picture.png</ImageSource>
+                                                </Binding.TargetNullValue>
+                                            </Binding>
+                                        </Image.Source>
+                                    </Image>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+            <DockPanel VerticalAlignment="Bottom"
                    Grid.Row="4">
-            <StatusBar DockPanel.Dock="Bottom">
-                <StatusBarItem>
-                    <TextBlock Name="ButtonName"/>
-                </StatusBarItem>
-            </StatusBar>
-        </DockPanel>
+                <StatusBar DockPanel.Dock="Bottom">
+                    <StatusBarItem>
+                        <TextBlock Name="ButtonName"/>
+                    </StatusBarItem>
+                </StatusBar>
+            </DockPanel>
+        </Grid>
     </Grid>
 </Window>
