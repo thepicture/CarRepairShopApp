@@ -1,0 +1,82 @@
+﻿<Window x:Class="CarRepairShopApp.View.AddContractToCustomerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarRepairShopApp.View"
+        mc:Ignorable="d"
+        Title="AddContractToCustomerWindow"
+        Height="450"
+        Width="800"
+        MinHeight="250"
+        MinWidth="600"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <GroupBox Header="Список всех клиентов">
+                <DataGrid Name="CustomerGrid"
+                      SelectionChanged="CustomerGrid_SelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ФИО"
+                                        Binding="{Binding CL_NAME}"
+                                        Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Серия паспорта"
+                                        Binding="{Binding CL_PASSNUM}"
+                                        Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Код паспорта"
+                                        Binding="{Binding CL_PASSCODE}"
+                                        Width="*"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+            <Button Content="Добавить выбранных клиентов"
+                    Name="BtnAddSelectedClientsToContract"
+                    IsEnabled="False"
+                    Grid.Row="1"
+                    Click="BtnAddSelectedClientsToContract_Click"></Button>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Button Content="Закрыть"
+                    VerticalAlignment="Top"
+                    Grid.Row="2"
+                    Name="CloseWindow"
+                    Click="CloseWindow_Click"></Button>
+            <GroupBox Header="Список клиентов для текущего договора">
+                <DataGrid Name="ContractsOfCustomersGrid"
+                  SelectionChanged="ContractsOfCustomersGrid_SelectionChanged"
+                  Grid.Column="1"
+                  Grid.Row="0">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ФИО"
+                                        Binding="{Binding CL_NAME}"
+                                        Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Серия паспорта"
+                                        Binding="{Binding CL_PASSNUM}"
+                                        Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Код паспорта"
+                                        Binding="{Binding CL_PASSCODE}"
+                                        Width="*"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+            <Button Content="Отменить контракт с выбранными клиентами"
+                    Grid.Row="1"
+                    IsEnabled="False"
+                    Name="BtnDeleteCustomerFromContract"
+                    Click="BtnDeleteCustomerFromContract_Click"></Button>
+        </Grid>
+    </Grid>
+</Window>

@@ -83,15 +83,21 @@
                                 </Binding>
                             </Image.Source>
                         </Image>
-                        <Button Name="BtnAddContractImage"
+                    </Grid>
+                </Grid>
+                <StackPanel>
+                    <Button Name="BtnAddContractImage"
                              Grid.Row="1"
                              Content="Прикрепить скан договора ..."
                              Click="BtnAddContractImage_Click"></Button>
-                    </Grid>
-                </Grid>
-                <Button Name="BtnSaveContract"
+                    <Button Name="BtnAddContractToCustomer"
+                             Grid.Row="1"
+                             Content="Назначить клиента ..."
+                             Click="BtnAddContractToCustomer_Click"></Button>
+                    <Button Name="BtnSaveContract"
                     Content="Сохранить изменения"
                     Click="BtnSaveContract_Click"></Button>
+                </StackPanel>
             </StackPanel>
             <!--StatusBar for MainWindow-->
             <DockPanel VerticalAlignment="Bottom" Grid.ColumnSpan="2">

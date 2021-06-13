@@ -29,7 +29,6 @@ namespace CarRepairShopApp.View
                 _currentContract.CO_DATE = DateTime.Now;
             }
             DataContext = _currentContract;
-            ContractPicker.DisplayDate = ContractPicker.SelectedDate ?? DateTime.Now;
         }
 
         /// <summary>
@@ -127,6 +126,16 @@ namespace CarRepairShopApp.View
             {
                 Close();
             }
+        }
+
+        private void BtnAddContractToCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.CurrentContract = _currentContract;
+            AddContractToCustomerWindow addContractToCustomerWindow = new AddContractToCustomerWindow()
+            {
+                Title = "Назначить контракт от " + _currentContract.CO_DATE + " клиенту"
+            };
+            addContractToCustomerWindow.ShowDialog();
         }
     }
 }

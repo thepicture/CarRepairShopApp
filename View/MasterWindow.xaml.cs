@@ -1,6 +1,7 @@
 ﻿using CarRepairShopApp.Model;
 using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -117,32 +118,32 @@ namespace CarRepairShopApp.View
 
         private void AddOrderItem_Click(object sender, RoutedEventArgs e)
         {
-
+            BtnAddOrder_Click(null, null);
         }
 
         private void ModifyOrderItem_Click(object sender, RoutedEventArgs e)
         {
-
+            BtnEditOrder_Click(null, null);
         }
 
         private void DeleteOrderItem_Click(object sender, RoutedEventArgs e)
         {
-
+            BtnDeleteOrder_Click(null, null);
         }
 
         private void AddContractItem_Click(object sender, RoutedEventArgs e)
         {
-
+            BtnAddContract_Click(null, null);
         }
 
         private void EditContractItem_Click(object sender, RoutedEventArgs e)
         {
-
+            BtnEditContract_Click(null, null);
         }
 
         private void DeleteContractItem_Click(object sender, RoutedEventArgs e)
         {
-
+            BtnDeleteContract_Click(null, null);
         }
 
         private void AddCustomerItem_Click(object sender, RoutedEventArgs e)
@@ -182,22 +183,68 @@ namespace CarRepairShopApp.View
 
         private void BtnEditContract_Click(object sender, RoutedEventArgs e)
         {
-
+            Contract selectedContract = ContractGrid.SelectedItem as Contract;
+            AddContractWindow contractWindow = new AddContractWindow(selectedContract)
+            {
+                Title = "Изменение договора от даты " + selectedContract.CO_DATE
+            };
+            contractWindow.ShowDialog();
+            UpdateEntries();
         }
 
         private void BtnDeleteContract_Click(object sender, RoutedEventArgs e)
         {
-
+            List<Contract> contracts = ContractGrid.SelectedItems.Cast<Contract>().ToList();
+            if (contracts.Count() > 0)
+            {
+                if (MessageBox.Show("Внимание! Будет отменено следующее число договоров: "
+                    + contracts.Count() + $".\n" +
+                    $"Нажмите \"Да\", если вы действительно хотите безвозвратно отменить выбранные договоры.",
+                    "Подтверждение отмены",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    Manager.Context.Contract.RemoveRange(contracts);
+                    try
+                    {
+                        Manager.Context.SaveChanges();
+                        UpdateEntries();
+                        BtnEditContract.IsEnabled = EditContractItem.IsEnabled = false;
+                        BtnDeleteContract.IsEnabled = DeleteContractItem.IsEnabled = false;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Удаление неуспешно! Пожалуйста, попробуйте ещё раз." +
+                            "\nОшибка: "
+                            + ex.Message, "Ошибка удаления",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Error);
+                    }
+                }
+            }
         }
 
         private void ContractGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if (ContractGrid.SelectedItems.Count > 1)
+            {
+                BtnEditContract.IsEnabled = EditContractItem.IsEnabled = false;
+            }
+            else
+            {
+                BtnEditContract.IsEnabled = EditContractItem.IsEnabled = true;
+            }
+            BtnDeleteContract.IsEnabled = DeleteContractItem.IsEnabled = true;
         }
 
         private void BtnAddOrder_Click(object sender, RoutedEventArgs e)
         {
-
+            AddEditOrderWindow orderWindow = new AddEditOrderWindow(null)
+            {
+                Title = "Формирование нового заказа"
+            };
+            orderWindow.ShowDialog();
+            UpdateEntries();
         }
 
         private void BtnEditOrder_Click(object sender, RoutedEventArgs e)

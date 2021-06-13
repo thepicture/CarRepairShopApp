@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CarRepairShopApp.Model
+﻿namespace CarRepairShopApp.Model
 {
     class Manager
     {
@@ -12,5 +6,6 @@ namespace CarRepairShopApp.Model
         public static User CurrentUser = new User();
         public static MainWindow MainLoginRegisterWindow = new MainWindow();
         public static Service CurrentService = new Service();
+        public static Contract CurrentContract = new Contract();
     }
 }

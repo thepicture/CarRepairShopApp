@@ -70,12 +70,22 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\ContractHelper.cs" />
+    <Compile Include="View\AddContractToCustomerWindow.xaml.cs">
+      <DependentUpon>AddContractToCustomerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AddContractWindow.xaml.cs">
       <DependentUpon>AddContractWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddEditOrderWindow.xaml.cs">
+      <DependentUpon>AddEditOrderWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MasterWindow.xaml.cs">
       <DependentUpon>MasterWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\AddContractToCustomerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AddContractWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -85,6 +95,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AddEditMasterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddEditOrderWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
