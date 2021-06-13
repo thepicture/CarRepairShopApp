@@ -16,7 +16,7 @@ namespace CarRepairShopApp.View
     /// </summary>
     public partial class AddContractWindow : Window
     {
-        private Contract _currentContract = new Contract();
+        private readonly Contract _currentContract = new Contract();
         public AddContractWindow(Contract contract)
         {
             InitializeComponent();
@@ -24,7 +24,12 @@ namespace CarRepairShopApp.View
             {
                 _currentContract = contract;
             }
+            else
+            {
+                _currentContract.CO_DATE = DateTime.Now;
+            }
             DataContext = _currentContract;
+            ContractPicker.DisplayDate = ContractPicker.SelectedDate ?? DateTime.Now;
         }
 
         /// <summary>
@@ -73,9 +78,9 @@ namespace CarRepairShopApp.View
         private void BtnSaveContract_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder errors = new StringBuilder();
-            if (ContractImage.Source is null)
+            if (_currentContract.CO_IMAGESCAN is null)
             {
-                errors.AppendLine("Пожалуйста, прикрепите скан договора");
+                errors.AppendLine("Пожалуйста, прикрепите скан договора.");
             }
             if (errors.Length > 0)
             {
@@ -92,7 +97,9 @@ namespace CarRepairShopApp.View
             try
             {
                 Manager.Context.SaveChanges();
-                MessageBox.Show("Данные о контракте от даты " + ContractPicker.SelectedDate.ToString() + " успешно обработаны!",
+                MessageBox.Show("Данные о контракте от даты "
+                    + ContractPicker.SelectedDate.ToString()
+                    + " успешно обработаны!",
                     "Успешно!",
                     MessageBoxButton.OK,
                     MessageBoxImage.Information);

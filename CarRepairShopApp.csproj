@@ -69,6 +69,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\ContractHelper.cs" />
     <Compile Include="View\AddContractWindow.xaml.cs">
       <DependentUpon>AddContractWindow.xaml</DependentUpon>
     </Compile>

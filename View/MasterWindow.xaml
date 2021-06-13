@@ -151,7 +151,7 @@
 
                             </DataGridTextColumn>
                             <DataGridTextColumn Header="Статус"
-                                            Binding="{Binding CO_ISCHECKED}"
+                                            Binding="{Binding IsContractChecked}"
                                             Width="*">
                             </DataGridTextColumn>
                         </DataGrid.Columns>
