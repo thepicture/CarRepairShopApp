@@ -1,118 +1,98 @@
-﻿<Window x:Class="CarRepairShopApp.View.AddEditMasterWindow"
+﻿<Window x:Class="CarRepairShopApp.View.AddContractWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarRepairShopApp.View"
         mc:Ignorable="d"
-        Title="AddEditMasterWindow"
-        Height="450"
-        Width="600"
-        MinWidth="600"
-        MinHeight="450"
+        Title="AddContractWindow"
+        Height="350"
+        Width="400"
+        MinHeight="350"
+        MinWidth="400"
         WindowStartupLocation="CenterScreen">
     <Grid Background="WhiteSmoke"
           Name="MainGrid">
-        <Grid MouseMove="MainGrid_MouseMove"
-              MouseLeave="MainGrid_MouseLeave"
+        <Grid MouseMove="Grid_MouseMove"
+              MouseLeave="Grid_MouseLeave"
               HorizontalAlignment="Center">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <!--View for adding or editing services.-->
             <StackPanel VerticalAlignment="Center"
-                    Name="LoginPanel"
+                    Name="MainPanel"
                     Grid.Column="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="ФИО"
+                    <TextBlock Text="Подтверждён"
                            Style="{StaticResource CommonBlock}"
                            Grid.Column="0"></TextBlock>
-                    <TextBox Name="MasterNameBox"
-                             Text="{Binding M_NAME}"
-                             Grid.Column="1"
-                             MaxLength="100"></TextBox>
+                    <CheckBox Name="IsContractChecked"
+                              Grid.Column="1"
+                              Margin="5"
+                              Width="200"
+                              VerticalAlignment="Center"
+                              IsChecked="{Binding CO_ISCHECKED}">
+                    </CheckBox>
                 </Grid>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="Опыт работы в годах"
+                    <TextBlock Text="Дата формирования"
                            Style="{StaticResource CommonBlock}"
                            Grid.Column="0"></TextBlock>
-                    <TextBox Name="MasterExperienceBox"
+                    <DatePicker Name="ContractPicker"
                              Text="{Binding M_EXPERIENCE}"
+                             IsTodayHighlighted="True"
+                             Width="200"
                              Grid.Column="1"
-                             Width="30"
                              HorizontalAlignment="Left"
-                             MaxLength="100"></TextBox>
+                             SelectedDate="{Binding CO_DATE}"></DatePicker>
                 </Grid>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="Номер паспорта"
+                    <TextBlock Text="Скан договора"
                            Style="{StaticResource CommonBlock}"
                            Grid.Column="0"></TextBlock>
-                    <StackPanel Orientation="Horizontal"
-                                Grid.Column="1">
-                        <TextBox Name="MasterPassNumBox"
-                             Text="{Binding M_PASSNUM}"
-                             Grid.Column="1"
-                             Width="33"
-                             MaxLength="4"></TextBox>
-                        <TextBlock Text="Код паспорта"
-                           Style="{StaticResource CommonBlock}"
-                           Grid.Column="2"></TextBlock>
-                        <TextBox Name="MasterPassCodeBox"
-                             Text="{Binding M_PASSCODE}"
-                             Grid.Column="3"
-                             Width="45"
-                             MaxLength="6"></TextBox>
-                    </StackPanel>
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="Аватар"
-                           Style="{StaticResource CommonBlock}"
-                           Grid.Column="0"></TextBlock>
-                    <Grid Grid.Column="1">
+                    <Grid Grid.Column="1"
+                          Width="200">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <!--Photo of the master.-->
                         <Image Stretch="UniformToFill"
-                                           Name="MasterPhoto"
+                                           Name="ContractImage"
                                            Margin="5"
                                            Width="100"
                                            Height="100">
                             <Image.Source>
-                                <Binding Path="M_PHOTO">
+                                <Binding Path="CO_IMAGESCAN">
                                     <Binding.TargetNullValue>
-                                        <ImageSource>pack://application:,,,/Resources/user_picture.png</ImageSource>
+                                        <ImageSource>pack://application:,,,/Resources/wrench.png</ImageSource>
                                     </Binding.TargetNullValue>
                                 </Binding>
                             </Image.Source>
                         </Image>
-                        <Button Name="BtnAddMasterPhoto"
+                        <Button Name="BtnAddContractImage"
                              Grid.Row="1"
-                             Content="Прикрепить аватар"
-                             Click="BtnAddMasterPhoto_Click"></Button>
+                             Content="Прикрепить скан договора ..."
+                             Click="BtnAddContractImage_Click"></Button>
                     </Grid>
                 </Grid>
-                <Button Name="BtnSaveMaster"
+                <Button Name="BtnSaveContract"
                     Content="Сохранить изменения"
-                    Click="BtnSaveMaster_Click"></Button>
+                    Click="BtnSaveContract_Click"></Button>
             </StackPanel>
             <!--StatusBar for MainWindow-->
             <DockPanel VerticalAlignment="Bottom" Grid.ColumnSpan="2">

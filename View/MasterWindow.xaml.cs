@@ -1,19 +1,12 @@
 ﻿using CarRepairShopApp.Model;
 using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace CarRepairShopApp.View
 {
@@ -28,6 +21,11 @@ namespace CarRepairShopApp.View
             InitializeUserPhoto();
             UserNameBlock.Text = Manager.CurrentUser.USER_NAME;
             UserRoleBlock.Text = "Роль: " + Manager.CurrentUser.Role.NAME;
+            UpdateEntries();
+        }
+
+        private void UpdateEntries()
+        {
             ContractGrid.ItemsSource = Manager.Context.Contract.ToList();
             OrdersGrid.ItemsSource = Manager.Context.Order.ToList();
         }
@@ -174,7 +172,12 @@ namespace CarRepairShopApp.View
 
         private void BtnAddContract_Click(object sender, RoutedEventArgs e)
         {
-
+            AddContractWindow contractWindow = new AddContractWindow(null)
+            {
+                Title = "Добавление нового контракта"
+            };
+            contractWindow.ShowDialog();
+            UpdateEntries();
         }
 
         private void BtnEditContract_Click(object sender, RoutedEventArgs e)
