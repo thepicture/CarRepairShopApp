@@ -70,6 +70,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\ContractHelper.cs" />
+    <Compile Include="ViewModel\PhotoGetter.cs" />
     <Compile Include="View\AddContractToCustomerWindow.xaml.cs">
       <DependentUpon>AddContractToCustomerWindow.xaml</DependentUpon>
     </Compile>
@@ -286,5 +287,6 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,13 +1,11 @@
 ﻿using CarRepairShopApp.Model;
-using Microsoft.Win32;
+using CarRepairShopApp.ViewModel;
 using System;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
 
 namespace CarRepairShopApp.View
 {
@@ -52,25 +50,11 @@ namespace CarRepairShopApp.View
 
         private void BtnAddContractImage_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog dialog = new OpenFileDialog();
-            if ((bool)dialog.ShowDialog())
+            if (PhotoGetter.OpenDialog())
             {
-                try
-                {
-                    ContractImage.Source = new BitmapImage(new Uri(dialog.FileName));
-                    _currentContract.CO_IMAGESCAN = File.ReadAllBytes(dialog.FileName);
-                    MessageBox.Show("Изображение успешно обновлено!",
-                        "Успешно!",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Information);
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Пожалуйста, выберите изображение для прикрепления.",
-                        "Ошибка",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Error);
-                }
+                _currentContract.CO_IMAGESCAN = PhotoGetter.ImageInBytes;
+                ContractImage.Source = PhotoGetter.Image;
+                PhotoGetter.SayAllOk();
             }
         }
 
