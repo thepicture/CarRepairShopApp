@@ -6,8 +6,10 @@
         xmlns:local="clr-namespace:CarRepairShopApp.View"
         mc:Ignorable="d"
         Title="MasterWindow"
-        Height="450"
-        Width="800"
+        Height="550"
+        Width="1000"
+        MinHeight="350"
+        MinWidth="1000"
         WindowStartupLocation="CenterScreen"
         Closing="MasterWindow_Closing">
     <Grid Name="MainGrid"
@@ -124,7 +126,16 @@
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <StackPanel Orientation="Horizontal">
+                  
+                    <GroupBox Header="Контракты"
+                              Margin="5"
+                              Grid.Row="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                              <StackPanel Orientation="Horizontal">
                         <Button Width="90"
                             Content="Сформировать"
                             Name="BtnAddContract"
@@ -140,21 +151,23 @@
                             IsEnabled="False"
                             Click="BtnDeleteContract_Click"></Button>
                     </StackPanel>
-                    <DataGrid Name="ContractGrid"
-                          Grid.Row="1"
-                          SelectionChanged="ContractGrid_SelectionChanged">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Дата формирования"
+                        <DataGrid Name="ContractGrid"
+                                  SelectionChanged="ContractGrid_SelectionChanged"
+                                  Grid.Row="1">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Дата формирования"
                                             Binding="{Binding CO_DATE}"
                                             Width="*">
 
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Header="Статус"
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Статус"
                                             Binding="{Binding IsContractChecked}"
                                             Width="*">
-                            </DataGridTextColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                                </DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        </Grid>
+                    </GroupBox>
                 </Grid>
             </Grid>
             <Grid Grid.Row="2">
@@ -166,116 +179,138 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <StackPanel Grid.Row="0"
+                <GroupBox Header="Заказы"
+                          Margin="5"
+                          Grid.Row="1"
+                          Grid.Column="0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"
                     Orientation="Horizontal"
                     HorizontalAlignment="Center">
-                    <Button Width="80"
+                            <Button Width="80"
                 Height="20"
                 Content="Новый заказ"
                 Name="BtnAddOrder"
                 Click="BtnAddOrder_Click"></Button>
-                    <Button Width="80"
+                            <Button Width="80"
                 Height="20"
                 Content="Изменить"
                 Name="BtnEditOrder"
                 IsEnabled="False"
                 Click="BtnEditOrder_Click"></Button>
-                    <Button Width="80"
+                            <Button Width="80"
                 Height="20"
                 Content="Отменить"
                 Name="BtnDeleteOrder"
                 Click="BtnDeleteOrder_Click"
                 IsEnabled="False"></Button>
-                </StackPanel>
-                <DataGrid Name="OrdersGrid"
-                          Grid.Row="1"
-                          Grid.Column="0"
-                          SelectionChanged="OrdersGrid_SelectionChanged">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Дата формирования"
+                        </StackPanel>
+                        <DataGrid Name="OrdersGrid"
+                              SelectionChanged="OrdersGrid_SelectionChanged"
+                              Grid.Row="1">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Дата создания"
                                         Binding="{Binding O_CREATEDATE}"
                                         Width="*"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Подтверждён клиентом"
+                                <DataGridTextColumn Header="Подтверждён"
                                         Binding="{Binding IsOrderChecked}"
                                         Width="*"></DataGridTextColumn>
-                        <DataGridTextColumn Header="ФИО клиента"
+                                <DataGridTextColumn Header="ФИО клиента"
                                         Binding="{Binding CustomerName}"
                                         Width="*"></DataGridTextColumn>
-                        <DataGridTextColumn Header="ФИО механика"
+                                <DataGridTextColumn Header="ФИО механика"
                                         Binding="{Binding GetMasterNameOfOrder}"
                                         Width="*"></DataGridTextColumn>
-                        <DataGridTemplateColumn Header="Статус заказа"
+                                <DataGridTemplateColumn Header="Статус заказа"
                                                 Width="*">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <ComboBox ItemsSource="{Binding GetStatusList}"
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ComboBox ItemsSource="{Binding GetStatusList}"
                                               SelectedItem="{Binding Status}"
                                               DisplayMemberPath="ST_STATE"
                                               Name="ComboStatus"
                                               SelectionChanged="ComboStatus_SelectionChanged">
-                                    </ComboBox>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
-                <StackPanel Grid.Row="0"
+                                            </ComboBox>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </GroupBox>
+                <Grid Grid.Row="1"
+                      Grid.Column="1">
+                    <GroupBox Header="Клиенты"
+                              Margin="5"
+                              Grid.Row="1"
+                              Grid.Column="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0"
                                 Grid.Column="1"
                                 Orientation="Horizontal"
                                 HorizontalAlignment="Center">
-                    <Button Width="auto"
+                                <Button Width="auto"
                 Height="20"
                 Content="Новый клиент"
                 Name="BtnAddCustomer"
                 Click="BtnAddCustomer_Click"></Button>
-                    <Button Width="auto"
-                Height="20"
-                Content="Изменить данные"
-                Name="BtnEditCustomer"
-                IsEnabled="False"
-                Click="BtnEditCustomer_Click"></Button>
-                    <Button Width="auto"
-                Height="20"
-                Content="Удалить данные"
-                Name="BtnDeleteCustomer"
-                Click="BtnDeleteCustomer_Click"
-                IsEnabled="False"></Button>
-                </StackPanel>
-                <Grid Grid.Row="1"
-                      Grid.Column="1">
-                    <DataGrid Name="CustomersGrid"
-                              SelectionChanged="CustomersGrid_SelectionChanged">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="ФИО"
+                                <Button Width="auto"
+                            Height="20"
+                            Content="Изменить данные"
+                            Name="BtnEditCustomer"
+                            IsEnabled="False"
+                            Click="BtnEditCustomer_Click"></Button>
+                                <Button Width="auto"
+                            Height="20"
+                            Content="Удалить данные"
+                            Name="BtnDeleteCustomer"
+                            Click="BtnDeleteCustomer_Click"
+                            IsEnabled="False"></Button>
+                            </StackPanel>
+                            <DataGrid Name="CustomersGrid"
+                                  SelectionChanged="CustomersGrid_SelectionChanged"
+                                  Grid.Row="1">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ФИО"
                                         Binding="{Binding CL_NAME}"
                                         Width="*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Серия паспорта"
+                                <DataGridTextColumn Header="Серия паспорта"
                                         Binding="{Binding CL_PASSNUM}"
                                         Width="*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Код паспорта"
+                                <DataGridTextColumn Header="Код паспорта"
                                         Binding="{Binding CL_PASSCODE}"
                                         Width="*"></DataGridTextColumn>
-                            <DataGridTemplateColumn Header="Фотография"
+                                <DataGridTemplateColumn Header="Фотография"
                                                     Width="*">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Image Width="100"
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Image Width="100"
                                                Height="100"
                                                Stretch="UniformToFill"
                                                Margin="5">
-                                            <Image.Source>
-                                                <Binding Path="CL_PHOTO">
-                                                    <Binding.TargetNullValue>
-                                                        <ImageSource>pack://application:,,,/Resources/user_picture.png</ImageSource>
-                                                    </Binding.TargetNullValue>
-                                                </Binding>
-                                            </Image.Source>
-                                        </Image>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                                                <Image.Source>
+                                                    <Binding Path="CL_PHOTO">
+                                                        <Binding.TargetNullValue>
+                                                            <ImageSource>pack://application:,,,/Resources/user_picture.png</ImageSource>
+                                                        </Binding.TargetNullValue>
+                                                    </Binding>
+                                                </Image.Source>
+                                            </Image>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        </Grid>
+                    </GroupBox>
                 </Grid>
             </Grid>
             <DockPanel VerticalAlignment="Bottom"

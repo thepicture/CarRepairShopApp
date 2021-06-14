@@ -215,6 +215,10 @@ namespace CarRepairShopApp.View
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
+                    foreach (Order order in orders)
+                    {
+                        order.Service.Clear();
+                    }
                     Manager.Context.Order.RemoveRange(orders);
                     try
                     {
