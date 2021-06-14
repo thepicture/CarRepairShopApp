@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 
 namespace CarRepairShopApp.Model
 {
@@ -11,11 +13,11 @@ namespace CarRepairShopApp.Model
                 return O_ISCHECKED ? "Подтвержден" : "Не подтвержден";
             }
         }
-        public string GetOrderStatus
+        public List<Status> GetStatusList
         {
             get
             {
-                return Status.ST_STATE;
+                return Manager.Context.Status.ToList();
             }
         }
         public string CustomerName

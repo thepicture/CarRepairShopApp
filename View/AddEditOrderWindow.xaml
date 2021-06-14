@@ -9,7 +9,8 @@
         Height="450"
         Width="800"
         WindowStartupLocation="CenterScreen">
-    <Grid Background="WhiteSmoke">
+    <Grid Background="WhiteSmoke"
+          ShowGridLines="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
@@ -20,6 +21,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Text="Подтверждён"
                    Style="{StaticResource CommonBlock}"
@@ -35,25 +37,30 @@
                    VerticalAlignment="Center"
                    Grid.Row="1"></TextBlock>
         <TextBox Style="{StaticResource CommonBox}"
+                 Name="CustomerName"
                  Grid.Column="1"
                  VerticalAlignment="Center"
                  IsReadOnly="True"
-                 Text="{Binding Client.CL_NAME}"
                  Grid.Row="1"
                  Width="150"></TextBox>
         <Button Content="Выбрать клиента ..."
+                Name="BtnSelectCustomer"
                 VerticalAlignment="Bottom"
                 Grid.Row="1"
                 Grid.Column="1"
-                Width="150"></Button>
+                Width="150"
+                Click="BtnSelectCustomer_Click"></Button>
         <TextBlock Text="Автомобиль"
                    Style="{StaticResource CommonBlock}"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    Grid.Row="2"></TextBlock>
         <ComboBox Grid.Column="1"
+                  SelectedIndex="0"
+                  Name="ComboCar"
                   IsReadOnly="True"
                   VerticalAlignment="Center"
+                  DisplayMemberPath="A_NAME"
                   Text="{Binding GetCurrentMaster}"
                   Grid.Row="2"
                   Width="150"></ComboBox>
@@ -80,5 +87,11 @@
                 Content="Выбрать услуги ..."
                 Grid.Row="4"
                 Width="150"></Button>
+        <Button Content="Сохранить изменения"
+                Name="BtnSaveChanges"
+                Click="BtnSaveChanges_Click"
+                Grid.Row="5"
+                Grid.ColumnSpan="2"
+                Width="200"></Button>
     </Grid>
 </Window>

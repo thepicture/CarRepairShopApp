@@ -7,5 +7,6 @@
         public static MainWindow MainLoginRegisterWindow = new MainWindow();
         public static Service CurrentService = new Service();
         public static Contract CurrentContract = new Contract();
+        public static Order CurrentOrder = new Order();
     }
 }

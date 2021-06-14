@@ -186,18 +186,26 @@
                         <DataGridTextColumn Header="Дата формирования"
                                         Binding="{Binding O_CREATEDATE}"
                                         Width="*"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Статус"
-                                        Binding="{Binding GetOrderStatus}"
-                                        Width="*"></DataGridTextColumn>
                         <DataGridTextColumn Header="Подтверждён клиентом"
                                         Binding="{Binding IsOrderChecked}"
                                         Width="*"></DataGridTextColumn>
                         <DataGridTextColumn Header="ФИО клиента"
-                                        Binding="{Binding GetClientNameOfOrder}"
+                                        Binding="{Binding CustomerName}"
                                         Width="*"></DataGridTextColumn>
                         <DataGridTextColumn Header="ФИО механика"
                                         Binding="{Binding GetMasterNameOfOrder}"
                                         Width="*"></DataGridTextColumn>
+                        <DataGridTemplateColumn Header="Статус заказа"
+                                                Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox ItemsSource="{Binding GetStatusList}"
+                                       SelectedItem="{Binding Status}"
+                                        DisplayMemberPath="ST_STATE">
+                                    </ComboBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

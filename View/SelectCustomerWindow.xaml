@@ -1,0 +1,40 @@
+﻿<Window x:Class="CarRepairShopApp.View.SelectCustomerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarRepairShopApp.View"
+        mc:Ignorable="d"
+        Title="SelectCustomerWindow"
+        Height="450"
+        Width="800"
+        MinHeight="250"
+        MinWidth="600"
+        WindowStartupLocation="CenterScreen">
+    <Grid Background="WhiteSmoke">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <DataGrid Name="CustomerGrid"
+                  SelectionMode="Single"
+                  SelectionChanged="CustomerGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ФИО"
+                                    Width="*"
+                                    Binding="{Binding CL_NAME}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Серия паспорта"
+                                    Width="*"
+                                    Binding="{Binding CL_PASSNUM}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Код паспорта"
+                                    Width="*"
+                                    Binding="{Binding CL_PASSСODE}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Grid.Row="1"
+                x:Name="BtnSelectCustomer"
+                Content="Выбрать клиента"
+                IsEnabled="False"
+                Click="BtnSelectCustomer_Click"></Button>
+    </Grid>
+</Window>
