@@ -8,9 +8,10 @@
         Title="AddEditOrderWindow"
         Height="450"
         Width="800"
+        MinHeight="450"
+        MinWidth="700"
         WindowStartupLocation="CenterScreen">
-    <Grid Background="WhiteSmoke"
-          ShowGridLines="True">
+    <Grid Background="WhiteSmoke">
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
@@ -81,6 +82,8 @@
                    VerticalAlignment="Center"
                    Grid.Row="4"></TextBlock>
         <Button Grid.Column="1"
+                Name="BtnServiceSelect"
+                Click="BtnServiceSelect_Click"
                 VerticalAlignment="Center"
                 Content="Выбрать услуги ..."
                 Grid.Row="4"

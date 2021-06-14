@@ -48,7 +48,7 @@ namespace CarRepairShopApp.View
         private void BtnSaveChanges_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder builder = new StringBuilder();
-            if (CustomerName.Text.Length == 0)
+            if (CustomerName.Text.Length.Equals(0))
             {
                 builder.AppendLine("Укажите клиента");
             }
@@ -67,7 +67,7 @@ namespace CarRepairShopApp.View
             _currentOrder.Auto = ComboCar.SelectedItem as Auto;
             if (_currentOrder.O_ID.Equals(0))
             {
-                _currentOrder.Status = Manager.Context.Status.First(s => s.ST_STATE == "В обработке");
+                _currentOrder.Status = Manager.Context.Status.First(s => s.ST_STATE.Equals("Не оплачен"));
                 Manager.Context.Order.Add(_currentOrder);
             }
             try
@@ -85,6 +85,16 @@ namespace CarRepairShopApp.View
             {
                 MessageBox.Show(Title + " неуспешно! " + ex.Message);
             }
+        }
+
+        private void BtnServiceSelect_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.CurrentOrder = _currentOrder;
+            AddServiceToOrderWindow serviceToOrderWindow = new AddServiceToOrderWindow
+            {
+                Title = "Выбор услуг в текущий заказ"
+            };
+            serviceToOrderWindow.ShowDialog();
         }
     }
 }

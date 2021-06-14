@@ -1,0 +1,76 @@
+﻿<Window x:Class="CarRepairShopApp.View.AddServiceToOrderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarRepairShopApp.View"
+        mc:Ignorable="d"
+        Title="AddServiceToOrderWindow"
+        Height="450"
+        Width="800"
+        WindowStartupLocation="CenterScreen"
+        MinHeight="250"
+        MinWidth="600">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <GroupBox Header="Список всех услуг">
+                <DataGrid Name="ServiceGrid"
+                          SelectionChanged="ServiceGrid_SelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Наименование услуги"
+                                        Binding="{Binding SE_NAME}"
+                                        Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Описание"
+                                        Binding="{Binding SE_DESCRIPTION}"
+                                        Width="*"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+            <Button Content="Добавить выбранные услуги в заказ"
+                    Name="BtnAddSelectedServicesToOrder"
+                    IsEnabled="False"
+                    Grid.Row="1"
+                    Click="BtnAddSelectedServicesToOrder_Click"></Button>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Button Content="Закрыть"
+                    VerticalAlignment="Top"
+                    Grid.Row="2"
+                    Name="CloseWindow"
+                    Click="CloseWindow_Click"></Button>
+            <GroupBox Header="Список услуг текущего заказа">
+                <DataGrid Name="ServicesOfOrderGrid"
+                  SelectionChanged="ServicesOfOrderGrid_SelectionChanged"
+                  Grid.Column="1"
+                  Grid.Row="0">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Наименование услуги"
+                                        Binding="{Binding SE_NAME}"
+                                        Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Описание"
+                                        Binding="{Binding SE_DESCRIPTION}"
+                                        Width="*"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+            <Button Content="Удалить выбранные услуги из текущего заказа"
+                    Grid.Row="1"
+                    IsEnabled="False"
+                    Name="BtnDeleteServicesFromOrder"
+                    Click="BtnDeleteServicesFromOrder_Click"></Button>
+        </Grid>
+    </Grid>
+</Window>
