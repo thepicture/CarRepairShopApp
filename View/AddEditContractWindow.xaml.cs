@@ -10,12 +10,12 @@ using System.Windows.Input;
 namespace CarRepairShopApp.View
 {
     /// <summary>
-    /// Interaction logic for AddContractWindow.xaml
+    /// Interaction logic for AddEditContractWindow.xaml
     /// </summary>
-    public partial class AddContractWindow : Window
+    public partial class AddEditContractWindow : Window
     {
         private readonly Contract _currentContract = new Contract();
-        public AddContractWindow(Contract contract)
+        public AddEditContractWindow(Contract contract)
         {
             InitializeComponent();
             if (contract != null)

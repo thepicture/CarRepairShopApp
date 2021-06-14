@@ -1,0 +1,82 @@
+﻿<Window x:Class="CarRepairShopApp.View.AddEditCustomerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarRepairShopApp.View"
+        mc:Ignorable="d"
+        Title="AddEditCustomerWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="ФИО"
+                   Style="{StaticResource CommonBlock}"
+                   VerticalAlignment="Center"></TextBlock>
+        <TextBox Style="{StaticResource CommonBox}"
+                 Width="200"
+                 Grid.Column="1"
+                 VerticalAlignment="Center"
+                 HorizontalAlignment="Left"
+                 MaxLength="100"
+                 Text="{Binding CL_NAME}"></TextBox>
+        <TextBlock Text="Серия паспорта"
+                   Style="{StaticResource CommonBlock}"
+                   VerticalAlignment="Center"
+                   Grid.Row="1"></TextBlock>
+        <TextBox Style="{StaticResource CommonBox}"
+                 Width="100"
+                 Grid.Row="1"
+                 Grid.Column="1"
+                 VerticalAlignment="Center"
+                 HorizontalAlignment="Left"
+                 MaxLength="4"
+                 Text="{Binding CL_PASSNUM}"></TextBox>
+        <TextBlock Text="Код паспорта"
+                   Style="{StaticResource CommonBlock}"
+                   VerticalAlignment="Center"
+                   Grid.Row="2"></TextBlock>
+        <TextBox Style="{StaticResource CommonBox}"
+                 Width="100"
+                 Grid.Row="2"
+                 Grid.Column="1"
+                 VerticalAlignment="Center"
+                 HorizontalAlignment="Left"
+                 MaxLength="6"
+                 Text="{Binding CL_PASSCODE}"></TextBox>
+        <TextBlock Text="Фотография"
+                   Style="{StaticResource CommonBlock}"
+                   VerticalAlignment="Center"
+                   Grid.Row="3"></TextBlock>
+        <StackPanel Grid.Row="3"
+                    Grid.Column="1"
+                    HorizontalAlignment="Left">
+        <Image Width="100"
+               Height="100"
+               Grid.Row="3"
+               Grid.Column="1"
+               Margin="5"
+               Name="CustomerPhoto">
+            <Image.Source>
+                <Binding Path="CL_PHOTO">
+                    <Binding.TargetNullValue>
+                        <ImageSource>pack://application:,,,/Resources/user_picture.png</ImageSource>
+                    </Binding.TargetNullValue>
+                </Binding>
+            </Image.Source>
+        </Image>
+            <Button Content="Прикрепить фотографию ..."
+                    Name="AttachCustomerPhoto"
+                    Click="AttachCustomerPhoto_Click"></Button>
+        </StackPanel>
+    </Grid>
+</Window>

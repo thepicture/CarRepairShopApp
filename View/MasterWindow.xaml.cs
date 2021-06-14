@@ -118,7 +118,7 @@ namespace CarRepairShopApp.View
 
         private void BtnAddContract_Click(object sender, RoutedEventArgs e)
         {
-            AddContractWindow contractWindow = new AddContractWindow(null)
+            AddEditContractWindow contractWindow = new AddEditContractWindow(null)
             {
                 Title = "Добавление нового контракта"
             };
@@ -129,7 +129,7 @@ namespace CarRepairShopApp.View
         private void BtnEditContract_Click(object sender, RoutedEventArgs e)
         {
             Contract selectedContract = ContractGrid.SelectedItem as Contract;
-            AddContractWindow contractWindow = new AddContractWindow(selectedContract)
+            AddEditContractWindow contractWindow = new AddEditContractWindow(selectedContract)
             {
                 Title = "Изменение договора от даты " + selectedContract.CO_DATE
             };
@@ -310,12 +310,23 @@ namespace CarRepairShopApp.View
 
         private void BtnAddCustomer_Click(object sender, RoutedEventArgs e)
         {
-
+            AddEditCustomerWindow customerWindow = new AddEditCustomerWindow(null)
+            {
+                Title = "Добавление данных о новом клиенте"
+            };
+            customerWindow.ShowDialog();
+            UpdateEntries();
         }
 
         private void BtnEditCustomer_Click(object sender, RoutedEventArgs e)
         {
-
+            Client client = CustomersGrid.SelectedItem as Client;
+            AddEditCustomerWindow customerWindow = new AddEditCustomerWindow(client)
+            {
+                Title = "Изменение данных о клиенте " + client.CL_NAME
+            };
+            customerWindow.ShowDialog();
+            UpdateEntries();
         }
 
         private void BtnDeleteCustomer_Click(object sender, RoutedEventArgs e)

@@ -126,7 +126,7 @@
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                  
+
                     <GroupBox Header="Контракты"
                               Margin="5"
                               Grid.Row="1">
@@ -135,37 +135,37 @@
                                 <RowDefinition Height="auto"></RowDefinition>
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
-                              <StackPanel Orientation="Horizontal">
-                        <Button Width="90"
+                            <StackPanel Orientation="Horizontal">
+                                <Button Width="90"
                             Content="Сформировать"
                             Name="BtnAddContract"
                             Click="BtnAddContract_Click"></Button>
-                        <Button Width="90"
+                                <Button Width="90"
                             Content="Изменить"
                             Name="BtnEditContract"
                             Click="BtnEditContract_Click"
                             IsEnabled="False"></Button>
-                        <Button Width="90"
+                                <Button Width="90"
                             Content="Отменить"
                             Name="BtnDeleteContract"
                             IsEnabled="False"
                             Click="BtnDeleteContract_Click"></Button>
-                    </StackPanel>
-                        <DataGrid Name="ContractGrid"
+                            </StackPanel>
+                            <DataGrid Name="ContractGrid"
                                   SelectionChanged="ContractGrid_SelectionChanged"
                                   Grid.Row="1">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Дата формирования"
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Дата формирования"
                                             Binding="{Binding CO_DATE}"
                                             Width="*">
 
-                                </DataGridTextColumn>
-                                <DataGridTextColumn Header="Статус"
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="Статус"
                                             Binding="{Binding IsContractChecked}"
                                             Width="*">
-                                </DataGridTextColumn>
-                            </DataGrid.Columns>
-                        </DataGrid>
+                                    </DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
                         </Grid>
                     </GroupBox>
                 </Grid>
@@ -254,61 +254,61 @@
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
                             <StackPanel Grid.Row="0"
-                                Grid.Column="1"
-                                Orientation="Horizontal"
-                                HorizontalAlignment="Center">
+                                        Grid.Column="1"
+                                        Orientation="Horizontal"
+                                        HorizontalAlignment="Center">
                                 <Button Width="auto"
-                Height="20"
-                Content="Новый клиент"
-                Name="BtnAddCustomer"
-                Click="BtnAddCustomer_Click"></Button>
+                                        Height="20"
+                                        Content="Новый клиент"
+                                        Name="BtnAddCustomer"
+                                        Click="BtnAddCustomer_Click"></Button>
                                 <Button Width="auto"
-                            Height="20"
-                            Content="Изменить данные"
-                            Name="BtnEditCustomer"
-                            IsEnabled="False"
-                            Click="BtnEditCustomer_Click"></Button>
+                                        Height="20"
+                                        Content="Изменить данные"
+                                        Name="BtnEditCustomer"
+                                        IsEnabled="False"
+                                        Click="BtnEditCustomer_Click"></Button>
                                 <Button Width="auto"
-                            Height="20"
-                            Content="Удалить данные"
-                            Name="BtnDeleteCustomer"
-                            Click="BtnDeleteCustomer_Click"
-                            IsEnabled="False"></Button>
+                                        Height="20"
+                                        Content="Удалить данные"
+                                        Name="BtnDeleteCustomer"
+                                        Click="BtnDeleteCustomer_Click"
+                                        IsEnabled="False"></Button>
                             </StackPanel>
                             <DataGrid Name="CustomersGrid"
-                                  SelectionChanged="CustomersGrid_SelectionChanged"
-                                  Grid.Row="1">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="ФИО"
+                                      SelectionChanged="CustomersGrid_SelectionChanged"
+                                      Grid.Row="1">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="ФИО"
                                         Binding="{Binding CL_NAME}"
                                         Width="*"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Серия паспорта"
+                                    <DataGridTextColumn Header="Серия паспорта"
                                         Binding="{Binding CL_PASSNUM}"
                                         Width="*"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Код паспорта"
+                                    <DataGridTextColumn Header="Код паспорта"
                                         Binding="{Binding CL_PASSCODE}"
                                         Width="*"></DataGridTextColumn>
-                                <DataGridTemplateColumn Header="Фотография"
+                                    <DataGridTemplateColumn Header="Фотография"
                                                     Width="*">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Image Width="100"
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Image Width="100"
                                                Height="100"
                                                Stretch="UniformToFill"
                                                Margin="5">
-                                                <Image.Source>
-                                                    <Binding Path="CL_PHOTO">
-                                                        <Binding.TargetNullValue>
-                                                            <ImageSource>pack://application:,,,/Resources/user_picture.png</ImageSource>
-                                                        </Binding.TargetNullValue>
-                                                    </Binding>
-                                                </Image.Source>
-                                            </Image>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                            </DataGrid.Columns>
-                        </DataGrid>
+                                                    <Image.Source>
+                                                        <Binding Path="CL_PHOTO">
+                                                            <Binding.TargetNullValue>
+                                                                <ImageSource>pack://application:,,,/Resources/user_picture.png</ImageSource>
+                                                            </Binding.TargetNullValue>
+                                                        </Binding>
+                                                    </Image.Source>
+                                                </Image>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
                         </Grid>
                     </GroupBox>
                 </Grid>
