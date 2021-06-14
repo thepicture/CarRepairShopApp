@@ -33,6 +33,7 @@
         <AssociationConnector Association="BaseModel.OrderOfClient" ManuallyRouted="false" />
         <AssociationConnector Association="BaseModel.OrderOfMaster" ManuallyRouted="false" />
         <AssociationConnector Association="BaseModel.ServiceOfOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseModel.FK_Order_Auto" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

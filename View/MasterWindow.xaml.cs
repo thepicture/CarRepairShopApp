@@ -27,6 +27,7 @@ namespace CarRepairShopApp.View
 
         private void UpdateEntries()
         {
+            OrdersGrid.SelectedItems.Clear();
             ContractGrid.ItemsSource = Manager.Context.Contract.ToList();
             OrdersGrid.ItemsSource = Manager.Context.Order.ToList();
         }
@@ -169,7 +170,7 @@ namespace CarRepairShopApp.View
 
         private void ContractGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (ContractGrid.SelectedItems.Count > 1)
+            if (ContractGrid.SelectedItems.Count != 1)
             {
                 BtnEditContract.IsEnabled = EditContractItem.IsEnabled = false;
             }
@@ -192,17 +193,61 @@ namespace CarRepairShopApp.View
 
         private void BtnEditOrder_Click(object sender, RoutedEventArgs e)
         {
-
+            Order order = OrdersGrid.SelectedItem as Order;
+            AddEditOrderWindow orderWindow = new AddEditOrderWindow(order)
+            {
+                Title = "Обновление информации о заказе даты " + order.O_CREATEDATE
+            };
+            orderWindow.ShowDialog();
+            UpdateEntries();
         }
 
         private void BtnDeleteOrder_Click(object sender, RoutedEventArgs e)
         {
-
+            List<Order> orders = OrdersGrid.SelectedItems.Cast<Order>().ToList();
+            if (orders.Count() > 0)
+            {
+                if (MessageBox.Show("Внимание! Будет безвозвратно отменено следующее число заказов: "
+                    + orders.Count() + $".\n" +
+                    $"Нажмите \"Да\", если вы действительно хотите безвозвратно отменить выбранные заказы.",
+                    "Подтверждение отмены",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    Manager.Context.Order.RemoveRange(orders);
+                    try
+                    {
+                        Manager.Context.SaveChanges();
+                        UpdateEntries();
+                        BtnEditOrder.IsEnabled = ModifyOrderItem.IsEnabled = false;
+                        BtnDeleteOrder.IsEnabled = DeleteOrderItem.IsEnabled = false;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Отмена неуспешна! Пожалуйста, попробуйте ещё раз." +
+                            "\nОшибка: "
+                            + ex.Message, "Ошибка отмены",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Error);
+                    }
+                }
+            }
         }
 
         private void OrdersGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if (OrdersGrid.SelectedItems.Count != 1)
+            {
+                BtnEditOrder.IsEnabled = ModifyOrderItem.IsEnabled = false;
+            }
+            else
+            {
+                BtnEditOrder.IsEnabled = ModifyOrderItem.IsEnabled = true;
+            }
+            if (OrdersGrid.SelectedItems.Count != 0)
+            {
+                BtnDeleteOrder.IsEnabled = DeleteOrderItem.IsEnabled = true;
+            }
         }
 
         private void MasterWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)

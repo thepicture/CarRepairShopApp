@@ -29,7 +29,7 @@
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="Подтверждён"
+                    <TextBlock Text="Подписан клиентом"
                            Style="{StaticResource CommonBlock}"
                            Grid.Column="0"></TextBlock>
                     <CheckBox Name="IsContractChecked"

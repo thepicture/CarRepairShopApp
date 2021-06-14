@@ -56,12 +56,10 @@
                    VerticalAlignment="Center"
                    Grid.Row="2"></TextBlock>
         <ComboBox Grid.Column="1"
-                  SelectedIndex="0"
                   Name="ComboCar"
                   IsReadOnly="True"
                   VerticalAlignment="Center"
                   DisplayMemberPath="A_NAME"
-                  Text="{Binding GetCurrentMaster}"
                   Grid.Row="2"
                   Width="150"></ComboBox>
         <TextBlock Text="Механик"

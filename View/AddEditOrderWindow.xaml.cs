@@ -30,6 +30,7 @@ namespace CarRepairShopApp.View
             {
                 CustomerName.Text = _currentOrder.Client.FirstOrDefault().CL_NAME;
                 ComboCar.ItemsSource = _currentOrder.Client.FirstOrDefault().Auto.ToList();
+                ComboCar.SelectedItem = _currentOrder.Auto;
             }
         }
 
@@ -63,6 +64,7 @@ namespace CarRepairShopApp.View
                     MessageBoxImage.Error);
                 return;
             }
+            _currentOrder.Auto = ComboCar.SelectedItem as Auto;
             if (_currentOrder.O_ID.Equals(0))
             {
                 _currentOrder.Status = Manager.Context.Status.First(s => s.ST_STATE == "В обработке");

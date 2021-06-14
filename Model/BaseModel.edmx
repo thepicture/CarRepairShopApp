@@ -76,6 +76,7 @@
           <Property Name="ST_ID" Type="int" Nullable="false" />
           <Property Name="O_CREATEDATE" Type="date" Nullable="false" />
           <Property Name="O_ISCHECKED" Type="bit" Nullable="false" />
+          <Property Name="A_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderOfClient">
           <Key>
@@ -258,6 +259,18 @@
             </Principal>
             <Dependent Role="ContractOfMaster">
               <PropertyRef Name="M_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Auto">
+          <End Role="Auto" Type="Self.Auto" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Auto">
+              <PropertyRef Name="A_ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="A_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -466,6 +479,10 @@
             <End Role="Master" EntitySet="Master" />
             <End Role="ContractOfMaster" EntitySet="ContractOfMaster" />
           </AssociationSet>
+          <AssociationSet Name="FK_Order_Auto" Association="Self.FK_Order_Auto">
+            <End Role="Auto" EntitySet="Auto" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
           <AssociationSet Name="FK_Order_Status" Association="Self.FK_Order_Status">
             <End Role="Status" EntitySet="Status" />
             <End Role="Order" EntitySet="Order" />
@@ -534,6 +551,7 @@
           <NavigationProperty Name="Client" Relationship="Self.FK_Auto_Client" FromRole="Auto" ToRole="Client" />
           <NavigationProperty Name="TypeOfCar" Relationship="Self.FK_TypeOfCar_Auto" FromRole="Auto" ToRole="TypeOfCar" />
           <NavigationProperty Name="Master" Relationship="Self.AutoOfMaster" FromRole="Auto" ToRole="Master" />
+          <NavigationProperty Name="Order" Relationship="BaseModel.FK_Order_Auto" FromRole="Auto" ToRole="Order" />
         </EntityType>
         <EntityType Name="Client">
           <Key>
@@ -586,6 +604,8 @@
           <NavigationProperty Name="Client" Relationship="Self.OrderOfClient" FromRole="Order" ToRole="Client" />
           <NavigationProperty Name="Master" Relationship="Self.OrderOfMaster" FromRole="Order" ToRole="Master" />
           <NavigationProperty Name="Service" Relationship="Self.ServiceOfOrder" FromRole="Order" ToRole="Service" />
+          <Property Name="A_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Auto" Relationship="BaseModel.FK_Order_Auto" FromRole="Order" ToRole="Auto" />
         </EntityType>
         <EntityType Name="Phone">
           <Key>
@@ -866,7 +886,23 @@
             <End Role="Order" EntitySet="Order" />
             <End Role="Service" EntitySet="Service" />
           </AssociationSet>
+          <AssociationSet Name="FK_Order_Auto" Association="BaseModel.FK_Order_Auto">
+            <End Role="Auto" EntitySet="Auto" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Order_Auto">
+          <End Type="BaseModel.Auto" Role="Auto" Multiplicity="1" />
+          <End Type="BaseModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Auto">
+              <PropertyRef Name="A_ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="A_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -919,6 +955,7 @@
           <EntitySetMapping Name="Order">
             <EntityTypeMapping TypeName="BaseModel.Order">
               <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="A_ID" ColumnName="A_ID" />
                 <ScalarProperty Name="O_ID" ColumnName="O_ID" />
                 <ScalarProperty Name="ST_ID" ColumnName="ST_ID" />
                 <ScalarProperty Name="O_CREATEDATE" ColumnName="O_CREATEDATE" />
