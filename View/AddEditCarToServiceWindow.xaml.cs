@@ -1,4 +1,5 @@
 ﻿using CarRepairShopApp.Model;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -14,8 +15,14 @@ namespace CarRepairShopApp.View
         public AddEditCarToServiceWindow()
         {
             InitializeComponent();
-            ModelGrid.ItemsSource = Manager.Context.TypeOfCar.ToList();
+            UpdateDataGrids();
+        }
+
+        private void UpdateDataGrids()
+        {
             ServiceModelGrid.ItemsSource = Manager.CurrentService.ServiceOfModel.ToList();
+            List<string> servicesToRemove = Manager.CurrentService.ServiceOfModel.Select(s => s.TypeOfCar.T_NAME).ToList();
+            ModelGrid.ItemsSource = Manager.Context.TypeOfCar.ToList().Where(t => !servicesToRemove.Contains(t.T_NAME)).ToList();
         }
 
         private void ModelCost_TextChanged(object sender, TextChangedEventArgs e)
@@ -27,10 +34,10 @@ namespace CarRepairShopApp.View
         {
             Manager.CurrentService.ServiceOfModel.Add(new ServiceOfModel
             {
-                T_ID = (ModelGrid.SelectedItem as TypeOfCar).T_ID,
+                TypeOfCar = ModelGrid.SelectedItem as TypeOfCar,
                 COST = decimal.Parse(ModelCost.Text)
             });
-            ServiceModelGrid.ItemsSource = Manager.CurrentService.ServiceOfModel.ToList();
+            UpdateDataGrids();
         }
 
         readonly Regex costRegex = new Regex(pattern: @"[1-9][0-9]{0,19}");
@@ -54,8 +61,8 @@ namespace CarRepairShopApp.View
         private void BtnDeleteModelFromService_Click(object sender, RoutedEventArgs e)
         {
             Manager.CurrentService.ServiceOfModel.Remove(ServiceModelGrid.SelectedItem as ServiceOfModel);
-            ServiceModelGrid.ItemsSource = Manager.CurrentService.ServiceOfModel.ToList();
             BtnDeleteModelFromService.IsEnabled = false;
+            UpdateDataGrids();
         }
 
         private void ServiceModelGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -21,18 +21,21 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <DataGrid Name="ModelGrid"
+            <GroupBox Header="Все модели автомобилей"
+                      Margin="5">
+                <DataGrid Name="ModelGrid"
                       SelectionMode="Single"
                       SelectionChanged="ModelGrid_SelectionChanged">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Автомобиль"
-                                        Binding="{Binding GetCarNameByType}"
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Автомобиль"
+                                        Binding="{Binding Auto.A_NAME}"
                                         Width="*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Модель"
+                        <DataGridTextColumn Header="Модель"
                                         Binding="{Binding T_NAME}"
                                         Width="*"></DataGridTextColumn>
-                </DataGrid.Columns>
-            </DataGrid>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
             <StackPanel Grid.Row="1">
                 <GroupBox Header="Цена услуги для выбранной модели (руб.)"
                           Margin="5">
@@ -57,22 +60,25 @@
                     Grid.Row="2"
                     Name="CloseEditCarToServiceWindow"
                     Click="CloseEditCarToServiceWindow_Click"></Button>
-            <DataGrid Name="ServiceModelGrid"
+            <GroupBox Header="Цена услуги для конкретных моделей"
+                      Margin="5">
+                <DataGrid Name="ServiceModelGrid"
                   SelectionChanged="ServiceModelGrid_SelectionChanged"
                   Grid.Column="1"
                   Grid.Row="0">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Автомобиль"
-                                        Binding="{Binding GetCarName}"
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Автомобиль"
+                                        Binding="{Binding TypeOfCar.Auto.A_NAME}"
                                         Width="*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Модель"
-                                        Binding="{Binding GetTypeName}"
+                        <DataGridTextColumn Header="Модель"
+                                        Binding="{Binding TypeOfCar.T_NAME}"
                                         Width="*"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Цена услуги"
+                        <DataGridTextColumn Header="Цена услуги"
                                         Binding="{Binding COST, StringFormat={}{0} руб.}"
                                         Width="*"></DataGridTextColumn>
-                </DataGrid.Columns>
-            </DataGrid>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
             <Button Content="Убрать выбранные модели из текущей услуги"
                     Grid.Row="1"
                     IsEnabled="False"
