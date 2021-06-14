@@ -273,32 +273,12 @@ namespace CarRepairShopApp.View
             BtnDeleteMaster_Click(null, null);
         }
 
-        private string GetSelectedPath()
-        {
-            using (System.Windows.Forms.FolderBrowserDialog dialog = new System.Windows.Forms.FolderBrowserDialog())
-            {
-                dialog.Description = "Укажите папку сохранения отчёта:";
-                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    return dialog.SelectedPath;
-                }
-                else
-                {
-                    MessageBox.Show("Операция формирования отчёта была отменена!",
-                        "Внимание",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Information);
-                    return null;
-                }
-            }
-        }
-
         /// <summary>
         /// Forms the .pdf and .docx documents with order statistic of masters and shows the .docx document after operations.
         /// </summary>
         private void MastersOrderReportForm_Click(object sender, RoutedEventArgs e)
         {
-            string filePath = GetSelectedPath();
+            string filePath = FolderGetter.GetSelectedPath();
             if (filePath == null)
             {
                 return;
@@ -358,13 +338,13 @@ namespace CarRepairShopApp.View
             }
             catch (Exception)
             {
-                ShowErrorInformationAboutMSOffice();
+                ReportExceptionHandler.ShowErrorInformationAboutMSOffice();
             }
         }
 
         private void ServicesReportForm_Click(object sender, RoutedEventArgs e)
         {
-            string filePath = GetSelectedPath();
+            string filePath = FolderGetter.GetSelectedPath();
             if (filePath == null)
             {
                 return;
@@ -421,16 +401,8 @@ namespace CarRepairShopApp.View
             }
             catch (Exception)
             {
-                ShowErrorInformationAboutMSOffice();
+                ReportExceptionHandler.ShowErrorInformationAboutMSOffice();
             }
-        }
-
-        private static void ShowErrorInformationAboutMSOffice()
-        {
-            MessageBox.Show("Сохранение неуспешно. Убедитесь, что в вашей системе установлен пакет Microsoft Office.",
-                "Ошибка",
-                MessageBoxButton.OK,
-                MessageBoxImage.Error);
         }
     }
 }
