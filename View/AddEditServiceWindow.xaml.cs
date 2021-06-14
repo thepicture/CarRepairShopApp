@@ -1,7 +1,6 @@
 ﻿using CarRepairShopApp.Model;
-using Microsoft.Win32;
+using CarRepairShopApp.ViewModel;
 using System;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -48,28 +47,14 @@ namespace CarRepairShopApp.View
 
         private void BtnAddServicePhoto_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog dialog = new OpenFileDialog();
-            if ((bool)dialog.ShowDialog())
+            if (PhotoGetter.OpenDialog())
             {
-                try
+                _currentService.PhotoOfService.Add(new PhotoOfService
                 {
-                    _currentService.PhotoOfService.Add(new PhotoOfService
-                    {
-                        PHOTO = File.ReadAllBytes(dialog.FileName)
-                    });
-                    ServicePhotoView.ItemsSource = _currentService.PhotoOfService.ToList();
-                    MessageBox.Show("Изображение успешно прикреплено!",
-                        "Успешно!",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Information);
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Пожалуйста, прикрепите изображение.",
-                        "Ошибка",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Error);
-                }
+                    PHOTO = PhotoGetter.ImageInBytes
+                });
+                ServicePhotoView.ItemsSource = _currentService.PhotoOfService.ToList();
+                PhotoGetter.SayAllOk();
             }
         }
 

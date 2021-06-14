@@ -1,4 +1,5 @@
 ﻿using CarRepairShopApp.Model;
+using CarRepairShopApp.ViewModel;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -36,25 +37,11 @@ namespace CarRepairShopApp.View
 
         private void BtnAddMasterPhoto_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog dialog = new OpenFileDialog();
-            if ((bool)dialog.ShowDialog())
+            if (PhotoGetter.OpenDialog())
             {
-                try
-                {
-                    MasterPhoto.Source = new BitmapImage(new Uri(dialog.FileName));
-                    _currentMaster.M_PHOTO = File.ReadAllBytes(dialog.FileName);
-                    MessageBox.Show("Изображение успешно обновлено!",
-                        "Успешно!",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Information);
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Пожалуйста, выберите изображение для прикрепления.",
-                        "Ошибка",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Error);
-                }
+                _currentMaster.M_PHOTO = PhotoGetter.ImageInBytes;
+                MasterPhoto.Source = PhotoGetter.Image;
+                PhotoGetter.SayAllOk();
             }
         }
 

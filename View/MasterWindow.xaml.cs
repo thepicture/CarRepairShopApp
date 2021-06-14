@@ -1,5 +1,5 @@
 ﻿using CarRepairShopApp.Model;
-using Microsoft.Win32;
+using CarRepairShopApp.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -74,41 +74,14 @@ namespace CarRepairShopApp.View
 
         private void ChangePictureItem_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog dialog = new OpenFileDialog();
-            if ((bool)dialog.ShowDialog())
-            {
-                try
-                {
-                    Manager.CurrentUser.USER_PHOTO = File.ReadAllBytes(dialog.FileName);
-                    Manager.Context.SaveChanges();
-                    InitializeUserPhoto();
-                    MessageBox.Show("Аватар успешно изменен!",
-                        "Успешно!",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Information);
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Пожалуйста, прикрепите изображение.",
-                        "Ошибка",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Error);
-                }
-            }
+            PictureChanger.ChangePicture();
+            InitializeUserPhoto();
         }
 
         private void DeletePictureItem_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Точно удалить текущий аватар?",
-              "Внимание",
-              MessageBoxButton.YesNo,
-              MessageBoxImage.Question)
-              == MessageBoxResult.Yes)
-            {
-                Manager.CurrentUser.USER_PHOTO = null;
-                Manager.Context.SaveChanges();
-                InitializeUserPhoto();
-            }
+            PictureChanger.DeletePicture();
+            InitializeUserPhoto();
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)

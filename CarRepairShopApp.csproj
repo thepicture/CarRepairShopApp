@@ -71,6 +71,7 @@
     </ApplicationDefinition>
     <Compile Include="Model\ContractHelper.cs" />
     <Compile Include="ViewModel\PhotoGetter.cs" />
+    <Compile Include="ViewModel\PictureChanger.cs" />
     <Compile Include="View\AddContractToCustomerWindow.xaml.cs">
       <DependentUpon>AddContractToCustomerWindow.xaml</DependentUpon>
     </Compile>
