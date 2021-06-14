@@ -222,5 +222,35 @@ namespace CarRepairShopApp.View
                 Manager.MainLoginRegisterWindow.Show();
             }
         }
+
+        /// <summary>
+        /// Saves new status to the database.
+        /// </summary>
+        private void ComboStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (OrdersGrid.SelectedItems.Count.Equals(0))
+            {
+                return;
+            }
+            try
+            {
+                Order order = OrdersGrid.SelectedItem as Order;
+                Status status = (sender as ComboBox).SelectedItem as Status;
+                Manager.Context.Order.Where(o => o.O_ID.Equals(order.O_ID)).First().Status = status;
+                Manager.Context.SaveChanges();
+                MessageBox.Show("Статус заказа успешно изменён!",
+                    "Успешно!",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("При изменении статуса произошла ошибка." +
+                    "Пожалуйста, попробуйте изменить статус ещё раз.",
+                    "Внимание",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
+        }
     }
 }

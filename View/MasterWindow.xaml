@@ -200,8 +200,10 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <ComboBox ItemsSource="{Binding GetStatusList}"
-                                       SelectedItem="{Binding Status}"
-                                        DisplayMemberPath="ST_STATE">
+                                              SelectedItem="{Binding Status}"
+                                              DisplayMemberPath="ST_STATE"
+                                              Name="ComboStatus"
+                                              SelectionChanged="ComboStatus_SelectionChanged">
                                     </ComboBox>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
