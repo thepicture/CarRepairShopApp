@@ -9,7 +9,76 @@
         Height="450"
         Width="800"
         WindowStartupLocation="CenterScreen">
-    <Grid>
-
+    <Grid Background="WhiteSmoke">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Подтверждён"
+                   Style="{StaticResource CommonBlock}"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"></TextBlock>
+        <CheckBox Margin="5"
+                  HorizontalAlignment="Center"
+                  Grid.Column="1"
+                  VerticalAlignment="Center"></CheckBox>
+        <TextBlock Text="Клиент"
+                   Style="{StaticResource CommonBlock}"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Grid.Row="1"></TextBlock>
+        <TextBox Style="{StaticResource CommonBox}"
+                 Grid.Column="1"
+                 VerticalAlignment="Center"
+                 IsReadOnly="True"
+                 Text="{Binding Client.CL_NAME}"
+                 Grid.Row="1"
+                 Width="150"></TextBox>
+        <Button Content="Выбрать клиента ..."
+                VerticalAlignment="Bottom"
+                Grid.Row="1"
+                Grid.Column="1"
+                Width="150"></Button>
+        <TextBlock Text="Автомобиль"
+                   Style="{StaticResource CommonBlock}"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Grid.Row="2"></TextBlock>
+        <ComboBox Grid.Column="1"
+                  IsReadOnly="True"
+                  VerticalAlignment="Center"
+                  Text="{Binding GetCurrentMaster}"
+                  Grid.Row="2"
+                  Width="150"></ComboBox>
+        <TextBlock Text="Механик"
+                   Style="{StaticResource CommonBlock}"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Grid.Row="3"></TextBlock>
+        <TextBox Style="{StaticResource CommonBox}"
+                 Name="TBoxMasterName"
+                 Grid.Column="1"
+                 IsReadOnly="True"
+                 HorizontalAlignment="Center"
+                 VerticalAlignment="Center"
+                 Grid.Row="3"
+                 Width="auto"></TextBox>
+        <TextBlock Text="Услуги"
+                   Style="{StaticResource CommonBlock}"
+                  HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Grid.Row="4"></TextBlock>
+        <Button Grid.Column="1"
+                VerticalAlignment="Center"
+                Content="Выбрать услуги ..."
+                Grid.Row="4"
+                Width="150"></Button>
     </Grid>
 </Window>

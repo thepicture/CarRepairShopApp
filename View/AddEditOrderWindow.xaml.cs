@@ -29,6 +29,7 @@ namespace CarRepairShopApp.View
                 _currentOrder = order;
             }
             DataContext = _currentOrder;
+            TBoxMasterName.Text = Manager.CurrentUser.USER_NAME;
         }
     }
 }

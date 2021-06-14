@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 
 namespace CarRepairShopApp.Model
 {
@@ -19,7 +18,7 @@ namespace CarRepairShopApp.Model
                 return Status.ST_STATE;
             }
         }
-        public string GetClientNameOfOrder
+        public string CustomerName
         {
             get
             {
