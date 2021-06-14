@@ -39,27 +39,27 @@
                         <MenuItem Header="Заказы">
                             <MenuItem Header="Новый заказ"
                                   Name="AddOrderItem"
-                                  Click="AddOrderItem_Click"></MenuItem>
+                                  Click="BtnAddOrder_Click"></MenuItem>
                             <MenuItem Header="Изменить"
                                   Name="ModifyOrderItem"
-                                  Click="ModifyOrderItem_Click"
+                                  Click="BtnEditOrder_Click"
                                   IsEnabled="False"></MenuItem>
                             <MenuItem Header="Отменить"
                                   Name="DeleteOrderItem"
-                                  Click="DeleteOrderItem_Click"
+                                  Click="BtnDeleteOrder_Click"
                                   IsEnabled="False"></MenuItem>
                         </MenuItem>
                         <MenuItem Header="Договоры">
                             <MenuItem Header="Сформировать"
                                   Name="AddContractItem"
-                                  Click="AddContractItem_Click"></MenuItem>
+                                  Click="BtnAddContract_Click"></MenuItem>
                             <MenuItem Header="Изменить"
                                   Name="EditContractItem"
-                                  Click="EditContractItem_Click"
+                                  Click="BtnEditContract_Click"
                                   IsEnabled="False"></MenuItem>
                             <MenuItem Header="Отменить"
                                   Name="DeleteContractItem"
-                                  Click="DeleteContractItem_Click"
+                                  Click="BtnDeleteContract_Click"
                                   IsEnabled="False"></MenuItem>
                         </MenuItem>
                         <MenuItem Header="Клиенты">

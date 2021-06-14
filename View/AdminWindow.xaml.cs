@@ -175,21 +175,6 @@ namespace CarRepairShopApp.View
             Close();
         }
 
-        private void AddServiceItem_Click(object sender, RoutedEventArgs e)
-        {
-            BtnAddService_Click(null, null);
-        }
-
-        private void ModifyServiceItem_Click(object sender, RoutedEventArgs e)
-        {
-            BtnEditService_Click(null, null);
-        }
-
-        private void DeleteServiceItem_Click(object sender, RoutedEventArgs e)
-        {
-            BtnDeleteService_Click(null, null);
-        }
-
         private void MastersGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (MastersGrid.SelectedItems.Count > 1)
@@ -256,21 +241,6 @@ namespace CarRepairShopApp.View
             };
             masterWindow.ShowDialog();
             UpdateEntries();
-        }
-
-        private void AddMasterItem_Click(object sender, RoutedEventArgs e)
-        {
-            BtnAddMaster_Click(null, null);
-        }
-
-        private void EditMasterItem_Click(object sender, RoutedEventArgs e)
-        {
-            BtnEditMaster_Click(null, null);
-        }
-
-        private void DeleteMasterItem_Click(object sender, RoutedEventArgs e)
-        {
-            BtnDeleteMaster_Click(null, null);
         }
 
         /// <summary>

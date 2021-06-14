@@ -42,27 +42,27 @@
                         <MenuItem Header="Услуги">
                             <MenuItem Header="Добавить"
                                   Name="AddServiceItem"
-                                  Click="AddServiceItem_Click"></MenuItem>
+                                  Click="BtnAddService_Click"></MenuItem>
                             <MenuItem Header="Изменить"
                                   Name="ModifyServiceItem"
-                                  Click="ModifyServiceItem_Click"
+                                  Click="BtnEditService_Click"
                                   IsEnabled="False"></MenuItem>
                             <MenuItem Header="Удалить"
                                   Name="DeleteServiceItem"
-                                  Click="DeleteServiceItem_Click"
+                                  Click="BtnDeleteService_Click"
                                   IsEnabled="False"></MenuItem>
                         </MenuItem>
                         <MenuItem Header="Механики">
                             <MenuItem Header="Добавить"
                                   Name="AddMasterItem"
-                                  Click="AddMasterItem_Click"></MenuItem>
+                                  Click="BtnAddMaster_Click"></MenuItem>
                             <MenuItem Header="Изменить"
                                   Name="EditMasterItem"
-                                  Click="EditMasterItem_Click"
+                                  Click="BtnEditMaster_Click"
                                   IsEnabled="False"></MenuItem>
                             <MenuItem Header="Удалить"
                                   Name="DeleteMasterItem"
-                                  Click="DeleteMasterItem_Click"
+                                  Click="BtnDeleteMaster_Click"
                                   IsEnabled="False"></MenuItem>
                         </MenuItem>
                     </MenuItem>

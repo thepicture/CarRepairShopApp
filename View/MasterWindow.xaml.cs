@@ -89,36 +89,6 @@ namespace CarRepairShopApp.View
             Close();
         }
 
-        private void AddOrderItem_Click(object sender, RoutedEventArgs e)
-        {
-            BtnAddOrder_Click(null, null);
-        }
-
-        private void ModifyOrderItem_Click(object sender, RoutedEventArgs e)
-        {
-            BtnEditOrder_Click(null, null);
-        }
-
-        private void DeleteOrderItem_Click(object sender, RoutedEventArgs e)
-        {
-            BtnDeleteOrder_Click(null, null);
-        }
-
-        private void AddContractItem_Click(object sender, RoutedEventArgs e)
-        {
-            BtnAddContract_Click(null, null);
-        }
-
-        private void EditContractItem_Click(object sender, RoutedEventArgs e)
-        {
-            BtnEditContract_Click(null, null);
-        }
-
-        private void DeleteContractItem_Click(object sender, RoutedEventArgs e)
-        {
-            BtnDeleteContract_Click(null, null);
-        }
-
         private void AddCustomerItem_Click(object sender, RoutedEventArgs e)
         {
 
