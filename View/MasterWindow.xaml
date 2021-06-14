@@ -17,8 +17,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="20"></RowDefinition>
                 <RowDefinition Height="150"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Name="MenuGrid">
@@ -158,30 +157,40 @@
                     </DataGrid>
                 </Grid>
             </Grid>
-            <StackPanel Grid.Row="2"
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Row="0"
                     Orientation="Horizontal"
                     HorizontalAlignment="Center">
-                <Button Width="80"
+                    <Button Width="80"
                 Height="20"
                 Content="Новый заказ"
                 Name="BtnAddOrder"
                 Click="BtnAddOrder_Click"></Button>
-                <Button Width="80"
+                    <Button Width="80"
                 Height="20"
                 Content="Изменить"
                 Name="BtnEditOrder"
                 IsEnabled="False"
                 Click="BtnEditOrder_Click"></Button>
-                <Button Width="80"
+                    <Button Width="80"
                 Height="20"
                 Content="Отменить"
                 Name="BtnDeleteOrder"
                 Click="BtnDeleteOrder_Click"
                 IsEnabled="False"></Button>
-            </StackPanel>
-            <Grid Grid.Row="3">
+                </StackPanel>
                 <DataGrid Name="OrdersGrid"
-                      SelectionChanged="OrdersGrid_SelectionChanged">
+                          Grid.Row="1"
+                          Grid.Column="0"
+                          SelectionChanged="OrdersGrid_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Дата формирования"
                                         Binding="{Binding O_CREATEDATE}"
@@ -210,9 +219,67 @@
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
+                <StackPanel Grid.Row="0"
+                                Grid.Column="1"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center">
+                    <Button Width="auto"
+                Height="20"
+                Content="Новый клиент"
+                Name="BtnAddCustomer"
+                Click="BtnAddCustomer_Click"></Button>
+                    <Button Width="auto"
+                Height="20"
+                Content="Изменить данные"
+                Name="BtnEditCustomer"
+                IsEnabled="False"
+                Click="BtnEditCustomer_Click"></Button>
+                    <Button Width="auto"
+                Height="20"
+                Content="Удалить данные"
+                Name="BtnDeleteCustomer"
+                Click="BtnDeleteCustomer_Click"
+                IsEnabled="False"></Button>
+                </StackPanel>
+                <Grid Grid.Row="1"
+                      Grid.Column="1">
+                    <DataGrid Name="CustomersGrid"
+                              SelectionChanged="CustomersGrid_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ФИО"
+                                        Binding="{Binding CL_NAME}"
+                                        Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Серия паспорта"
+                                        Binding="{Binding CL_PASSNUM}"
+                                        Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Код паспорта"
+                                        Binding="{Binding CL_PASSCODE}"
+                                        Width="*"></DataGridTextColumn>
+                            <DataGridTemplateColumn Header="Фотография"
+                                                    Width="*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Width="100"
+                                               Height="100"
+                                               Stretch="UniformToFill"
+                                               Margin="5">
+                                            <Image.Source>
+                                                <Binding Path="CL_PHOTO">
+                                                    <Binding.TargetNullValue>
+                                                        <ImageSource>pack://application:,,,/Resources/user_picture.png</ImageSource>
+                                                    </Binding.TargetNullValue>
+                                                </Binding>
+                                            </Image.Source>
+                                        </Image>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
             </Grid>
             <DockPanel VerticalAlignment="Bottom"
-                   Grid.Row="4">
+                       Grid.Row="3">
                 <StatusBar DockPanel.Dock="Bottom">
                     <StatusBarItem>
                         <TextBlock Name="ButtonName"/>

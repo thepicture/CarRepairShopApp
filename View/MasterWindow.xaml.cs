@@ -30,6 +30,7 @@ namespace CarRepairShopApp.View
             OrdersGrid.SelectedItems.Clear();
             ContractGrid.ItemsSource = Manager.Context.Contract.ToList();
             OrdersGrid.ItemsSource = Manager.Context.Order.ToList();
+            CustomersGrid.ItemsSource = Manager.Context.Client.ToList();
         }
 
         private void InitializeUserPhoto()
@@ -296,6 +297,31 @@ namespace CarRepairShopApp.View
                     MessageBoxButton.OK,
                     MessageBoxImage.Error);
             }
+        }
+
+        private void ColumnDefinition_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+
+        }
+
+        private void BtnAddCustomer_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnEditCustomer_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnDeleteCustomer_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CustomersGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
