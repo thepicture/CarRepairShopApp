@@ -66,7 +66,9 @@ namespace CarRepairShopApp.View
                 MessageBoxImage.Question)
                 == MessageBoxResult.Yes)
             {
-                _currentService.PhotoOfService.Remove((sender as Button).DataContext as PhotoOfService);
+                PhotoOfService service = (sender as Button).DataContext as PhotoOfService;
+                _currentService.PhotoOfService.Remove(service);
+                Manager.Context.PhotoOfService.Remove(service);
                 MessageBox.Show("Выбранное фото успешно удалено!",
                     "Успешно!",
                     MessageBoxButton.OK,
