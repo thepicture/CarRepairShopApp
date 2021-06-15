@@ -144,6 +144,9 @@
     <Compile Include="View\AddEditOrderWindow.xaml.cs">
       <DependentUpon>AddEditOrderWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\AddEditPhoneWindow.xaml.cs">
+      <DependentUpon>AddEditPhoneWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AddServiceToOrderWindow.xaml.cs">
       <DependentUpon>AddServiceToOrderWindow.xaml</DependentUpon>
     </Compile>
@@ -174,6 +177,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AddEditOrderWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddEditPhoneWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -40,7 +40,12 @@ namespace CarRepairShopApp.View
 
         private void BtnAddCustomerPhoneNumber_Click(object sender, RoutedEventArgs e)
         {
-
+            Manager.CurrentCustomer = _currentCustomer;
+            AddEditPhoneWindow phoneWindow = new AddEditPhoneWindow()
+            {
+                Title = "Номера телефонов клиента " + _currentCustomer.CL_NAME
+            };
+            phoneWindow.ShowDialog();
         }
 
         private void BtnSaveChanges_Click(object sender, RoutedEventArgs e)

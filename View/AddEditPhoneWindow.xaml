@@ -1,0 +1,47 @@
+﻿<Window x:Class="CarRepairShopApp.View.AddEditPhoneWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarRepairShopApp.View"
+        mc:Ignorable="d"
+        Title="AddEditPhoneWindow"
+        Height="250"
+        Width="400"
+        WindowStartupLocation="CenterScreen"
+        MinHeight="250"
+        MinWidth="400">
+    <Grid Background="WhiteSmoke">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <DataGrid Name="PhonesGrid"
+                  SelectionChanged="PhonesGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Номер телефона"
+                                    Width="*"
+                                    Binding="{Binding P_NUMBER}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="1">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Новый номер телефона"
+                           HorizontalAlignment="Left"
+                           Margin="5"></TextBlock>
+                <TextBox Name="TBoxPhoneNumber"
+                         Width="150"
+                         MaxLength="20"
+                         KeyDown="TBoxPhoneNumber_KeyDown"></TextBox>
+                <Button Content="Добавить"
+                        Name="BtnAddPhone"
+                        Click="BtnAddPhone_Click"
+                        HorizontalAlignment="Right"></Button>
+            </StackPanel>
+            <Button Content="Удалить выбранные номера телефонов"
+                    Name="BtnDeleteSelectedPhones"
+                    IsEnabled="False"
+                    Click="BtnDeleteSelectedPhones_Click"></Button>
+        </StackPanel>
+    </Grid>
+</Window>

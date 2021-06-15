@@ -8,5 +8,6 @@
         public static Service CurrentService = new Service();
         public static Contract CurrentContract = new Contract();
         public static Order CurrentOrder = new Order();
+        public static Client CurrentCustomer = new Client();
     }
 }
