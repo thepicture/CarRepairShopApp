@@ -83,10 +83,10 @@
                                   Name="CustomersReportForm"
                                   Click="CustomersReportForm_Click"></MenuItem>
                         </MenuItem>
-                        <MenuItem Header="Заказы">
-                            <MenuItem Header="Создать отчёт по статистике заказов"
-                                  Name="OrdersReportForm"
-                                  Click="OrdersReportForm_Click"></MenuItem>
+                        <MenuItem Header="Услуги">
+                            <MenuItem Header="Создать отчёт по услугам"
+                                  Name="ServicesReportForm"
+                                  Click="ServicesReportForm_Click"></MenuItem>
                         </MenuItem>
                     </MenuItem>
                 </Menu>

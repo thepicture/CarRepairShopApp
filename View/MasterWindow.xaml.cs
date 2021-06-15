@@ -166,11 +166,6 @@ namespace CarRepairShopApp.View
             }
         }
 
-        private void OrdersReportForm_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void BtnAddContract_Click(object sender, RoutedEventArgs e)
         {
             AddEditContractWindow contractWindow = new AddEditContractWindow(null)
@@ -358,11 +353,6 @@ namespace CarRepairShopApp.View
             }
         }
 
-        private void ColumnDefinition_MouseWheel(object sender, MouseWheelEventArgs e)
-        {
-
-        }
-
         private void BtnAddCustomer_Click(object sender, RoutedEventArgs e)
         {
             AddEditCustomerWindow customerWindow = new AddEditCustomerWindow(null)
@@ -432,6 +422,11 @@ namespace CarRepairShopApp.View
                 BtnEditCustomer.IsEnabled = EditCustomerItem.IsEnabled = true;
             }
             BtnDeleteCustomer.IsEnabled = DeleteCustomerItem.IsEnabled = true;
+        }
+
+        private void ServicesReportForm_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceReportFormer.FormReport();
         }
     }
 }
