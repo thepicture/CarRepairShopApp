@@ -42,6 +42,9 @@
                     Name="BtnDeleteSelectedPhones"
                     IsEnabled="False"
                     Click="BtnDeleteSelectedPhones_Click"></Button>
+            <Button Content="Закрыть окно"
+                    Name="BtnCloseWindow"
+                    Click="BtnCloseWindow_Click"></Button>
         </StackPanel>
     </Grid>
 </Window>

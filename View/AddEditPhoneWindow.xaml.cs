@@ -67,5 +67,17 @@ namespace CarRepairShopApp.View
                 System.Media.SystemSounds.Asterisk.Play();
             }
         }
+
+        private void BtnCloseWindow_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Действительно закрыть текущее окно?",
+                "Внимание",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question)
+                == MessageBoxResult.Yes)
+            {
+                Close();
+            }
+        }
     }
 }

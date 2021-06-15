@@ -60,7 +60,7 @@
                   Name="ComboCar"
                   IsReadOnly="True"
                   VerticalAlignment="Center"
-                  DisplayMemberPath="A_NAME"
+                  DisplayMemberPath="T_NAME"
                   Grid.Row="2"
                   Width="150"></ComboBox>
         <TextBlock Text="Механик"

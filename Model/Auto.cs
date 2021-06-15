@@ -23,12 +23,10 @@ namespace CarRepairShopApp.Model
         }
     
         public int A_ID { get; set; }
-        public int CL_ID { get; set; }
         public string A_NAME { get; set; }
         public byte[] A_PHOTO { get; set; }
         public string A_TYPE { get; set; }
     
-        public virtual Client Client { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Order { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

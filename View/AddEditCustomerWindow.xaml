@@ -102,7 +102,7 @@
                 Grid.Row="4"
                 Grid.Column="1"
                 VerticalAlignment="Center"
-                Content="Добавить автомобили..."
+                Content="Автомобили ..."
                 HorizontalAlignment="Left"
                 Name="BtnAddCarForCustomer"
                 Click="BtnAddCarForCustomer_Click"></Button>
@@ -115,7 +115,7 @@
                 Grid.Row="5"
                 Grid.Column="1"
                 VerticalAlignment="Center"
-                Content="Добавить телефон..."
+                Content="Номера телефонов ..."
                 HorizontalAlignment="Left"
                 Name="BtnAddCustomerPhoneNumber"
                 Click="BtnAddCustomerPhoneNumber_Click"></Button>

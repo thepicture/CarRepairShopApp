@@ -29,7 +29,7 @@ namespace CarRepairShopApp.View
             if (_currentOrder.Client.Count != 0)
             {
                 CustomerName.Text = _currentOrder.Client.FirstOrDefault().CL_NAME;
-                ComboCar.ItemsSource = _currentOrder.Client.FirstOrDefault().Auto.ToList();
+                ComboCar.ItemsSource = _currentOrder.Client.FirstOrDefault().TypeOfCar.ToList();
                 ComboCar.SelectedItem = _currentOrder.Auto;
             }
         }

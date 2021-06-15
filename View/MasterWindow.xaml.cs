@@ -379,7 +379,7 @@ namespace CarRepairShopApp.View
             List<Client> clients = CustomersGrid.SelectedItems.Cast<Client>().ToList();
             if (clients.Count() > 0)
             {
-                if (MessageBox.Show("Внимание! Будет безвозвратно удалено следующее число данных о клиентах: "
+                if (MessageBox.Show("Внимание! Будет удалено следующее количество данных о клиентах: "
                     + clients.Count() + $".\n" +
                     $"Нажмите \"Да\", если вы действительно хотите безвозвратно удалить выбранные данные о клиентах.",
                     "Подтверждение отмены",
@@ -388,10 +388,9 @@ namespace CarRepairShopApp.View
                 {
                     foreach (Client client in clients)
                     {
-                        client.Auto.Clear();
                         client.Phone.Clear();
+                        Manager.Context.Entry(client).State = System.Data.Entity.EntityState.Deleted;
                     }
-                    Manager.Context.Client.RemoveRange(clients);
                     try
                     {
                         Manager.Context.SaveChanges();
@@ -401,7 +400,7 @@ namespace CarRepairShopApp.View
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Отмена неуспешна! Пожалуйста, попробуйте ещё раз." +
+                        MessageBox.Show("Удаление неуспешно! Пожалуйста, попробуйте ещё раз." +
                             "\nОшибка: "
                             + ex.Message, "Ошибка",
                             MessageBoxButton.OK,
