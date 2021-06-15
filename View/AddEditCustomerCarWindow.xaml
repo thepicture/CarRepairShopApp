@@ -1,16 +1,14 @@
-﻿<Window x:Class="CarRepairShopApp.View.AddEditCarToServiceWindow"
+﻿<Window x:Class="CarRepairShopApp.View.AddEditCustomerCarWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarRepairShopApp.View"
         mc:Ignorable="d"
-        Title="AddEditCarToServiceWindow"
+        Title="AddEditCustomerCarWindow"
         Height="450"
         Width="800"
         WindowStartupLocation="CenterScreen"
-        MinHeight="250"
-        MinWidth="600"
         Background="WhiteSmoke">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -25,29 +23,35 @@
             <GroupBox Header="Все модели автомобилей"
                       Margin="5">
                 <DataGrid Name="ModelGrid"
-                      SelectionMode="Single"
-                      SelectionChanged="ModelGrid_SelectionChanged">
+                          SelectionChanged="ModelGrid_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Автомобиль"
-                                        Binding="{Binding Auto.A_NAME}"
-                                        Width="*"></DataGridTextColumn>
+                                            Binding="{Binding Auto.A_NAME}"
+                                            Width="*"></DataGridTextColumn>
                         <DataGridTextColumn Header="Модель"
-                                        Binding="{Binding T_NAME}"
-                                        Width="*"></DataGridTextColumn>
+                                            Binding="{Binding T_NAME}"
+                                            Width="*"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </GroupBox>
             <StackPanel Grid.Row="1">
-                <GroupBox Header="Цена услуги для выбранной модели (руб.)"
+                <GroupBox Header="Добавить новую модель автомобиля"
                           Margin="5">
-                    <TextBox MaxLength="20"
-                         Name="ModelCost"
-                         TextChanged="ModelCost_TextChanged"></TextBox>
+                    <StackPanel>
+                        <ComboBox Name="ComboModel"
+                                  DisplayMemberPath="T_NAME"></ComboBox>
+                        <TextBox Name="ModelName"
+                                 TextChanged="ModelName_TextChanged"
+                                 MaxLength="50"></TextBox>
+                        <Button Content="Добавить модель"
+                                Name="BtnAddNewModel"
+                                Click="BtnAddNewModel_Click"></Button>
+                    </StackPanel>
                 </GroupBox>
-                <Button Content="Добавить выбранные модели"
-                    Name="BtnAddSelectedModelsToService"
+                <Button Content="Присвоить клиенту выбранные модели"
+                        Name="BtnAddSelectedModelsToCustomer"
                         IsEnabled="False"
-                    Click="BtnAddSelectedModelsToService_Click"></Button>
+                        Click="BtnAddSelectedModelsToCustomer_Click"></Button>
             </StackPanel>
         </Grid>
         <Grid Grid.Column="1">
@@ -59,12 +63,12 @@
             <Button Content="Закрыть"
                     VerticalAlignment="Top"
                     Grid.Row="2"
-                    Name="CloseEditCarToServiceWindow"
-                    Click="CloseEditCarToServiceWindow_Click"></Button>
-            <GroupBox Header="Цена услуги для конкретных моделей"
+                    Name="CloseCarOfCustomerWindow"
+                    Click="CloseCarOfCustomerWindow_Click"></Button>
+            <GroupBox Header="Модели автомобилей клиента"
                       Margin="5">
-                <DataGrid Name="ServiceModelGrid"
-                  SelectionChanged="ServiceModelGrid_SelectionChanged"
+                <DataGrid Name="CustomerModelsGrid"
+                  SelectionChanged="CustomerModelsGrid_SelectionChanged"
                   Grid.Column="1"
                   Grid.Row="0">
                     <DataGrid.Columns>
@@ -74,17 +78,14 @@
                         <DataGridTextColumn Header="Модель"
                                         Binding="{Binding TypeOfCar.T_NAME}"
                                         Width="*"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Цена услуги"
-                                        Binding="{Binding COST, StringFormat={}{0} руб.}"
-                                        Width="*"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </GroupBox>
             <Button Content="Убрать выбранные модели из текущей услуги"
                     Grid.Row="1"
                     IsEnabled="False"
-                    Name="BtnDeleteModelFromService"
-                    Click="BtnDeleteModelFromService_Click"></Button>
+                    Name="BtnDeleteModelsOfCustomer"
+                    Click="BtnDeleteModelsOfCustomer_Click"></Button>
         </Grid>
     </Grid>
 </Window>

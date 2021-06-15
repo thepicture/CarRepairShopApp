@@ -23,8 +23,7 @@ namespace CarRepairShopApp.View
             InitializeUserPhoto();
             UserNameBlock.Text = Manager.CurrentUser.USER_NAME;
             UserRoleBlock.Text = "Роль: " + Manager.CurrentUser.Role.NAME;
-            ServiceGrid.ItemsSource = Manager.Context.Service.ToList();
-            MastersGrid.ItemsSource = Manager.Context.Master.ToList();
+            UpdateEntries();
         }
 
         private void InitializeUserPhoto()
@@ -99,6 +98,7 @@ namespace CarRepairShopApp.View
                 Title = "Редактирование услуги " + service.SE_NAME
             };
             addEditServiceWindow.ShowDialog();
+            UpdateEntries();
         }
 
         private void UpdateEntries()

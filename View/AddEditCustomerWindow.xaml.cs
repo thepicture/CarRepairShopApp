@@ -35,7 +35,12 @@ namespace CarRepairShopApp.View
 
         private void BtnAddCarForCustomer_Click(object sender, RoutedEventArgs e)
         {
-
+            Manager.CurrentCustomer = _currentCustomer;
+            AddEditCustomerCarWindow carWindow = new AddEditCustomerCarWindow()
+            {
+                Title = "Модели автомобилей клиента " + _currentCustomer.CL_NAME
+            };
+            carWindow.ShowDialog();
         }
 
         private void BtnAddCustomerPhoneNumber_Click(object sender, RoutedEventArgs e)

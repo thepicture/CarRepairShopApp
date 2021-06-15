@@ -138,6 +138,9 @@
     <Compile Include="View\AddEditContractWindow.xaml.cs">
       <DependentUpon>AddEditContractWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\AddEditCustomerCarWindow.xaml.cs">
+      <DependentUpon>AddEditCustomerCarWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AddEditCustomerWindow.xaml.cs">
       <DependentUpon>AddEditCustomerWindow.xaml</DependentUpon>
     </Compile>
@@ -165,6 +168,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AddEditCarToServiceWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddEditCustomerCarWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

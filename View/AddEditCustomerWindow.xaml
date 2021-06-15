@@ -6,19 +6,21 @@
         xmlns:local="clr-namespace:CarRepairShopApp.View"
         mc:Ignorable="d"
         Title="AddEditCustomerWindow"
-        Height="450"
-        Width="800"
-        WindowStartupLocation="CenterScreen">
+        Height="350"
+        Width="500"
+        MinHeight="350"
+        MinWidth="500"
+        WindowStartupLocation="CenterScreen"
+        Background="WhiteSmoke">
     <Grid VerticalAlignment="Center">
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
