@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using Word = Microsoft.Office.Interop.Word;
 
 namespace CarRepairShopApp.View
 {
@@ -93,7 +94,76 @@ namespace CarRepairShopApp.View
 
         private void CustomersReportForm_Click(object sender, RoutedEventArgs e)
         {
+            string filePath = FolderGetter.GetSelectedPath();
+            if (filePath == null)
+            {
+                return;
+            }
+            var allCustomers = Manager.Context.Client.ToList();
 
+            var application = new Word.Application();
+
+            Word.Document document = application.Documents.Add();
+
+            for (int i = 0; i < allCustomers.Count; i++)
+            {
+                Word.Paragraph paragraph = document.Paragraphs.Add();
+                Word.Range customerRange = paragraph.Range;
+
+                customerRange.Text = "Статистика заказов по клиенту " + allCustomers[i].CL_NAME;
+                customerRange.set_Style("Заголовок 1");
+                customerRange.InsertParagraphAfter();
+
+                Word.Paragraph tableParagraph = document.Paragraphs.Add();
+                Word.Range tableRange = tableParagraph.Range;
+                Word.Table serviceTable = document.Tables.Add(tableRange, 2, 2); ;
+                serviceTable.Borders.InsideLineStyle = serviceTable.Borders.OutsideLineStyle = Word.WdLineStyle.wdLineStyleSingle;
+                serviceTable.Range.Cells.VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+
+                Word.Range cellRange;
+
+                cellRange = serviceTable.Cell(1, 1).Range;
+                cellRange.Text = "Клиент";
+                cellRange = serviceTable.Cell(1, 2).Range;
+                cellRange.Text = "Среднее число заказов в месяц";
+
+                serviceTable.Rows[1].Range.Bold = 1;
+                serviceTable.Rows[1].Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                var currentCustomer = allCustomers[i];
+
+                cellRange = serviceTable.Cell(2, 1).Range;
+                cellRange.Text = currentCustomer.CL_NAME;
+                cellRange = serviceTable.Cell(2, 2).Range;
+                if (currentCustomer.Order.Count() == 0)
+                {
+                    cellRange.Text = "Заказов не найдено";
+                }
+                else if (currentCustomer.Order.Max(o => o.O_CREATEDATE.Year) == currentCustomer.Order.Min(o => o.O_CREATEDATE.Year))
+                {
+                    cellRange.Text = Math.Round(currentCustomer.Order.Count / 12.0, 2).ToString() + $" шт.";
+                }
+                else
+                {
+                    cellRange.Text = Math.Round(currentCustomer.Order.Count / currentCustomer.Order.Max(o => o.O_CREATEDATE.Year) - currentCustomer.Order.Min(o => o.O_CREATEDATE.Year) * 1.0, 2).ToString() + " шт.";
+                }
+                if (currentCustomer != Manager.Context.Client.ToList().LastOrDefault())
+                {
+                    document.Words.Last.InsertBreak(Word.WdBreakType.wdPageBreak);
+                }
+            }
+            application.Visible = true;
+
+            string currentDate = DateTime.Now.ToString("dd-MM-yyyy_hh-mm");
+
+            try
+            {
+                document.SaveAs(filePath + @"\Отчёт-по-заказам-клиентов_" + currentDate + ".docx");
+                document.SaveAs(filePath + @"\Отчёт-по-заказам-клиентов_" + currentDate + ".pdf", Word.WdExportFormat.wdExportFormatPDF);
+            }
+            catch (Exception)
+            {
+                ReportExceptionHandler.ShowErrorInformationAboutMSOffice();
+            }
         }
 
         private void OrdersReportForm_Click(object sender, RoutedEventArgs e)
@@ -216,7 +286,7 @@ namespace CarRepairShopApp.View
                     {
                         MessageBox.Show("Отмена неуспешна! Пожалуйста, попробуйте ещё раз." +
                             "\nОшибка: "
-                            + ex.Message, "Ошибка отмены",
+                            + ex.Message, "Ошибка",
                             MessageBoxButton.OK,
                             MessageBoxImage.Error);
                     }
@@ -343,7 +413,7 @@ namespace CarRepairShopApp.View
                     {
                         MessageBox.Show("Отмена неуспешна! Пожалуйста, попробуйте ещё раз." +
                             "\nОшибка: "
-                            + ex.Message, "Ошибка отмены",
+                            + ex.Message, "Ошибка",
                             MessageBoxButton.OK,
                             MessageBoxImage.Error);
                     }

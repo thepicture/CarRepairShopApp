@@ -132,7 +132,7 @@ namespace CarRepairShopApp.View
                     {
                         MessageBox.Show("Удаление неуспешно! Пожалуйста, попробуйте ещё раз." +
                             "\nОшибка: "
-                            + ex.Message, "Ошибка удаления",
+                            + ex.Message, "Ошибка",
                             MessageBoxButton.OK,
                             MessageBoxImage.Error);
                     }

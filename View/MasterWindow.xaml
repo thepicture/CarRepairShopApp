@@ -79,7 +79,7 @@
                     </MenuItem>
                     <MenuItem Header="Отчеты">
                         <MenuItem Header="Клиенты">
-                            <MenuItem Header="Создать отчёт по статистике клиентов"
+                            <MenuItem Header="Создать статистику по заказам клиентов"
                                   Name="CustomersReportForm"
                                   Click="CustomersReportForm_Click"></MenuItem>
                         </MenuItem>
