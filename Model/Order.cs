@@ -27,6 +27,7 @@ namespace CarRepairShopApp.Model
         public System.DateTime O_CREATEDATE { get; set; }
         public bool O_ISCHECKED { get; set; }
         public int T_ID { get; set; }
+        public string MASTER_NAME { get; set; }
     
         public virtual Status Status { get; set; }
         public virtual TypeOfCar TypeOfCar { get; set; }

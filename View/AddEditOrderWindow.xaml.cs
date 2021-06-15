@@ -26,11 +26,12 @@ namespace CarRepairShopApp.View
 
         private void GetNameAndCarOfTheCustomerIfExists()
         {
-            if (_currentOrder.Client.Count != 0)
+            if (_currentOrder.Client.Count > 0)
             {
                 CustomerName.Text = _currentOrder.Client.FirstOrDefault().CL_NAME;
                 ComboCar.ItemsSource = _currentOrder.Client.FirstOrDefault().TypeOfCar.ToList();
                 ComboCar.SelectedItem = _currentOrder.TypeOfCar;
+                TBoxMasterName.Text = Manager.CurrentUser.USER_NAME;
             }
         }
 
@@ -64,6 +65,10 @@ namespace CarRepairShopApp.View
                     MessageBoxImage.Error);
                 return;
             }
+            _currentOrder.Master.Add(new Master
+            {
+                M_NAME = Manager.CurrentUser.USER_NAME
+            });
             _currentOrder.TypeOfCar = ComboCar.SelectedItem as TypeOfCar;
             if (_currentOrder.O_ID.Equals(0))
             {

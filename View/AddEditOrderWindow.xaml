@@ -62,11 +62,8 @@
         <ComboBox Grid.Column="1"
                   Name="ComboCar"
                   IsReadOnly="True"
-                  VerticalAlignment="Center"
-                  HorizontalAlignment="Left"
                   DisplayMemberPath="T_NAME"
-                  Grid.Row="2"
-                  Width="150"></ComboBox>
+                  Grid.Row="2"></ComboBox>
         <TextBlock Text="Механик"
                    Style="{StaticResource CommonBlock}"
                    VerticalAlignment="Center"

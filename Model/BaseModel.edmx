@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Auto">
           <Key>
             <PropertyRef Name="A_ID" />
@@ -85,6 +85,7 @@
           <Property Name="O_CREATEDATE" Type="date" Nullable="false" />
           <Property Name="O_ISCHECKED" Type="bit" Nullable="false" />
           <Property Name="T_ID" Type="int" Nullable="false" />
+          <Property Name="MASTER_NAME" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="OrderOfClient">
           <Key>
@@ -578,8 +579,7 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -647,6 +647,7 @@
           <NavigationProperty Name="Client" Relationship="Self.OrderOfClient" FromRole="Order" ToRole="Client" />
           <NavigationProperty Name="Master" Relationship="Self.OrderOfMaster" FromRole="Order" ToRole="Master" />
           <NavigationProperty Name="Service" Relationship="Self.ServiceOfOrder" FromRole="Order" ToRole="Service" />
+          <Property Name="MASTER_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Phone">
           <Key>
@@ -993,6 +994,7 @@
           <EntitySetMapping Name="Order">
             <EntityTypeMapping TypeName="BaseModel.Order">
               <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="MASTER_NAME" ColumnName="MASTER_NAME" />
                 <ScalarProperty Name="O_ID" ColumnName="O_ID" />
                 <ScalarProperty Name="ST_ID" ColumnName="ST_ID" />
                 <ScalarProperty Name="O_CREATEDATE" ColumnName="O_CREATEDATE" />
