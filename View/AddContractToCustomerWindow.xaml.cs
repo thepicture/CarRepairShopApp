@@ -1,4 +1,5 @@
 ﻿using CarRepairShopApp.Model;
+using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,8 +14,14 @@ namespace CarRepairShopApp.View
         public AddContractToCustomerWindow()
         {
             InitializeComponent();
-            CustomerGrid.ItemsSource = Manager.Context.Client.ToList();
+
+            UpdateDataGrids();
+        }
+
+        private void UpdateDataGrids()
+        {
             ContractsOfCustomersGrid.ItemsSource = Manager.CurrentContract.Client.ToList();
+            CustomerGrid.ItemsSource = Manager.Context.Client.ToList().Except(Manager.CurrentContract.Client).ToList();
         }
 
         private void BtnAddSelectedClientsToContract_Click(object sender, RoutedEventArgs e)
@@ -23,7 +30,7 @@ namespace CarRepairShopApp.View
             {
                 Manager.CurrentContract.Client.Add(client);
             }
-            ContractsOfCustomersGrid.ItemsSource = Manager.CurrentContract.Client.ToList();
+            UpdateDataGrids();
         }
 
         private void CustomerGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -54,8 +61,8 @@ namespace CarRepairShopApp.View
             {
                 Manager.CurrentContract.Client.Remove(client);
             }
-            ContractsOfCustomersGrid.ItemsSource = Manager.CurrentContract.Client.ToList();
             BtnDeleteCustomerFromContract.IsEnabled = false;
+            UpdateDataGrids();
         }
     }
 }
