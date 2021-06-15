@@ -26,10 +26,10 @@ namespace CarRepairShopApp.Model
         public int ST_ID { get; set; }
         public System.DateTime O_CREATEDATE { get; set; }
         public bool O_ISCHECKED { get; set; }
-        public int A_ID { get; set; }
+        public int T_ID { get; set; }
     
-        public virtual Auto Auto { get; set; }
         public virtual Status Status { get; set; }
+        public virtual TypeOfCar TypeOfCar { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Client> Client { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

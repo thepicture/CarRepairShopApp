@@ -84,7 +84,7 @@
           <Property Name="ST_ID" Type="int" Nullable="false" />
           <Property Name="O_CREATEDATE" Type="date" Nullable="false" />
           <Property Name="O_ISCHECKED" Type="bit" Nullable="false" />
-          <Property Name="A_ID" Type="int" Nullable="false" />
+          <Property Name="T_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderOfClient">
           <Key>
@@ -291,18 +291,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Order_Auto">
-          <End Role="Auto" Type="Self.Auto" Multiplicity="1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Auto">
-              <PropertyRef Name="A_ID" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="A_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Order_Status">
           <End Role="Status" Type="Self.Status" Multiplicity="1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
@@ -312,6 +300,18 @@
             </Principal>
             <Dependent Role="Order">
               <PropertyRef Name="ST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_TypeOfCar">
+          <End Role="TypeOfCar" Type="Self.TypeOfCar" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfCar">
+              <PropertyRef Name="T_ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="T_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -356,7 +356,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderOfMaster_Order">
-          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="OrderOfMaster" Type="Self.OrderOfMaster" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Order">
@@ -519,12 +521,12 @@
             <End Role="TypeOfCar" EntitySet="TypeOfCar" />
             <End Role="ModelOfClient" EntitySet="ModelOfClient" />
           </AssociationSet>
-          <AssociationSet Name="FK_Order_Auto" Association="Self.FK_Order_Auto">
-            <End Role="Auto" EntitySet="Auto" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
           <AssociationSet Name="FK_Order_Status" Association="Self.FK_Order_Status">
             <End Role="Status" EntitySet="Status" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_TypeOfCar" Association="Self.FK_Order_TypeOfCar">
+            <End Role="TypeOfCar" EntitySet="TypeOfCar" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderOfClient_Client" Association="Self.FK_OrderOfClient_Client">
@@ -589,7 +591,6 @@
           <Property Name="A_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="A_PHOTO" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="A_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_Order_Auto" FromRole="Auto" ToRole="Order" />
           <NavigationProperty Name="TypeOfCar" Relationship="Self.FK_TypeOfCar_Auto" FromRole="Auto" ToRole="TypeOfCar" />
           <NavigationProperty Name="Master" Relationship="Self.AutoOfMaster" FromRole="Auto" ToRole="Master" />
         </EntityType>
@@ -640,9 +641,9 @@
           <Property Name="ST_ID" Type="Int32" Nullable="false" />
           <Property Name="O_CREATEDATE" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="O_ISCHECKED" Type="Boolean" Nullable="false" />
-          <Property Name="A_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Auto" Relationship="Self.FK_Order_Auto" FromRole="Order" ToRole="Auto" />
+          <Property Name="T_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Status" Relationship="Self.FK_Order_Status" FromRole="Order" ToRole="Status" />
+          <NavigationProperty Name="TypeOfCar" Relationship="Self.FK_Order_TypeOfCar" FromRole="Order" ToRole="TypeOfCar" />
           <NavigationProperty Name="Client" Relationship="Self.OrderOfClient" FromRole="Order" ToRole="Client" />
           <NavigationProperty Name="Master" Relationship="Self.OrderOfMaster" FromRole="Order" ToRole="Master" />
           <NavigationProperty Name="Service" Relationship="Self.ServiceOfOrder" FromRole="Order" ToRole="Service" />
@@ -722,6 +723,7 @@
           <Property Name="A_ID" Type="Int32" Nullable="false" />
           <Property Name="T_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Auto" Relationship="Self.FK_TypeOfCar_Auto" FromRole="TypeOfCar" ToRole="Auto" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Order_TypeOfCar" FromRole="TypeOfCar" ToRole="Order" />
           <NavigationProperty Name="ServiceOfModel" Relationship="Self.FK_ServiceOfModel_TypeOfCar" FromRole="TypeOfCar" ToRole="ServiceOfModel" />
           <NavigationProperty Name="Client" Relationship="Self.ModelOfClient" FromRole="TypeOfCar" ToRole="Client" />
         </EntityType>
@@ -737,18 +739,6 @@
           <Property Name="USER_PHOTO" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
         </EntityType>
-        <Association Name="FK_Order_Auto">
-          <End Role="Auto" Type="Self.Auto" Multiplicity="1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Auto">
-              <PropertyRef Name="A_ID" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="A_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TypeOfCar_Auto">
           <End Role="Auto" Type="Self.Auto" Multiplicity="1" />
           <End Role="TypeOfCar" Type="Self.TypeOfCar" Multiplicity="*" />
@@ -784,6 +774,18 @@
             </Principal>
             <Dependent Role="Order">
               <PropertyRef Name="ST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_TypeOfCar">
+          <End Role="TypeOfCar" Type="Self.TypeOfCar" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfCar">
+              <PropertyRef Name="T_ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="T_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -878,10 +880,6 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="TypeOfCar" EntityType="Self.TypeOfCar" />
           <EntitySet Name="User" EntityType="Self.User" />
-          <AssociationSet Name="FK_Order_Auto" Association="Self.FK_Order_Auto">
-            <End Role="Auto" EntitySet="Auto" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
           <AssociationSet Name="FK_TypeOfCar_Auto" Association="Self.FK_TypeOfCar_Auto">
             <End Role="Auto" EntitySet="Auto" />
             <End Role="TypeOfCar" EntitySet="TypeOfCar" />
@@ -892,6 +890,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Order_Status" Association="Self.FK_Order_Status">
             <End Role="Status" EntitySet="Status" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_TypeOfCar" Association="Self.FK_Order_TypeOfCar">
+            <End Role="TypeOfCar" EntitySet="TypeOfCar" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
           <AssociationSet Name="FK_PhotoOfService_Service" Association="Self.FK_PhotoOfService_Service">
@@ -995,7 +997,7 @@
                 <ScalarProperty Name="ST_ID" ColumnName="ST_ID" />
                 <ScalarProperty Name="O_CREATEDATE" ColumnName="O_CREATEDATE" />
                 <ScalarProperty Name="O_ISCHECKED" ColumnName="O_ISCHECKED" />
-                <ScalarProperty Name="A_ID" ColumnName="A_ID" />
+                <ScalarProperty Name="T_ID" ColumnName="T_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

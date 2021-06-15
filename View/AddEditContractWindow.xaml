@@ -10,9 +10,9 @@
         Width="400"
         MinHeight="350"
         MinWidth="400"
-        WindowStartupLocation="CenterScreen">
-    <Grid Background="WhiteSmoke"
-          Name="MainGrid">
+        WindowStartupLocation="CenterScreen"
+        Background="WhiteSmoke">
+    <Grid>
         <Grid MouseMove="Grid_MouseMove"
               MouseLeave="Grid_MouseLeave"
               HorizontalAlignment="Center">

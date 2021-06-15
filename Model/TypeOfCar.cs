@@ -17,6 +17,7 @@ namespace CarRepairShopApp.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TypeOfCar()
         {
+            this.Order = new HashSet<Order>();
             this.ServiceOfModel = new HashSet<ServiceOfModel>();
             this.Client = new HashSet<Client>();
         }
@@ -26,6 +27,8 @@ namespace CarRepairShopApp.Model
         public string T_NAME { get; set; }
     
         public virtual Auto Auto { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Order { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ServiceOfModel> ServiceOfModel { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

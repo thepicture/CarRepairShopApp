@@ -10,119 +10,112 @@
         Width="600"
         MinWidth="600"
         MinHeight="450"
-        WindowStartupLocation="CenterScreen">
-    <Grid Background="WhiteSmoke"
-          Name="MainGrid">
-        <Grid MouseMove="MainGrid_MouseMove"
-              MouseLeave="MainGrid_MouseLeave"
-              HorizontalAlignment="Center">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-            <!--View for adding or editing services.-->
-            <StackPanel VerticalAlignment="Center"
+        WindowStartupLocation="CenterScreen"
+        Background="WhiteSmoke">
+    <Grid MouseMove="MainGrid_MouseMove"
+          MouseLeave="MainGrid_MouseLeave">
+        <!--View for adding or editing services.-->
+        <StackPanel VerticalAlignment="Center"
                     Name="LoginPanel"
                     Grid.Column="1">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="ФИО"
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="ФИО"
                            Style="{StaticResource CommonBlock}"
                            Grid.Column="0"></TextBlock>
-                    <TextBox Name="MasterNameBox"
-                             Text="{Binding M_NAME}"
-                             Grid.Column="1"
-                             MaxLength="100"></TextBox>
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="Опыт работы в годах"
+                <TextBox Name="MasterNameBox"
+                         Text="{Binding M_NAME}"
+                         Grid.Column="1"
+                         MaxLength="100"></TextBox>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Опыт работы в годах"
                            Style="{StaticResource CommonBlock}"
                            Grid.Column="0"></TextBlock>
-                    <TextBox Name="MasterExperienceBox"
+                <TextBox Name="MasterExperienceBox"
                              Text="{Binding M_EXPERIENCE}"
                              Grid.Column="1"
                              Width="30"
                              HorizontalAlignment="Left"
                              MaxLength="100"></TextBox>
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="Номер паспорта"
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Номер паспорта"
                            Style="{StaticResource CommonBlock}"
                            Grid.Column="0"></TextBlock>
-                    <StackPanel Orientation="Horizontal"
+                <StackPanel Orientation="Horizontal"
                                 Grid.Column="1">
-                        <TextBox Name="MasterPassNumBox"
+                    <TextBox Name="MasterPassNumBox"
                              Text="{Binding M_PASSNUM}"
                              Grid.Column="1"
                              Width="33"
                              MaxLength="4"></TextBox>
-                        <TextBlock Text="Код паспорта"
+                    <TextBlock Text="Код паспорта"
                            Style="{StaticResource CommonBlock}"
                            Grid.Column="2"></TextBlock>
-                        <TextBox Name="MasterPassCodeBox"
+                    <TextBox Name="MasterPassCodeBox"
                              Text="{Binding M_PASSCODE}"
                              Grid.Column="3"
                              Width="45"
                              MaxLength="6"></TextBox>
-                    </StackPanel>
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="Аватар"
+                </StackPanel>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Аватар"
                            Style="{StaticResource CommonBlock}"
                            Grid.Column="0"></TextBlock>
-                    <Grid Grid.Column="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <!--Photo of the master.-->
-                        <Image Stretch="UniformToFill"
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <!--Photo of the master.-->
+                    <Image Stretch="UniformToFill"
                                            Name="MasterPhoto"
                                            Margin="5"
                                            Width="100"
                                            Height="100">
-                            <Image.Source>
-                                <Binding Path="M_PHOTO">
-                                    <Binding.TargetNullValue>
-                                        <ImageSource>pack://application:,,,/Resources/user_picture.png</ImageSource>
-                                    </Binding.TargetNullValue>
-                                </Binding>
-                            </Image.Source>
-                        </Image>
-                        <Button Name="BtnAddMasterPhoto"
+                        <Image.Source>
+                            <Binding Path="M_PHOTO">
+                                <Binding.TargetNullValue>
+                                    <ImageSource>pack://application:,,,/Resources/user_picture.png</ImageSource>
+                                </Binding.TargetNullValue>
+                            </Binding>
+                        </Image.Source>
+                    </Image>
+                    <Button Name="BtnAddMasterPhoto"
                              Grid.Row="1"
                              Content="Прикрепить аватар"
                              Click="BtnAddMasterPhoto_Click"></Button>
-                    </Grid>
                 </Grid>
-                <Button Name="BtnSaveMaster"
+            </Grid>
+            <Button Name="BtnSaveMaster"
                     Content="Сохранить изменения"
                     Click="BtnSaveMaster_Click"></Button>
-            </StackPanel>
-            <!--StatusBar for MainWindow-->
-            <DockPanel VerticalAlignment="Bottom" Grid.ColumnSpan="2">
-                <StatusBar DockPanel.Dock="Bottom">
-                    <StatusBarItem>
-                        <TextBlock Name="ButtonName"/>
-                    </StatusBarItem>
-                </StatusBar>
-            </DockPanel>
-        </Grid>
+        </StackPanel>
+        <!--StatusBar for MainWindow-->
+        <DockPanel VerticalAlignment="Bottom" Grid.ColumnSpan="2">
+            <StatusBar DockPanel.Dock="Bottom">
+                <StatusBarItem>
+                    <TextBlock Name="ButtonName"/>
+                </StatusBarItem>
+            </StatusBar>
+        </DockPanel>
         <Button Content="Отмена"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"

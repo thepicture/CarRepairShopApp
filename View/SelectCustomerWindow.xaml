@@ -10,8 +10,9 @@
         Width="800"
         MinHeight="250"
         MinWidth="600"
-        WindowStartupLocation="CenterScreen">
-    <Grid Background="WhiteSmoke">
+        WindowStartupLocation="CenterScreen"
+        Background="WhiteSmoke">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
