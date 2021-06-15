@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Auto">
           <Key>
             <PropertyRef Name="A_ID" />
@@ -13,6 +13,7 @@
           <Property Name="CL_ID" Type="int" Nullable="false" />
           <Property Name="A_NAME" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="A_PHOTO" Type="varbinary(max)" />
+          <Property Name="A_TYPE" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="AutoOfMaster">
           <Key>
@@ -67,6 +68,14 @@
           <Property Name="M_PASSNUM" Type="int" Nullable="false" />
           <Property Name="M_PASSCODE" Type="int" Nullable="false" />
           <Property Name="M_PHOTO" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="ModelOfClient">
+          <Key>
+            <PropertyRef Name="T_ID" />
+            <PropertyRef Name="CL_ID" />
+          </Key>
+          <Property Name="T_ID" Type="int" Nullable="false" />
+          <Property Name="CL_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -262,6 +271,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ModelOfClient_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="ModelOfClient" Type="Self.ModelOfClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="CL_ID" />
+            </Principal>
+            <Dependent Role="ModelOfClient">
+              <PropertyRef Name="CL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ModelOfClient_TypeOfCar">
+          <End Role="TypeOfCar" Type="Self.TypeOfCar" Multiplicity="1" />
+          <End Role="ModelOfClient" Type="Self.ModelOfClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfCar">
+              <PropertyRef Name="T_ID" />
+            </Principal>
+            <Dependent Role="ModelOfClient">
+              <PropertyRef Name="T_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Order_Auto">
           <End Role="Auto" Type="Self.Auto" Multiplicity="1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
@@ -438,6 +471,7 @@
           <EntitySet Name="ContractOfClient" EntityType="Self.ContractOfClient" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContractOfMaster" EntityType="Self.ContractOfMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Master" EntityType="Self.Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModelOfClient" EntityType="Self.ModelOfClient" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderOfClient" EntityType="Self.OrderOfClient" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderOfMaster" EntityType="Self.OrderOfMaster" Schema="dbo" store:Type="Tables" />
@@ -478,6 +512,14 @@
           <AssociationSet Name="FK_ContractOfMaster_Master" Association="Self.FK_ContractOfMaster_Master">
             <End Role="Master" EntitySet="Master" />
             <End Role="ContractOfMaster" EntitySet="ContractOfMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModelOfClient_Client" Association="Self.FK_ModelOfClient_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="ModelOfClient" EntitySet="ModelOfClient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModelOfClient_TypeOfCar" Association="Self.FK_ModelOfClient_TypeOfCar">
+            <End Role="TypeOfCar" EntitySet="TypeOfCar" />
+            <End Role="ModelOfClient" EntitySet="ModelOfClient" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_Auto" Association="Self.FK_Order_Auto">
             <End Role="Auto" EntitySet="Auto" />
@@ -536,8 +578,7 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -553,6 +594,7 @@
           <NavigationProperty Name="Order" Relationship="Self.FK_Order_Auto" FromRole="Auto" ToRole="Order" />
           <NavigationProperty Name="TypeOfCar" Relationship="Self.FK_TypeOfCar_Auto" FromRole="Auto" ToRole="TypeOfCar" />
           <NavigationProperty Name="Master" Relationship="Self.AutoOfMaster" FromRole="Auto" ToRole="Master" />
+          <Property Name="A_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Client">
           <Key>
@@ -567,6 +609,7 @@
           <NavigationProperty Name="Phone" Relationship="Self.FK_Phone_Client" FromRole="Client" ToRole="Phone" />
           <NavigationProperty Name="Contract" Relationship="Self.ContractOfClient" FromRole="Client" ToRole="Contract" />
           <NavigationProperty Name="Order" Relationship="Self.OrderOfClient" FromRole="Client" ToRole="Order" />
+          <NavigationProperty Name="TypeOfCar" Relationship="BaseModel.ModelOfClient" FromRole="Client" ToRole="TypeOfCar" />
         </EntityType>
         <EntityType Name="Contract">
           <Key>
@@ -683,6 +726,7 @@
           <Property Name="T_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Auto" Relationship="Self.FK_TypeOfCar_Auto" FromRole="TypeOfCar" ToRole="Auto" />
           <NavigationProperty Name="ServiceOfModel" Relationship="Self.FK_ServiceOfModel_TypeOfCar" FromRole="TypeOfCar" ToRole="ServiceOfModel" />
+          <NavigationProperty Name="Client" Relationship="BaseModel.ModelOfClient" FromRole="TypeOfCar" ToRole="Client" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -903,7 +947,15 @@
             <End Role="Order" EntitySet="Order" />
             <End Role="Service" EntitySet="Service" />
           </AssociationSet>
+          <AssociationSet Name="ModelOfClient" Association="BaseModel.ModelOfClient">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="TypeOfCar" EntitySet="TypeOfCar" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="ModelOfClient">
+          <End Type="BaseModel.Client" Role="Client" Multiplicity="*" />
+          <End Type="BaseModel.TypeOfCar" Role="TypeOfCar" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -913,6 +965,7 @@
           <EntitySetMapping Name="Auto">
             <EntityTypeMapping TypeName="BaseModel.Auto">
               <MappingFragment StoreEntitySet="Auto">
+                <ScalarProperty Name="A_TYPE" ColumnName="A_TYPE" />
                 <ScalarProperty Name="A_ID" ColumnName="A_ID" />
                 <ScalarProperty Name="CL_ID" ColumnName="CL_ID" />
                 <ScalarProperty Name="A_NAME" ColumnName="A_NAME" />
@@ -1094,6 +1147,14 @@
             </EndProperty>
             <EndProperty Name="Service">
               <ScalarProperty Name="SE_ID" ColumnName="SE_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ModelOfClient" TypeName="BaseModel.ModelOfClient" StoreEntitySet="ModelOfClient">
+            <EndProperty Name="TypeOfCar">
+              <ScalarProperty Name="T_ID" ColumnName="T_ID" />
+            </EndProperty>
+            <EndProperty Name="Client">
+              <ScalarProperty Name="CL_ID" ColumnName="CL_ID" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

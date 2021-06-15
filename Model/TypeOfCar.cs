@@ -18,6 +18,7 @@ namespace CarRepairShopApp.Model
         public TypeOfCar()
         {
             this.ServiceOfModel = new HashSet<ServiceOfModel>();
+            this.Client = new HashSet<Client>();
         }
     
         public int T_ID { get; set; }
@@ -27,5 +28,7 @@ namespace CarRepairShopApp.Model
         public virtual Auto Auto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ServiceOfModel> ServiceOfModel { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Client> Client { get; set; }
     }
 }

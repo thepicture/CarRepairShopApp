@@ -21,6 +21,7 @@ namespace CarRepairShopApp.Model
             this.Phone = new HashSet<Phone>();
             this.Contract = new HashSet<Contract>();
             this.Order = new HashSet<Order>();
+            this.TypeOfCar = new HashSet<TypeOfCar>();
         }
     
         public int CL_ID { get; set; }
@@ -37,5 +38,7 @@ namespace CarRepairShopApp.Model
         public virtual ICollection<Contract> Contract { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Order { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TypeOfCar> TypeOfCar { get; set; }
     }
 }

@@ -34,6 +34,7 @@
         <AssociationConnector Association="BaseModel.OrderOfClient" ManuallyRouted="false" />
         <AssociationConnector Association="BaseModel.OrderOfMaster" ManuallyRouted="false" />
         <AssociationConnector Association="BaseModel.ServiceOfOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseModel.ModelOfClient" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

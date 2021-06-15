@@ -8,6 +8,8 @@
         Title="AddEditCustomerCarWindow"
         Height="450"
         Width="800"
+        MinHeight="350"
+        MinWidth="700"
         WindowStartupLocation="CenterScreen"
         Background="WhiteSmoke">
     <Grid>
@@ -39,7 +41,7 @@
                           Margin="5">
                     <StackPanel>
                         <ComboBox Name="ComboModel"
-                                  DisplayMemberPath="T_NAME"></ComboBox>
+                                  DisplayMemberPath="A_NAME"></ComboBox>
                         <TextBox Name="ModelName"
                                  TextChanged="ModelName_TextChanged"
                                  MaxLength="50"></TextBox>
@@ -73,11 +75,30 @@
                   Grid.Row="0">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Автомобиль"
-                                        Binding="{Binding TypeOfCar.Auto.A_NAME}"
+                                        Binding="{Binding Auto.A_NAME}"
                                         Width="*"></DataGridTextColumn>
                         <DataGridTextColumn Header="Модель"
-                                        Binding="{Binding TypeOfCar.T_NAME}"
+                                        Binding="{Binding T_NAME}"
                                         Width="*"></DataGridTextColumn>
+                        <DataGridTemplateColumn Header="Фотография"
+                                        Width="auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Width="100"
+                                           Height="100"
+                                           Stretch="UniformToFill"
+                                           Margin="5">
+                                        <Image.Source>
+                                            <Binding Path="Auto.A_PHOTO">
+                                                <Binding.TargetNullValue>
+                                                    <ImageSource>pack://application:,,,/Resources/wrench.png</ImageSource>
+                                                </Binding.TargetNullValue>
+                                            </Binding>
+                                        </Image.Source>
+                                    </Image>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </GroupBox>
