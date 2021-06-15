@@ -66,14 +66,14 @@
                         <MenuItem Header="Клиенты">
                             <MenuItem Header="Добавить"
                                   Name="AddCustomerItem"
-                                  Click="AddCustomerItem_Click"></MenuItem>
+                                  Click="BtnAddCustomer_Click"></MenuItem>
                             <MenuItem Header="Изменить данные"
                                   Name="EditCustomerItem"
-                                  Click="EditCustomerItem_Click"
+                                  Click="BtnEditCustomer_Click"
                                   IsEnabled="False"></MenuItem>
                             <MenuItem Header="Удалить"
                                   Name="DeleteCustomerItem"
-                                  Click="DeleteCustomerItem_Click"
+                                  Click="BtnDeleteCustomer_Click"
                                   IsEnabled="False"></MenuItem>
                         </MenuItem>
                     </MenuItem>
@@ -289,7 +289,7 @@
                                         Binding="{Binding CL_PASSCODE}"
                                         Width="*"></DataGridTextColumn>
                                     <DataGridTemplateColumn Header="Фотография"
-                                                    Width="*">
+                                                    Width="auto">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <Image Width="100"

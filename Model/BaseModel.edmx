@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="BaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="BaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Auto">
           <Key>
             <PropertyRef Name="A_ID" />
@@ -536,7 +536,8 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -549,9 +550,9 @@
           <Property Name="A_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="A_PHOTO" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Client" Relationship="Self.FK_Auto_Client" FromRole="Auto" ToRole="Client" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Order_Auto" FromRole="Auto" ToRole="Order" />
           <NavigationProperty Name="TypeOfCar" Relationship="Self.FK_TypeOfCar_Auto" FromRole="Auto" ToRole="TypeOfCar" />
           <NavigationProperty Name="Master" Relationship="Self.AutoOfMaster" FromRole="Auto" ToRole="Master" />
-          <NavigationProperty Name="Order" Relationship="BaseModel.FK_Order_Auto" FromRole="Auto" ToRole="Order" />
         </EntityType>
         <EntityType Name="Client">
           <Key>
@@ -574,9 +575,9 @@
           <Property Name="CO_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CO_ISCHECKED" Type="Boolean" Nullable="false" />
           <Property Name="CO_IMAGESCAN" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="CO_DATE" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Client" Relationship="Self.ContractOfClient" FromRole="Contract" ToRole="Client" />
           <NavigationProperty Name="Master" Relationship="Self.ContractOfMaster" FromRole="Contract" ToRole="Master" />
-          <Property Name="CO_DATE" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Master">
           <Key>
@@ -600,12 +601,12 @@
           <Property Name="ST_ID" Type="Int32" Nullable="false" />
           <Property Name="O_CREATEDATE" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="O_ISCHECKED" Type="Boolean" Nullable="false" />
+          <Property Name="A_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Auto" Relationship="Self.FK_Order_Auto" FromRole="Order" ToRole="Auto" />
           <NavigationProperty Name="Status" Relationship="Self.FK_Order_Status" FromRole="Order" ToRole="Status" />
           <NavigationProperty Name="Client" Relationship="Self.OrderOfClient" FromRole="Order" ToRole="Client" />
           <NavigationProperty Name="Master" Relationship="Self.OrderOfMaster" FromRole="Order" ToRole="Master" />
           <NavigationProperty Name="Service" Relationship="Self.ServiceOfOrder" FromRole="Order" ToRole="Service" />
-          <Property Name="A_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Auto" Relationship="BaseModel.FK_Order_Auto" FromRole="Order" ToRole="Auto" />
         </EntityType>
         <EntityType Name="Phone">
           <Key>
@@ -704,6 +705,18 @@
             </Principal>
             <Dependent Role="Auto">
               <PropertyRef Name="CL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Auto">
+          <End Role="Auto" Type="Self.Auto" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Auto">
+              <PropertyRef Name="A_ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="A_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -834,6 +847,10 @@
             <End Role="Client" EntitySet="Client" />
             <End Role="Auto" EntitySet="Auto" />
           </AssociationSet>
+          <AssociationSet Name="FK_Order_Auto" Association="Self.FK_Order_Auto">
+            <End Role="Auto" EntitySet="Auto" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
           <AssociationSet Name="FK_TypeOfCar_Auto" Association="Self.FK_TypeOfCar_Auto">
             <End Role="Auto" EntitySet="Auto" />
             <End Role="TypeOfCar" EntitySet="TypeOfCar" />
@@ -886,23 +903,7 @@
             <End Role="Order" EntitySet="Order" />
             <End Role="Service" EntitySet="Service" />
           </AssociationSet>
-          <AssociationSet Name="FK_Order_Auto" Association="BaseModel.FK_Order_Auto">
-            <End Role="Auto" EntitySet="Auto" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
         </EntityContainer>
-        <Association Name="FK_Order_Auto">
-          <End Type="BaseModel.Auto" Role="Auto" Multiplicity="1" />
-          <End Type="BaseModel.Order" Role="Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Auto">
-              <PropertyRef Name="A_ID" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="A_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -933,10 +934,10 @@
           <EntitySetMapping Name="Contract">
             <EntityTypeMapping TypeName="BaseModel.Contract">
               <MappingFragment StoreEntitySet="Contract">
-                <ScalarProperty Name="CO_DATE" ColumnName="CO_DATE" />
                 <ScalarProperty Name="CO_ID" ColumnName="CO_ID" />
                 <ScalarProperty Name="CO_ISCHECKED" ColumnName="CO_ISCHECKED" />
                 <ScalarProperty Name="CO_IMAGESCAN" ColumnName="CO_IMAGESCAN" />
+                <ScalarProperty Name="CO_DATE" ColumnName="CO_DATE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -955,11 +956,11 @@
           <EntitySetMapping Name="Order">
             <EntityTypeMapping TypeName="BaseModel.Order">
               <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="A_ID" ColumnName="A_ID" />
                 <ScalarProperty Name="O_ID" ColumnName="O_ID" />
                 <ScalarProperty Name="ST_ID" ColumnName="ST_ID" />
                 <ScalarProperty Name="O_CREATEDATE" ColumnName="O_CREATEDATE" />
                 <ScalarProperty Name="O_ISCHECKED" ColumnName="O_ISCHECKED" />
+                <ScalarProperty Name="A_ID" ColumnName="A_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

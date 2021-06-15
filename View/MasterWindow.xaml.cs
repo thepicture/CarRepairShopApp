@@ -91,21 +91,6 @@ namespace CarRepairShopApp.View
             Close();
         }
 
-        private void AddCustomerItem_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void EditCustomerItem_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void DeleteCustomerItem_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void CustomersReportForm_Click(object sender, RoutedEventArgs e)
         {
 
@@ -331,12 +316,52 @@ namespace CarRepairShopApp.View
 
         private void BtnDeleteCustomer_Click(object sender, RoutedEventArgs e)
         {
-
+            List<Client> clients = CustomersGrid.SelectedItems.Cast<Client>().ToList();
+            if (clients.Count() > 0)
+            {
+                if (MessageBox.Show("Внимание! Будет безвозвратно удалено следующее число данных о клиентах: "
+                    + clients.Count() + $".\n" +
+                    $"Нажмите \"Да\", если вы действительно хотите безвозвратно удалить выбранные данные о клиентах.",
+                    "Подтверждение отмены",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    foreach (Client client in clients)
+                    {
+                        client.Auto.Clear();
+                        client.Phone.Clear();
+                    }
+                    Manager.Context.Client.RemoveRange(clients);
+                    try
+                    {
+                        Manager.Context.SaveChanges();
+                        UpdateEntries();
+                        BtnEditCustomer.IsEnabled = EditCustomerItem.IsEnabled = false;
+                        BtnDeleteCustomer.IsEnabled = DeleteCustomerItem.IsEnabled = false;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Отмена неуспешна! Пожалуйста, попробуйте ещё раз." +
+                            "\nОшибка: "
+                            + ex.Message, "Ошибка отмены",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Error);
+                    }
+                }
+            }
         }
 
         private void CustomersGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if (CustomersGrid.SelectedItems.Count != 1)
+            {
+                BtnEditCustomer.IsEnabled = EditCustomerItem.IsEnabled = false;
+            }
+            else
+            {
+                BtnEditCustomer.IsEnabled = EditCustomerItem.IsEnabled = true;
+            }
+            BtnDeleteCustomer.IsEnabled = DeleteCustomerItem.IsEnabled = true;
         }
     }
 }

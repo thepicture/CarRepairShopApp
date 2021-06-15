@@ -1,6 +1,9 @@
 ﻿using CarRepairShopApp.Model;
 using CarRepairShopApp.ViewModel;
+using System;
+using System.Text;
 using System.Windows;
+using System.Windows.Input;
 
 namespace CarRepairShopApp.View
 {
@@ -27,6 +30,69 @@ namespace CarRepairShopApp.View
                 _currentCustomer.CL_PHOTO = PhotoGetter.ImageInBytes;
                 CustomerPhoto.Source = PhotoGetter.Image;
                 PhotoGetter.SayAllOk();
+            }
+        }
+
+        private void BtnAddCarForCustomer_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnAddCustomerPhoneNumber_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnSaveChanges_Click(object sender, RoutedEventArgs e)
+        {
+            StringBuilder builder = new StringBuilder();
+            if (TBoxPassNum.Text.Length != 4)
+            {
+                builder.AppendLine("Укажите корректную серию паспорта");
+            }
+            if (TBoxPassCode.Text.Length != 6)
+            {
+                builder.AppendLine("Укажите корректный номер паспорта");
+            }
+            if (!RegexHelper.NameRegex.IsMatch(TBoxCustomerName.Text))
+            {
+                builder.AppendLine("Укажите корректное ФИО клиента");
+            }
+            if (builder.Length > 0)
+            {
+                MessageBox.Show(builder.ToString(),
+                    Title + " неуспешно",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+                return;
+            }
+            if (_currentCustomer.CL_ID.Equals(0))
+            {
+                Manager.Context.Client.Add(_currentCustomer);
+            }
+            try
+            {
+                Manager.Context.SaveChanges();
+                MessageBox.Show("Данные о клиенте "
+                    + _currentCustomer.CL_NAME
+                    + " успешно сохранены!",
+                    "Успешно!",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(Title + " неуспешно! " + ex.Message);
+            }
+        }
+
+        private void CheckPassportNumbers(object sender, KeyEventArgs e)
+        {
+            if ((!(e.Key >= Key.D0) || !(e.Key <= Key.D9)) && (e.Key != Key.Tab))
+            {
+                e.Handled = true;
+                System.Media.SystemSounds.Asterisk.Play();
             }
         }
     }

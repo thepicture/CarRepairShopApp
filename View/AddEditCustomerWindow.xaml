@@ -5,13 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarRepairShopApp.View"
         mc:Ignorable="d"
-        Title="AddEditCustomerWindow" Height="450" Width="800">
-    <Grid>
+        Title="AddEditCustomerWindow"
+        Height="450"
+        Width="800"
+        WindowStartupLocation="CenterScreen">
+    <Grid VerticalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
@@ -21,14 +26,16 @@
         </Grid.ColumnDefinitions>
         <TextBlock Text="ФИО"
                    Style="{StaticResource CommonBlock}"
-                   VerticalAlignment="Center"></TextBlock>
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Right"></TextBlock>
         <TextBox Style="{StaticResource CommonBox}"
                  Width="200"
                  Grid.Column="1"
                  VerticalAlignment="Center"
                  HorizontalAlignment="Left"
                  MaxLength="100"
-                 Text="{Binding CL_NAME}"></TextBox>
+                 Text="{Binding CL_NAME}"
+                 Name="TBoxCustomerName"></TextBox>
         <TextBlock Text="Серия паспорта"
                    Style="{StaticResource CommonBlock}"
                    VerticalAlignment="Center"
@@ -40,7 +47,9 @@
                  VerticalAlignment="Center"
                  HorizontalAlignment="Left"
                  MaxLength="4"
-                 Text="{Binding CL_PASSNUM}"></TextBox>
+                 KeyDown="CheckPassportNumbers"
+                 Text="{Binding CL_PASSNUM}"
+                 Name="TBoxPassNum"></TextBox>
         <TextBlock Text="Код паспорта"
                    Style="{StaticResource CommonBlock}"
                    VerticalAlignment="Center"
@@ -52,7 +61,9 @@
                  VerticalAlignment="Center"
                  HorizontalAlignment="Left"
                  MaxLength="6"
-                 Text="{Binding CL_PASSCODE}"></TextBox>
+                 KeyDown="CheckPassportNumbers"
+                 Text="{Binding CL_PASSCODE}"
+                 Name="TBoxPassCode"></TextBox>
         <TextBlock Text="Фотография"
                    Style="{StaticResource CommonBlock}"
                    VerticalAlignment="Center"
@@ -65,7 +76,8 @@
                Grid.Row="3"
                Grid.Column="1"
                Margin="5"
-               Name="CustomerPhoto">
+               Name="CustomerPhoto"
+               Stretch="UniformToFill">
             <Image.Source>
                 <Binding Path="CL_PHOTO">
                     <Binding.TargetNullValue>
@@ -75,8 +87,42 @@
             </Image.Source>
         </Image>
             <Button Content="Прикрепить фотографию ..."
+                    Width="200"
                     Name="AttachCustomerPhoto"
                     Click="AttachCustomerPhoto_Click"></Button>
         </StackPanel>
+        <TextBlock Text="Список автомобилей"
+                   Style="{StaticResource CommonBlock}"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Right"
+                   Grid.Row="4"></TextBlock>
+        <Button Width="200"
+                Grid.Row="4"
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                Content="Добавить автомобили..."
+                HorizontalAlignment="Left"
+                Name="BtnAddCarForCustomer"
+                Click="BtnAddCarForCustomer_Click"></Button>
+        <TextBlock Text="Список телефонов"
+                   Style="{StaticResource CommonBlock}"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Right"
+                   Grid.Row="5"></TextBlock>
+        <Button Width="200"
+                Grid.Row="5"
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                Content="Добавить телефон..."
+                HorizontalAlignment="Left"
+                Name="BtnAddCustomerPhoneNumber"
+                Click="BtnAddCustomerPhoneNumber_Click"></Button>
+        <Button Grid.ColumnSpan="2"
+                Grid.Row="6"
+                Content="Сохранить изменения"
+                Width="410"
+                HorizontalAlignment="Center"
+                Name="BtnSaveChanges"
+                Click="BtnSaveChanges_Click"></Button>
     </Grid>
 </Window>

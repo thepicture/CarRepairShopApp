@@ -4,22 +4,23 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="871ffc07da6f43078b8723c6d4d2ce01" Name="Diagram1">
-        <EntityTypeShape EntityType="BaseModel.Auto" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="BaseModel.Client" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="BaseModel.Contract" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="BaseModel.Master" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="BaseModel.Order" Width="1.5" PointX="7.5" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="BaseModel.Phone" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BaseModel.PhotoOfService" Width="1.5" PointX="12" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="BaseModel.Role" Width="1.5" PointX="5.75" PointY="11.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="BaseModel.Service" Width="1.5" PointX="9.75" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BaseModel.ServiceOfModel" Width="1.5" PointX="7.5" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BaseModel.Status" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BaseModel.sysdiagrams" Width="1.5" PointX="9.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BaseModel.TypeOfCar" Width="1.5" PointX="5.25" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BaseModel.User" Width="1.5" PointX="8" PointY="10.875" IsExpanded="true" />
+      <Diagram DiagramId="89e89e61b1de46d7a8b4f5a3d991abbd" Name="Diagram1">
+        <EntityTypeShape EntityType="BaseModel.Auto" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.Client" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.Contract" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.Master" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.Order" Width="1.5" PointX="7.5" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.Phone" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.PhotoOfService" Width="1.5" PointX="12" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.Role" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.Service" Width="1.5" PointX="9.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.ServiceOfModel" Width="1.5" PointX="12" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.Status" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.TypeOfCar" Width="1.5" PointX="5.25" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.User" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="BaseModel.FK_Auto_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseModel.FK_Order_Auto" ManuallyRouted="false" />
         <AssociationConnector Association="BaseModel.FK_TypeOfCar_Auto" ManuallyRouted="false" />
         <AssociationConnector Association="BaseModel.FK_Phone_Client" ManuallyRouted="false" />
         <AssociationConnector Association="BaseModel.FK_Order_Status" ManuallyRouted="false" />
@@ -33,7 +34,6 @@
         <AssociationConnector Association="BaseModel.OrderOfClient" ManuallyRouted="false" />
         <AssociationConnector Association="BaseModel.OrderOfMaster" ManuallyRouted="false" />
         <AssociationConnector Association="BaseModel.ServiceOfOrder" ManuallyRouted="false" />
-        <AssociationConnector Association="BaseModel.FK_Order_Auto" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
