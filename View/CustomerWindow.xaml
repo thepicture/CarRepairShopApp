@@ -16,6 +16,27 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
+        <Image Grid.Row="2"
+               Source="/Resources/wrench.png"
+               Opacity=".1"
+               RenderTransformOrigin=".5, .5">
+            <Image.RenderTransform>
+                <RotateTransform x:Name="DoNotFreeze"></RotateTransform>
+            </Image.RenderTransform>
+            <Image.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation From="0"
+                                             To="360"
+                                             RepeatBehavior="Forever"
+                                             Duration="0:2:0"
+                                             Storyboard.TargetProperty="(Image.RenderTransform).(RotateTransform.Angle)"></DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Image.Triggers>
+        </Image>
         <Grid Height="100"
               Background="LightBlue">
             <TextBlock Text="Просмотр услуг"
@@ -32,7 +53,8 @@
                     Click="BtnExit_Click"></Button>
         </Grid>
         <Grid Grid.Row="1">
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
                 <TextBlock Text="Наименование услуги"
                            Margin="5"
                            VerticalAlignment="Center"></TextBlock>
@@ -41,17 +63,11 @@
                          TextChanged="UpdateServiceView"
                          Margin="5"
                          VerticalAlignment="Center"></TextBox>
-                <TextBlock Text="Тип автомобиля"
-                           Margin="5"
-                           VerticalAlignment="Center"></TextBlock>
-                <ComboBox Width="200"
-                          Name="ComboCar"
-                          SelectedIndex="0"
-                          VerticalAlignment="Center"
-                          DisplayMemberPath="A_NAME"></ComboBox>
             </StackPanel>
         </Grid>
         <ListView Grid.Row="2"
+                  SelectionChanged="ServicesList_SelectionChanged"
+                  Background="Transparent"
                   Margin="5"
                   Name="ServicesList"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled">
@@ -110,5 +126,30 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Grid Grid.Row="3"
+              Background="LightBlue">
+            <Button Content="Подать заявку на выбранные услуги"
+                    FontSize="20"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Visibility="Hidden"
+                    Background="Yellow"
+                    Name="BtnMakeAnOrder"
+                    Click="BtnMakeAnOrder_Click">
+            </Button>
+            <StackPanel HorizontalAlignment="Left"
+                        Orientation="Horizontal">
+                <TextBlock Text="Мой автомобиль"
+                           FontSize="15"
+                           Margin="5"
+                           VerticalAlignment="Center"></TextBlock>
+                <ComboBox Width="150"
+                          Name="ComboCar"
+                          SelectedIndex="0"
+                          SelectionChanged="ServicesList_SelectionChanged"
+                          VerticalAlignment="Center"
+                          DisplayMemberPath="A_NAME"></ComboBox>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>
