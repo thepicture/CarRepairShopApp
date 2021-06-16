@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace CarRepairShopApp.View
 {
@@ -33,7 +34,12 @@ namespace CarRepairShopApp.View
 
         private void BtnMoreInfo_Click(object sender, RoutedEventArgs e)
         {
-
+            Service service = (sender as Button).DataContext as Service;
+            ServiceInfoWindow infoWindow = new ServiceInfoWindow(service)
+            {
+                Title = "Информация об услуге " + service.SE_NAME
+            };
+            infoWindow.ShowDialog();
         }
 
         private void BtnExit_Click(object sender, RoutedEventArgs e)

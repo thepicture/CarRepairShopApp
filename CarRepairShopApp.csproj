@@ -166,6 +166,9 @@
     <Compile Include="View\SelectCustomerWindow.xaml.cs">
       <DependentUpon>SelectCustomerWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ServiceInfoWindow.xaml.cs">
+      <DependentUpon>ServiceInfoWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\AddContractToCustomerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -250,6 +253,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SelectCustomerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ServiceInfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

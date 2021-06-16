@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:CarRepairShopApp.View"
         mc:Ignorable="d"
         Title="CustomerWindow"
-        Height="450"
+        Height="650"
         Width="1000"
-        MinHeight="250"
+        MinHeight="450"
         MinWidth="1000"
         WindowStartupLocation="CenterScreen">
     <Grid>
@@ -22,6 +22,9 @@
                Source="/Resources/wrench.png"
                Opacity=".1"
                RenderTransformOrigin=".5, .5">
+            <Image.Effect>
+                <BlurEffect></BlurEffect>
+            </Image.Effect>
             <Image.RenderTransform>
                 <RotateTransform x:Name="DoNotFreeze"></RotateTransform>
             </Image.RenderTransform>
@@ -59,11 +62,13 @@
                         HorizontalAlignment="Center">
                 <TextBlock Text="Наименование услуги"
                            Margin="5"
+                           FontSize="15"
                            VerticalAlignment="Center"></TextBlock>
                 <TextBox Width="200"
                          Name="TBoxServiceName"
                          TextChanged="UpdateServiceView"
                          Margin="5"
+                         FontSize="15"
                          VerticalAlignment="Center"></TextBox>
             </StackPanel>
         </Grid>
