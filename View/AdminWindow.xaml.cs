@@ -200,7 +200,12 @@ namespace CarRepairShopApp.View
                MessageBoxImage.Warning)
                 == MessageBoxResult.Yes)
             {
-                Manager.Context.Master.RemoveRange(masters);
+                foreach (Master master in masters)
+                {
+                    //master.Phone.Clear();
+                    master.Order.Clear();
+                    Manager.Context.Entry(master).State = System.Data.Entity.EntityState.Deleted;
+                }
                 try
                 {
                     Manager.Context.SaveChanges();

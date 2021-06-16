@@ -65,10 +65,18 @@ namespace CarRepairShopApp.View
                     MessageBoxImage.Error);
                 return;
             }
-            _currentOrder.Master.Add(new Master
+            Master master = Manager.Context.Master.Where(m => m.M_NAME.Equals(Manager.CurrentUser.USER_NAME)).FirstOrDefault();
+            if (master is null)
             {
-                M_NAME = Manager.CurrentUser.USER_NAME
-            });
+                _currentOrder.Master.Add(new Master
+                {
+                    M_NAME = Manager.CurrentUser.USER_NAME
+                });
+            }
+            else
+            {
+                _currentOrder.Master.Add(master);
+            }
             _currentOrder.TypeOfCar = ComboCar.SelectedItem as TypeOfCar;
             if (_currentOrder.O_ID.Equals(0))
             {
@@ -100,6 +108,21 @@ namespace CarRepairShopApp.View
                 Title = "Выбор услуг в текущий заказ"
             };
             serviceToOrderWindow.ShowDialog();
+        }
+
+        private void BtnDiscardChanges_Click(object sender, RoutedEventArgs e)
+        {
+            if(MessageBox.Show("Точно отменить "
+                + Title
+                + "?",
+                "Внимание",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question)
+                == MessageBoxResult.Yes)
+            {
+                Manager.Context.Entry(_currentOrder).State = System.Data.Entity.EntityState.Unchanged;
+                Close();
+            }
         }
     }
 }

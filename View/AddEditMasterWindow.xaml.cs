@@ -105,6 +105,7 @@ namespace CarRepairShopApp.View
                 MessageBoxImage.Question)
                 == MessageBoxResult.Yes)
             {
+                Manager.Context.Entry(_currentMaster).State = System.Data.Entity.EntityState.Unchanged;
                 Close();
             }
         }

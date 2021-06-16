@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="MasterWindow"
         Height="550"
-        Width="1000"
+        Width="1100"
         MinHeight="350"
-        MinWidth="1000"
+        MinWidth="1100"
         WindowStartupLocation="CenterScreen"
         Closing="MasterWindow_Closing"
         Background="WhiteSmoke">
@@ -237,6 +237,9 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Итог"
+                                        Binding="{Binding GetPrice}"
+                                        Width="*"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

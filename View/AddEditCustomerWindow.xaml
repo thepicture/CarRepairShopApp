@@ -21,18 +21,26 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <Button HorizontalAlignment="Right"
+                Grid.Column="1"
+                Content="Отмена"
+                Name="BtnDiscardChanges"
+                Click="BtnDiscardChanges_Click"></Button>
         <TextBlock Text="ФИО"
+                   Grid.Row="1"
                    Style="{StaticResource CommonBlock}"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Right"></TextBlock>
         <TextBox Style="{StaticResource CommonBox}"
                  Width="200"
                  Grid.Column="1"
+                 Grid.Row="1"
                  VerticalAlignment="Center"
                  HorizontalAlignment="Left"
                  MaxLength="100"
@@ -41,10 +49,10 @@
         <TextBlock Text="Серия паспорта"
                    Style="{StaticResource CommonBlock}"
                    VerticalAlignment="Center"
-                   Grid.Row="1"></TextBlock>
+                   Grid.Row="2"></TextBlock>
         <TextBox Style="{StaticResource CommonBox}"
                  Width="100"
-                 Grid.Row="1"
+                 Grid.Row="2"
                  Grid.Column="1"
                  VerticalAlignment="Center"
                  HorizontalAlignment="Left"
@@ -55,10 +63,10 @@
         <TextBlock Text="Код паспорта"
                    Style="{StaticResource CommonBlock}"
                    VerticalAlignment="Center"
-                   Grid.Row="2"></TextBlock>
+                   Grid.Row="3"></TextBlock>
         <TextBox Style="{StaticResource CommonBox}"
                  Width="100"
-                 Grid.Row="2"
+                 Grid.Row="3"
                  Grid.Column="1"
                  VerticalAlignment="Center"
                  HorizontalAlignment="Left"
@@ -69,13 +77,13 @@
         <TextBlock Text="Фотография"
                    Style="{StaticResource CommonBlock}"
                    VerticalAlignment="Center"
-                   Grid.Row="3"></TextBlock>
-        <StackPanel Grid.Row="3"
+                   Grid.Row="4"></TextBlock>
+        <StackPanel Grid.Row="4"
                     Grid.Column="1"
                     HorizontalAlignment="Left">
         <Image Width="100"
                Height="100"
-               Grid.Row="3"
+               Grid.Row="4"
                Grid.Column="1"
                Margin="5"
                Name="CustomerPhoto"
@@ -97,9 +105,9 @@
                    Style="{StaticResource CommonBlock}"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Right"
-                   Grid.Row="4"></TextBlock>
+                   Grid.Row="5"></TextBlock>
         <Button Width="200"
-                Grid.Row="4"
+                Grid.Row="5"
                 Grid.Column="1"
                 VerticalAlignment="Center"
                 Content="Автомобили ..."
@@ -110,9 +118,9 @@
                    Style="{StaticResource CommonBlock}"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Right"
-                   Grid.Row="5"></TextBlock>
+                   Grid.Row="6"></TextBlock>
         <Button Width="200"
-                Grid.Row="5"
+                Grid.Row="6"
                 Grid.Column="1"
                 VerticalAlignment="Center"
                 Content="Номера телефонов ..."
@@ -120,7 +128,7 @@
                 Name="BtnAddCustomerPhoneNumber"
                 Click="BtnAddCustomerPhoneNumber_Click"></Button>
         <Button Grid.ColumnSpan="2"
-                Grid.Row="6"
+                Grid.Row="7"
                 Content="Сохранить изменения"
                 Width="410"
                 HorizontalAlignment="Center"

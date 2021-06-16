@@ -12,33 +12,39 @@
         MinWidth="400"
         WindowStartupLocation="CenterScreen"
         Background="WhiteSmoke">
-    <Grid HorizontalAlignment="Center"
+    <Grid>
+        <Button Name="BtnDiscardChanges"
+                Content="Отмена"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Click="BtnDiscardChanges_Click"></Button>
+        <Grid HorizontalAlignment="Center"
           VerticalAlignment="Center">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-        </Grid.RowDefinitions>
-        <TextBlock Text="Подтверждён"
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Подтверждён"
                    Style="{StaticResource CommonBlock}"
                    VerticalAlignment="Center"></TextBlock>
-        <CheckBox Margin="5"
+            <CheckBox Margin="5"
                   Grid.Column="1"
                   VerticalAlignment="Center"></CheckBox>
-        <TextBlock Text="Клиент"
+            <TextBlock Text="Клиент"
                    Style="{StaticResource CommonBlock}"
                    VerticalAlignment="Center"
                    Grid.Row="1"></TextBlock>
-        <StackPanel Grid.Row="1"
+            <StackPanel Grid.Row="1"
                     Grid.Column="1">
-        <TextBox Style="{StaticResource CommonBox}"
+                <TextBox Style="{StaticResource CommonBox}"
                  Name="CustomerName"
                  Grid.Column="1"
                  VerticalAlignment="Center"
@@ -46,7 +52,7 @@
                  IsReadOnly="True"
                  Grid.Row="1"
                  Width="150"></TextBox>
-        <Button Content="Выбрать клиента ..."
+                <Button Content="Выбрать клиента ..."
                 Name="BtnSelectCustomer"
                 VerticalAlignment="Bottom"
                 HorizontalAlignment="Left"
@@ -54,32 +60,32 @@
                 Grid.Column="1"
                 Width="150"
                 Click="BtnSelectCustomer_Click"></Button>
-        </StackPanel>
-        <TextBlock Text="Автомобиль"
+            </StackPanel>
+            <TextBlock Text="Автомобиль"
                    Style="{StaticResource CommonBlock}"
                    VerticalAlignment="Center"
                    Grid.Row="2"></TextBlock>
-        <ComboBox Grid.Column="1"
+            <ComboBox Grid.Column="1"
                   Name="ComboCar"
                   IsReadOnly="True"
                   DisplayMemberPath="T_NAME"
                   Grid.Row="2"></ComboBox>
-        <TextBlock Text="Механик"
+            <TextBlock Text="Механик"
                    Style="{StaticResource CommonBlock}"
                    VerticalAlignment="Center"
                    Grid.Row="3"></TextBlock>
-        <TextBox Style="{StaticResource CommonBox}"
+            <TextBox Style="{StaticResource CommonBox}"
                  Name="TBoxMasterName"
                  Grid.Column="1"
                  IsReadOnly="True"
                  VerticalAlignment="Center"
                  Grid.Row="3"
                  Width="auto"></TextBox>
-        <TextBlock Text="Услуги"
+            <TextBlock Text="Услуги"
                    Style="{StaticResource CommonBlock}"
                    VerticalAlignment="Center"
                    Grid.Row="4"></TextBlock>
-        <Button Grid.Column="1"
+            <Button Grid.Column="1"
                 Name="BtnServiceSelect"
                 Click="BtnServiceSelect_Click"
                 VerticalAlignment="Center"
@@ -87,10 +93,11 @@
                 Content="Выбрать услуги ..."
                 Grid.Row="4"
                 Width="150"></Button>
-        <Button Content="Сохранить изменения"
+            <Button Content="Сохранить изменения"
                 Name="BtnSaveChanges"
                 Click="BtnSaveChanges_Click"
                 Grid.Row="5"
                 Grid.ColumnSpan="2"></Button>
+        </Grid>
     </Grid>
 </Window>

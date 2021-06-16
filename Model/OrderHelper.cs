@@ -34,5 +34,12 @@ namespace CarRepairShopApp.Model
                 return Master.Count == 0 ? "Не указано" : Master.FirstOrDefault().M_NAME;
             }
         }
+        public string GetPrice
+        {
+            get
+            {
+                return Service.Sum(s => s.ServiceOfModel.Sum(t => t.COST)).ToString() + " руб.";
+            }
+        }
     }
 }

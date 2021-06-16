@@ -105,5 +105,20 @@ namespace CarRepairShopApp.View
                 System.Media.SystemSounds.Asterisk.Play();
             }
         }
+
+        private void BtnDiscardChanges_Click(object sender, RoutedEventArgs e)
+        {
+            if(MessageBox.Show("Действительно отменить "
+                + Title
+                +"?",
+                "Внимание",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question)
+                == MessageBoxResult.Yes)
+            {
+                Manager.Context.Entry(_currentCustomer).State = System.Data.Entity.EntityState.Unchanged;
+                Close();
+            }
+        }
     }
 }
