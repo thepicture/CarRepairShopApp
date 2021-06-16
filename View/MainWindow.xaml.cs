@@ -25,7 +25,7 @@ namespace CarRepairShopApp
             InitializeComponent();
             ComboLogin.ItemsSource = Manager.Context.User.ToList();
             /// A code above uses recurrent formula. The code loads all except Administrator role.
-            ComboRole.ItemsSource = Manager.Context.Role.ToList().Take(Manager.Context.Role.ToList().Count).Reverse().Take(Manager.Context.Role.ToList().Count - 1).Reverse();
+            ComboRole.ItemsSource = Manager.Context.Role.ToList().Take(Manager.Context.Role.ToList().Count).Reverse().Take(Manager.Context.Role.ToList().Count - 2).Reverse();
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace CarRepairShopApp
                         CustomerWindow customerWindow = new CustomerWindow
                         {
                             Owner = this,
-                            Title = currentUser.USER_NAME + " — панель клиента"
+                            Title = currentUser.USER_NAME + " — просмотр услуг"
                         };
                         customerWindow.Show();
                         Hide();

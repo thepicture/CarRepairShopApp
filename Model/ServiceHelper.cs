@@ -14,5 +14,25 @@ namespace CarRepairShopApp.Model
                 .Equals(m.TypeOfCar)).Sum(s => s.COST).ToString() + " руб.";
             }
         }
+        public byte[] GetPhotoOfService
+        {
+            get
+            {
+                return PhotoOfService.Count.Equals(0) ? null : PhotoOfService.FirstOrDefault().PHOTO;
+            }
+        }
+        public string GetMiddlePrice
+        {
+            get
+            {
+                if (ServiceOfModel.Count == 0)
+                {
+                    return "По договору";
+                }
+                return "Средняя цена: "
+                    + ServiceOfModel.Sum(s => s.COST) / ServiceOfModel.Count
+                    + " руб.";
+            }
+        }
     }
 }
