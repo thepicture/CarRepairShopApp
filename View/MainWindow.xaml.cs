@@ -73,7 +73,13 @@ namespace CarRepairShopApp
                     }
                     else if (currentUser.Role.NAME.Equals("Клиент"))
                     {
-
+                        CustomerWindow customerWindow = new CustomerWindow
+                        {
+                            Owner = this,
+                            Title = currentUser.USER_NAME + " — панель клиента"
+                        };
+                        customerWindow.Show();
+                        Hide();
                     }
                     Manager.MainLoginRegisterWindow = this;
                     PBoxPassword.Password = null;

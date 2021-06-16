@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="AddEditOrderWindow"
         Height="250"
-        Width="400"
+        Width="500"
         MinHeight="250"
-        MinWidth="400"
+        MinWidth="500"
         WindowStartupLocation="CenterScreen"
         Background="WhiteSmoke">
     <Grid>
@@ -51,7 +51,7 @@
                  HorizontalAlignment="Left"
                  IsReadOnly="True"
                  Grid.Row="1"
-                 Width="150"></TextBox>
+                 Width="200"></TextBox>
                 <Button Content="Выбрать клиента ..."
                 Name="BtnSelectCustomer"
                 VerticalAlignment="Bottom"
@@ -67,6 +67,7 @@
                    Grid.Row="2"></TextBlock>
             <ComboBox Grid.Column="1"
                   Name="ComboCar"
+                  SelectionChanged="ComboCar_SelectionChanged"
                   IsReadOnly="True"
                   DisplayMemberPath="T_NAME"
                   Grid.Row="2"></ComboBox>
@@ -86,13 +87,14 @@
                    VerticalAlignment="Center"
                    Grid.Row="4"></TextBlock>
             <Button Grid.Column="1"
-                Name="BtnServiceSelect"
-                Click="BtnServiceSelect_Click"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Left"
-                Content="Выбрать услуги ..."
-                Grid.Row="4"
-                Width="150"></Button>
+                    IsEnabled="False"
+                    Name="BtnServiceSelect"
+                    Click="BtnServiceSelect_Click"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Content="Выбрать услуги ..."
+                    Grid.Row="4"
+                    Width="150"></Button>
             <Button Content="Сохранить изменения"
                 Name="BtnSaveChanges"
                 Click="BtnSaveChanges_Click"

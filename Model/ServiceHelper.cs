@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 
 namespace CarRepairShopApp.Model
 {
@@ -12,7 +8,10 @@ namespace CarRepairShopApp.Model
         {
             get
             {
-                return ServiceOfModel.Sum(s => s.COST).ToString() + " руб.";
+                var order = Manager.CurrentOrder.TypeOfCar;
+                return ServiceOfModel.Where(m => Manager.CurrentOrder.TypeOfCar
+                .Equals(m.TypeOfCar)).Sum(s => s.COST).Equals(0) ? "услуга недоступна" : ServiceOfModel.Where(m => Manager.CurrentOrder.TypeOfCar
+                .Equals(m.TypeOfCar)).Sum(s => s.COST).ToString() + " руб.";
             }
         }
     }

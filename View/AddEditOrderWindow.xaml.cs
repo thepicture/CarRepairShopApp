@@ -112,7 +112,7 @@ namespace CarRepairShopApp.View
 
         private void BtnDiscardChanges_Click(object sender, RoutedEventArgs e)
         {
-            if(MessageBox.Show("Точно отменить "
+            if (MessageBox.Show("Точно отменить "
                 + Title
                 + "?",
                 "Внимание",
@@ -122,6 +122,15 @@ namespace CarRepairShopApp.View
             {
                 Manager.Context.Entry(_currentOrder).State = System.Data.Entity.EntityState.Unchanged;
                 Close();
+            }
+        }
+
+        private void ComboCar_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (!ComboCar.SelectedItem.Equals(null))
+            {
+                _currentOrder.TypeOfCar = ComboCar.SelectedItem as TypeOfCar;
+                BtnServiceSelect.IsEnabled = true;
             }
         }
     }
