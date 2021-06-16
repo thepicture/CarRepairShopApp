@@ -125,6 +125,7 @@
     <Compile Include="Model\TypeOfCar.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\TypeOfCarHelper.cs" />
     <Compile Include="Model\User.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
