@@ -112,6 +112,7 @@
     <Compile Include="Model\Service.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\ServiceHelper.cs" />
     <Compile Include="Model\ServiceOfModel.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
