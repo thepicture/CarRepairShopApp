@@ -45,54 +45,33 @@ namespace CarRepairShopApp.View
                 == MessageBoxResult.Yes)
             {
                 Close();
+                Manager.MainLoginRegisterWindow.Show();
             }
         }
 
         private void BtnMakeAnOrder_Click(object sender, RoutedEventArgs e)
         {
-            Order order = new Order();
-            if (Manager.Context.Client.Where(c => c.CL_NAME.Equals(Manager.CurrentUser.USER_NAME)).Any().Equals(false))
+            ClientDataWindow clientWindow = new ClientDataWindow(ServicesList.SelectedItems.Cast<Service>().ToList(), ComboModel.SelectedItem as TypeOfCar)
             {
-                Client client = new Client
-                {
-                    CL_NAME = Manager.CurrentUser.USER_NAME,
-                };
-                Manager.Context.Client.Add(client);
-                Manager.Context.SaveChanges();
-            }
-            order.O_CREATEDATE = DateTime.Now;
-            Random random = new Random();
-            order.Master.Add(Manager.Context.Master.ToList().OrderBy(m => random.Next()).First());
-            order.Client.Add(Manager.Context.Client.Where(c => c.CL_NAME.Equals(Manager.CurrentUser.USER_NAME)).First());
-            order.Status = Manager.Context.Status.Where(s => s.ST_STATE.Contains("в обработке")).FirstOrDefault();
-            order.TypeOfCar = (ComboCar.SelectedItem as Auto).TypeOfCar.First();
-            foreach (Service service in ServicesList.SelectedItems)
-            {
-                order.Service.Add(service);
-            }
-            try
-            {
-                Manager.Context.Order.Add(order);
-                Manager.Context.SaveChanges();
-                MessageBox.Show("Заявка успешно подана!",
-                    "Успешно!",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Information);
-                ServicesList.SelectedItems.Clear();
-                BtnMakeAnOrder.Visibility = Visibility.Hidden;
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Пожалуйста, попробуйте подать заявку ещё раз!",
-                    "Ошибка",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
-            }
+                Title = "Оформление заявки на оказание услуг"
+            };
+            clientWindow.ShowDialog();
+            ServicesList.SelectedItems.Clear();
+            BtnMakeAnOrder.Visibility = Visibility.Hidden;
         }
 
         private void ServicesList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (ComboCar.SelectedIndex != 0)
+            {
+                ComboModel.ItemsSource = Manager.Context.TypeOfCar.ToList().Where(t => t.Auto.Equals(ComboCar.SelectedItem as Auto)).ToList();
+                ComboModel.IsEnabled = true;
+            }
+            else
+            {
+                ComboModel.IsEnabled = false;
+            }
+            if (ComboCar.SelectedIndex != 0 && ServicesList.SelectedItems.Count > 0 && ComboModel.SelectedItem != null)
             {
                 BtnMakeAnOrder.Visibility = Visibility.Visible;
             }

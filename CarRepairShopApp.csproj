@@ -154,6 +154,9 @@
     <Compile Include="View\AddServiceToOrderWindow.xaml.cs">
       <DependentUpon>AddServiceToOrderWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ClientDataWindow.xaml.cs">
+      <DependentUpon>ClientDataWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CustomerWindow.xaml.cs">
       <DependentUpon>CustomerWindow.xaml</DependentUpon>
     </Compile>
@@ -204,6 +207,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AdminWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ClientDataWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

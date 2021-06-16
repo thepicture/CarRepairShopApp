@@ -7,7 +7,9 @@
         mc:Ignorable="d"
         Title="CustomerWindow"
         Height="450"
-        Width="800"
+        Width="1000"
+        MinHeight="250"
+        MinWidth="1000"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
@@ -66,6 +68,7 @@
             </StackPanel>
         </Grid>
         <ListView Grid.Row="2"
+                  SelectionMode="Multiple"
                   SelectionChanged="ServicesList_SelectionChanged"
                   Background="Transparent"
                   Margin="5"
@@ -128,16 +131,7 @@
         </ListView>
         <Grid Grid.Row="3"
               Background="LightBlue">
-            <Button Content="Подать заявку на выбранные услуги"
-                    FontSize="20"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
-                    Visibility="Hidden"
-                    Background="Yellow"
-                    Name="BtnMakeAnOrder"
-                    Click="BtnMakeAnOrder_Click">
-            </Button>
-            <StackPanel HorizontalAlignment="Left"
+            <StackPanel HorizontalAlignment="Center"
                         Orientation="Horizontal">
                 <TextBlock Text="Мой автомобиль"
                            FontSize="15"
@@ -149,6 +143,24 @@
                           SelectionChanged="ServicesList_SelectionChanged"
                           VerticalAlignment="Center"
                           DisplayMemberPath="A_NAME"></ComboBox>
+                <TextBlock Text="Моя модель"
+                           FontSize="15"
+                           Margin="5"
+                           VerticalAlignment="Center"></TextBlock>
+                <ComboBox Width="150"
+                          Name="ComboModel"
+                          IsEnabled="false"
+                          SelectionChanged="ServicesList_SelectionChanged"
+                          VerticalAlignment="Center"
+                          DisplayMemberPath="T_NAME"></ComboBox>
+                <Button Content="Подать заявку на выбранные услуги"
+                    FontSize="20"
+                    VerticalAlignment="Center"
+                    Visibility="Hidden"
+                    Background="Yellow"
+                    Name="BtnMakeAnOrder"
+                    Click="BtnMakeAnOrder_Click">
+                </Button>
             </StackPanel>
         </Grid>
     </Grid>

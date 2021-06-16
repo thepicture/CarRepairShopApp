@@ -1,0 +1,77 @@
+﻿<Window x:Class="CarRepairShopApp.View.ClientDataWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarRepairShopApp.View"
+        mc:Ignorable="d"
+        Title="ClientDataWindow"
+        Height="250"
+        Width="600"
+        MinHeight="250"
+        MinWidth="600"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Background="LightBlue"
+              Grid.ColumnSpan="2">
+            <TextBlock Text="Оформление заказа"
+                       Margin="5"
+                       FontSize="20"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"></TextBlock>
+        </Grid>
+        <TextBlock Style="{StaticResource CommonBlock}"
+                   Grid.Row="1"
+                   Text="Серия паспорта"
+                   FontSize="20"
+                   VerticalAlignment="Center"></TextBlock>
+        <TextBox Style="{StaticResource CommonBox}"
+                 Grid.Row="1"
+                 MaxLength="4"
+                 Grid.Column="1"
+                 VerticalAlignment="Center"
+                 FontSize="30"
+                 Name="TBoxPassNum"
+                 KeyDown="TBoxPassNum_KeyDown"></TextBox>
+        <TextBlock Style="{StaticResource CommonBlock}"
+                   Grid.Row="2"
+                   Text="Номер паспорта"
+                   FontSize="20"
+                   VerticalAlignment="Center"></TextBlock>
+        <TextBox Style="{StaticResource CommonBox}"
+                 Grid.Row="2"
+                 Grid.Column="1"
+                 MaxLength="6"
+                 VerticalAlignment="Center"
+                 FontSize="30"
+                 Name="TBoxPassCode"
+                 KeyDown="TBoxPassNum_KeyDown"></TextBox>
+        <Button Content="Подтвердить подачу заявки"
+                Grid.Row="3"
+                IsEnabled="False"
+                Grid.ColumnSpan="2"
+                Background="Yellow"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                FontSize="20"
+                Name="BtnSendRequest"
+                Click="BtnSendRequest_Click"></Button>
+        <Button HorizontalAlignment="Right"
+                Content="Отмена"
+                Background="Yellow"
+                FontSize="20"
+                Grid.Column="1"
+                Name="BtnDiscardChanges"
+                Click="BtnDiscardChanges_Click"></Button>
+    </Grid>
+</Window>
