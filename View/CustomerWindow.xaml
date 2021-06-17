@@ -81,15 +81,17 @@
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal"></WrapPanel>
+                    <WrapPanel Orientation="Horizontal"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"></WrapPanel>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Width="280"
-                          Height="280">
+                    <Grid Width="320"
+                          Height="320">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="90"></RowDefinition>
                             <RowDefinition Height="auto"></RowDefinition>
                             <RowDefinition Height="auto"></RowDefinition>
                             <RowDefinition Height="auto"></RowDefinition>
@@ -98,6 +100,7 @@
                         </Grid.RowDefinitions>
                         <TextBlock Text="{Binding SE_NAME}"
                                    Margin="5"
+                                   TextAlignment="Center"
                                    HorizontalAlignment="Center"
                                    FontWeight="Bold"
                                    FontSize="25"

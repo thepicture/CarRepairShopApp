@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace CarRepairShopApp.Model
 {
@@ -30,7 +31,7 @@ namespace CarRepairShopApp.Model
                     return "По договору";
                 }
                 return "Средняя цена: "
-                    + ServiceOfModel.Sum(s => s.COST) / ServiceOfModel.Count
+                    + Math.Round(ServiceOfModel.Sum(s => s.COST) / ServiceOfModel.Count, 0)
                     + " руб.";
             }
         }

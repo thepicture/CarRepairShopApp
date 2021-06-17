@@ -24,6 +24,72 @@ namespace CarRepairShopApp.View
             UserNameBlock.Text = Manager.CurrentUser.USER_NAME;
             UserRoleBlock.Text = "Роль: " + Manager.CurrentUser.Role.NAME;
             UpdateEntries();
+            // CreateRandomTypeOfCar();
+            //CreateRandomServices();
+            CreateRandomModelsOfServices();
+        }
+
+        readonly Random random = new Random();
+        private void CreateRandomTypeOfCar()
+        {
+            string[] charsPartOne = { "A", "B", "C", "D", "E" };
+            string[] charsPartTwo = { "LITE", "PRO", "SUPER", "SUN" };
+            foreach (Auto auto in Manager.Context.Auto.ToList())
+            {
+                for (int i = 0; i < random.Next(1, 10); i++)
+                {
+                    auto.TypeOfCar.Add(new TypeOfCar
+                    {
+                        T_NAME = charsPartOne[random.Next(0, charsPartOne.Length)]
+                        + random.Next(100, 999).ToString()
+                        + charsPartTwo[random.Next(0, charsPartTwo.Length)]
+                    });
+                }
+                Manager.Context.Entry(auto).State = System.Data.Entity.EntityState.Modified;
+            }
+            Manager.Context.SaveChanges();
+        }
+
+        private void CreateRandomModelsOfServices()
+        {
+            foreach (Service service in Manager.Context.Service.ToList())
+            {
+                for (int i = 0; i < random.Next(1, 10); i++)
+                {
+                    Manager.Context.Service.Find(service.SE_ID).ServiceOfModel.Add(new ServiceOfModel
+                    {
+                        COST = decimal.Parse((random.NextDouble() * 4900 + 100).ToString()),
+                        TypeOfCar = Manager.Context.TypeOfCar.ToList().Except(Manager.Context.Service.Find(service.SE_ID).ServiceOfModel.Select(s => s.TypeOfCar)).OrderBy(r => random.Next()).First()
+                    });
+                    Manager.Context.SaveChanges();
+                }
+            }
+        }
+
+        private void CreateRandomServices()
+        {
+            string[] servicePartOne = { "Установка", "Замена", "Починка", "Покраска", "Ремонт" };
+            string[] servicePartTwo = { "бампера", "окон", "подвески", "шин", "фар", "двигателя" };
+            string[] servicePartThree = { "Делюкс", "PRO", "Лайт", "Стандарт", "VIP" };
+            string[] descriptions = { "Гарантированное и качественное выполнение услуги ", "Быстрое и дешёвое выполнение услуги" };
+            for (int i = 0; i < 300; i++)
+            {
+                Service service = new Service
+                {
+                    SE_NAME = servicePartOne[random.Next(0, servicePartOne.Length)]
+                    + " "
+                    + servicePartTwo[random.Next(0, servicePartThree.Length)]
+                    + " "
+                    + servicePartThree[random.Next(0, servicePartThree.Length)],
+                    SE_DESCRIPTION = descriptions[random.Next(0, descriptions.Length)] + "!"
+                };
+                if (random.NextDouble() > 0.2)
+                {
+                    service.PhotoOfService.Add(Manager.Context.PhotoOfService.ToList().OrderBy(r => random.Next()).First());
+                }
+                Manager.Context.Service.Add(service);
+            }
+            Manager.Context.SaveChanges();
         }
 
         private void InitializeUserPhoto()
