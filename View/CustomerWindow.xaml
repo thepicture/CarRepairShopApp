@@ -7,15 +7,16 @@
         mc:Ignorable="d"
         Title="CustomerWindow"
         Height="650"
-        Width="1000"
+        Width="900"
         MinHeight="450"
-        MinWidth="1000"
+        MinWidth="900"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Image Grid.Row="2"
@@ -71,6 +72,11 @@
                          FontSize="15"
                          VerticalAlignment="Center"></TextBox>
             </StackPanel>
+            <TextBlock FontSize="15"
+                       Margin="5"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Right"
+                       Name="DatabaseServiceCount"></TextBlock>
         </Grid>
         <ListView Grid.Row="2"
                   SelectionMode="Multiple"
@@ -137,9 +143,53 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Grid Grid.Row="3"
+        <StackPanel Grid.Row="3"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+            <Button Content="◄"
+                    Click="BtnPreviousPage_Click"
+                    Name="BtnPreviousPage"
+                    Background="Magenta"
+                    Foreground="White"
+                    FontSize="20"
+                    Width="30"
+                    Height="30"></Button>
+            <Button Content="1"
+                    Name="BtnFirst"
+                    Click="BtnFirst_Click"
+                    Background="Magenta"
+                    Foreground="White"
+                    FontSize="20"
+                    Width="30"
+                    Height="30"></Button>
+            <Button Content="2"
+                    Name="BtnSecond"
+                    Click="BtnSecond_Click"
+                    Background="Magenta"
+                    Foreground="White"
+                    FontSize="20"
+                    Width="30"
+                    Height="30"></Button>
+            <Button Content="3"
+                    Name="BtnThird"
+                    Click="BtnThird_Click"
+                    Background="Magenta"
+                    Foreground="White"
+                    FontSize="20"
+                    Width="30"
+                    Height="30"></Button>
+            <Button Content="►"
+                    Name="BtnNextPage"
+                    Click="BtnNextPage_Click"
+                    Background="Magenta"
+                    Foreground="White"
+                    FontSize="20"
+                    Width="30"
+                    Height="30"></Button>
+        </StackPanel>
+        <Grid Grid.Row="4"
               Background="LightBlue">
-            <StackPanel HorizontalAlignment="Center"
+            <StackPanel HorizontalAlignment="Left"
                         Orientation="Horizontal">
                 <TextBlock Text="Мой автомобиль"
                            FontSize="15"
@@ -148,7 +198,7 @@
                 <ComboBox Width="150"
                           Name="ComboCar"
                           SelectedIndex="0"
-                          SelectionChanged="ServicesList_SelectionChanged"
+                          SelectionChanged="ComboCar_SelectionChanged"
                           VerticalAlignment="Center"
                           DisplayMemberPath="A_NAME"></ComboBox>
                 <TextBlock Text="Моя модель"
@@ -158,18 +208,20 @@
                 <ComboBox Width="150"
                           Name="ComboModel"
                           IsEnabled="false"
-                          SelectionChanged="ServicesList_SelectionChanged"
+                          SelectionChanged="ComboCar_SelectionChanged"
                           VerticalAlignment="Center"
                           DisplayMemberPath="T_NAME"></ComboBox>
+            </StackPanel>
                 <Button Content="Подать заявку на выбранные услуги"
                     FontSize="20"
+                    Grid.Row="4"
+                    HorizontalAlignment="Right"
                     VerticalAlignment="Center"
                     Visibility="Hidden"
                     Background="Yellow"
                     Name="BtnMakeAnOrder"
                     Click="BtnMakeAnOrder_Click">
                 </Button>
-            </StackPanel>
         </Grid>
     </Grid>
 </Window>

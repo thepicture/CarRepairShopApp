@@ -21,17 +21,26 @@ namespace CarRepairShopApp.View
             ComboCar.ItemsSource = autos;
         }
 
+        private int pageNum = 0;
+        /// <summary>
+        /// Filtration for the service view.
+        /// </summary>
         private void UpdateServiceView(object sender, RoutedEventArgs e)
         {
             List<Service> services = Manager.Context.Service.ToList();
-            if (ComboCar.SelectedIndex != 0)
-            {
-
-            }
             services = services.Where(s => s.SE_NAME.ToLower().Contains(TBoxServiceName.Text.ToLower())).ToList();
+            if (ComboCar.SelectedIndex != 0 && ComboModel.SelectedItem != null)
+            {
+                services = services.Where(s => s.ServiceOfModel.Select(t => t.TypeOfCar).Contains(ComboModel.SelectedItem as TypeOfCar)).ToList();
+            }
+            services = services.Skip(pageNum * 20).Take(20).ToList();
             ServicesList.ItemsSource = services;
+            DatabaseServiceCount.Text = "Выведено " + services.Count + " услуг из " + Manager.Context.Service.Count();
         }
 
+        /// <summary>
+        /// Opens a new window with additional information about the selected service.
+        /// </summary>
         private void BtnMoreInfo_Click(object sender, RoutedEventArgs e)
         {
             Service service = (sender as Button).DataContext as Service;
@@ -42,6 +51,9 @@ namespace CarRepairShopApp.View
             infoWindow.ShowDialog();
         }
 
+        /// <summary>
+        /// Closes the current application.
+        /// </summary>
         private void BtnExit_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Точно покинуть окно просмотра услуг?",
@@ -55,6 +67,9 @@ namespace CarRepairShopApp.View
             }
         }
 
+        /// <summary>
+        /// Makes a new customer order.
+        /// </summary>
         private void BtnMakeAnOrder_Click(object sender, RoutedEventArgs e)
         {
             ClientDataWindow clientWindow = new ClientDataWindow(ServicesList.SelectedItems.Cast<Service>().ToList(), ComboModel.SelectedItem as TypeOfCar)
@@ -66,7 +81,12 @@ namespace CarRepairShopApp.View
             BtnMakeAnOrder.Visibility = Visibility.Hidden;
         }
 
-        private void ServicesList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        /// <summary>
+        /// Checks if a customer chose auto and its model.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ServicesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (ComboCar.SelectedIndex != 0)
             {
@@ -85,6 +105,127 @@ namespace CarRepairShopApp.View
             {
                 BtnMakeAnOrder.Visibility = Visibility.Hidden;
             }
+            UpdateServiceView(null, null);
+        }
+
+        /// <summary>
+        /// Navigates to the previous page.
+        /// </summary>
+        private void BtnPreviousPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (pageNum > 0)
+            {
+                pageNum--;
+            }
+            BtnFirst.Content = pageNum + 1;
+            BtnSecond.Content = pageNum + 2;
+            BtnThird.Content = pageNum + 3;
+            int countOfPages = Manager.Context.Service.Count() / 20 + 1;
+            if (Convert.ToInt32(BtnSecond.Content) < countOfPages)
+            {
+                BtnSecond.IsEnabled = true;
+            }
+            if (Convert.ToInt32(BtnThird.Content) < countOfPages)
+            {
+                BtnThird.IsEnabled = true;
+            }
+            UpdateServiceView(null, null);
+        }
+
+        /// <summary>
+        /// Navigates to the first page.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnFirst_Click(object sender, RoutedEventArgs e)
+        {
+            BtnPreviousPage_Click(null, null);
+        }
+
+        /// <summary>
+        /// Navigates to a second page.
+        /// </summary>
+        private void BtnSecond_Click(object sender, RoutedEventArgs e)
+        {
+            pageNum = Convert.ToInt32(BtnSecond.Content) - 1;
+
+            BtnFirst.Content = (pageNum + 1).ToString();
+            BtnSecond.Content = (pageNum + 2).ToString();
+            BtnThird.Content = (pageNum + 3).ToString();
+
+            int countOfPages = (Manager.Context.Service.Count() / 20) + 1;
+            if (Convert.ToInt32(BtnSecond.Content) > countOfPages)
+            {
+                BtnSecond.IsEnabled = false;
+            }
+
+            if (Convert.ToInt32(BtnThird.Content) > countOfPages)
+            {
+                BtnThird.IsEnabled = false;
+            }
+            UpdateServiceView(null, null);
+        }
+
+        /// <summary>
+        /// Navigates to a third page.
+        /// </summary>
+        private void BtnThird_Click(object sender, RoutedEventArgs e)
+        {
+            pageNum = Convert.ToInt32(BtnThird.Content) - 1;
+
+            BtnFirst.Content = (pageNum + 1).ToString();
+            BtnSecond.Content = (pageNum + 2).ToString();
+            BtnThird.Content = (pageNum + 3).ToString();
+
+            int countPage = (Manager.Context.Service.Count() / 20) + 1;
+            if (Convert.ToInt32(BtnSecond.Content) > countPage)
+            {
+                BtnSecond.IsEnabled = false;
+            }
+
+            if (Convert.ToInt32(BtnThird.Content) > countPage)
+            {
+                BtnThird.IsEnabled = false;
+            }
+            UpdateServiceView(null, null);
+        }
+
+        /// <summary>
+        /// Navigates to a next page.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnNextPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (ServicesList.Items.Count >= 20)
+            {
+                pageNum++;
+            }
+            BtnFirst.Content = pageNum + 1;
+            BtnSecond.Content = pageNum + 2;
+            BtnThird.Content = pageNum + 3;
+            int countOfPages = Manager.Context.Service.Count() / 20 + 1;
+            if (Convert.ToInt32(BtnSecond.Content) > countOfPages)
+            {
+                BtnSecond.IsEnabled = false;
+            }
+            if (Convert.ToInt32(BtnThird.Content) > countOfPages)
+            {
+                BtnThird.IsEnabled = false;
+            }
+            UpdateServiceView(null, null);
+        }
+
+        /// <summary>
+        /// Updates navigation bar.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboCar_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            pageNum = 0;
+            BtnFirst_Click(null, null);
+            ServicesList_SelectionChanged(null, null);
         }
     }
 }
