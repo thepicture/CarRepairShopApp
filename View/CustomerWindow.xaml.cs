@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace CarRepairShopApp.View
 {
@@ -84,8 +85,6 @@ namespace CarRepairShopApp.View
         /// <summary>
         /// Checks if a customer chose auto and its model.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ServicesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (ComboCar.SelectedIndex != 0)
@@ -96,6 +95,7 @@ namespace CarRepairShopApp.View
             else
             {
                 ComboModel.IsEnabled = false;
+                ComboModel.SelectedItem = null;
             }
             if (ComboCar.SelectedIndex != 0 && ServicesList.SelectedItems.Count > 0 && ComboModel.SelectedItem != null)
             {
@@ -135,8 +135,6 @@ namespace CarRepairShopApp.View
         /// <summary>
         /// Navigates to the first page.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void BtnFirst_Click(object sender, RoutedEventArgs e)
         {
             BtnPreviousPage_Click(null, null);
@@ -226,6 +224,38 @@ namespace CarRepairShopApp.View
             pageNum = 0;
             BtnFirst_Click(null, null);
             ServicesList_SelectionChanged(null, null);
+        }
+
+        /// <summary>
+        /// Shows hints in the StatusBar.
+        /// </summary>
+        private void MainGrid_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Source is Button button)
+            {
+                if (button.ToolTip != null)
+                {
+                    ButtonName.Text = button.ToolTip.ToString();
+                }
+                else
+                {
+                    ButtonName.Text = button.Content.ToString();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Make the StatusBar empty.
+        /// </summary>
+        private void MainGrid_MouseLeave(object sender, MouseEventArgs e)
+        {
+            ButtonName.Text = null;
+        }
+
+        private void TBoxServiceName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            BtnFirst_Click(null, null);
+            UpdateServiceView(null, null);
         }
     }
 }

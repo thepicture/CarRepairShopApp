@@ -11,11 +11,14 @@
         MinHeight="450"
         MinWidth="900"
         WindowStartupLocation="CenterScreen">
-    <Grid>
+    <Grid Name="MainGrid"
+          MouseMove="MainGrid_MouseMove"
+          MouseLeave="MainGrid_MouseLeave">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
@@ -67,7 +70,7 @@
                            VerticalAlignment="Center"></TextBlock>
                 <TextBox Width="200"
                          Name="TBoxServiceName"
-                         TextChanged="UpdateServiceView"
+                         TextChanged="TBoxServiceName_TextChanged"
                          Margin="5"
                          FontSize="15"
                          VerticalAlignment="Center"></TextBox>
@@ -147,6 +150,8 @@
                     Orientation="Horizontal"
                     HorizontalAlignment="Center">
             <Button Content="◄"
+                    ToolTipService.IsEnabled="False"
+                    ToolTip="На предыдущую страницу"
                     Click="BtnPreviousPage_Click"
                     Name="BtnPreviousPage"
                     Background="Magenta"
@@ -185,7 +190,9 @@
                     Foreground="White"
                     FontSize="20"
                     Width="30"
-                    Height="30"></Button>
+                    Height="30"
+                    ToolTipService.IsEnabled="False"
+                    ToolTip="На следующую страницу"></Button>
         </StackPanel>
         <Grid Grid.Row="4"
               Background="LightBlue">
@@ -213,6 +220,7 @@
                           DisplayMemberPath="T_NAME"></ComboBox>
             </StackPanel>
                 <Button Content="Подать заявку на выбранные услуги"
+                    RenderTransformOrigin=".5,.5"
                     FontSize="20"
                     Grid.Row="4"
                     HorizontalAlignment="Right"
@@ -221,7 +229,42 @@
                     Background="Yellow"
                     Name="BtnMakeAnOrder"
                     Click="BtnMakeAnOrder_Click">
+                <Button.RenderTransform>
+                    <ScaleTransform x:Name="DoNotFreezeButton"></ScaleTransform>
+                </Button.RenderTransform>
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Loaded">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation From="0.8"
+                                                 To="1"
+                                                 AutoReverse="True"
+                                                 RepeatBehavior="Forever"
+                                                 Duration="0:0:5"
+                                                 Storyboard.TargetProperty="(Image.RenderTransform).(ScaleTransform.ScaleX)"></DoubleAnimation>
+                                <DoubleAnimation From="0.8"
+                                                 To="1"
+                                                 AutoReverse="True"
+                                                 RepeatBehavior="Forever"
+                                                 Duration="0:0:5"
+                                                 Storyboard.TargetProperty="(Image.RenderTransform).(ScaleTransform.ScaleY)"></DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
                 </Button>
         </Grid>
+        <!--StatusBar for MainWindow-->
+        <DockPanel VerticalAlignment="Bottom"
+                   Grid.Row="5">
+            <StatusBar DockPanel.Dock="Bottom"
+                       Background="LightBlue">
+                <StatusBarItem>
+                    <TextBlock Name="ButtonName"
+                               FontSize="20"
+                               TextAlignment="Center"/>
+                </StatusBarItem>
+            </StatusBar>
+        </DockPanel>
     </Grid>
 </Window>
