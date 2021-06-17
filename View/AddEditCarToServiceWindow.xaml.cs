@@ -18,6 +18,9 @@ namespace CarRepairShopApp.View
             UpdateDataGrids();
         }
 
+        /// <summary>
+        /// Updates the datagrids.
+        /// </summary>
         private void UpdateDataGrids()
         {
             ServiceModelGrid.ItemsSource = Manager.CurrentService.ServiceOfModel.ToList();
@@ -25,11 +28,17 @@ namespace CarRepairShopApp.View
             ModelGrid.ItemsSource = Manager.Context.TypeOfCar.ToList().Where(t => !servicesToRemove.Contains(t.T_NAME)).ToList();
         }
 
+        /// <summary>
+        /// Checks if the cost and selection are valid.
+        /// </summary>
         private void ModelCost_TextChanged(object sender, TextChangedEventArgs e)
         {
             CheckIfTheCostAndSelectionAreValid();
         }
 
+        /// <summary>
+        /// Add selected models to current service.
+        /// </summary>
         private void BtnAddSelectedModelsToService_Click(object sender, RoutedEventArgs e)
         {
             Manager.CurrentService.ServiceOfModel.Add(new ServiceOfModel
@@ -41,6 +50,9 @@ namespace CarRepairShopApp.View
         }
 
         readonly Regex costRegex = new Regex(pattern: @"[1-9][0-9]{0,19}");
+        /// <summary>
+        /// Checks regex expression for the TextBoxes.
+        /// </summary>
         private void CheckIfTheCostAndSelectionAreValid()
         {
             if (ModelGrid.SelectedItems.Count > 0 && costRegex.IsMatch(ModelCost.Text))
@@ -53,11 +65,17 @@ namespace CarRepairShopApp.View
             }
         }
 
+        /// <summary>
+        /// Goes to method to check if the cost and selection are valid.
+        /// </summary>
         private void ModelGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             CheckIfTheCostAndSelectionAreValid();
         }
 
+        /// <summary>
+        /// Deletes selected model from the service.
+        /// </summary>
         private void BtnDeleteModelFromService_Click(object sender, RoutedEventArgs e)
         {
             Manager.CurrentService.ServiceOfModel.Remove(ServiceModelGrid.SelectedItem as ServiceOfModel);
@@ -65,11 +83,17 @@ namespace CarRepairShopApp.View
             UpdateDataGrids();
         }
 
+        /// <summary>
+        /// Makes delete button enabled.
+        /// </summary>
         private void ServiceModelGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             BtnDeleteModelFromService.IsEnabled = true;
         }
 
+        /// <summary>
+        /// Closes current window.
+        /// </summary>
         private void CloseEditCarToServiceWindow_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Точно закрыть окно указание стоимости услуги для моделей автомобилей?",

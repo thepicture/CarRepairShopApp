@@ -87,7 +87,8 @@
                        Grid.Row="2"></TextBlock>
             <ListView Grid.Row="3"
                       BorderBrush="Transparent"
-                      ItemsSource="{Binding ServiceOfModel}">
+                      ItemsSource="{Binding ServiceOfModel}"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel Orientation="Horizontal"></WrapPanel>

@@ -25,11 +25,28 @@ namespace CarRepairShopApp.View
             UserRoleBlock.Text = "Роль: " + Manager.CurrentUser.Role.NAME;
             UpdateEntries();
             // CreateRandomTypeOfCar();
-            //CreateRandomServices();
-            CreateRandomModelsOfServices();
+            // CreateRandomServices();
+            // CreateRandomModelsOfServices();
+            // AddDummyPhotosToService();
+        }
+
+        private void AddDummyPhotosToService()
+        {
+            foreach (Service service in Manager.Context.Service.ToList())
+            {
+                for (int i = 0; i < random.Next(0, 5); i++)
+                {
+                    Manager.Context.Entry(service).Entity.PhotoOfService
+                        .Add(new PhotoOfService {PHOTO= Manager.Context.PhotoOfService.ToList().OrderBy(r => random.Next()).First().PHOTO });
+                }
+                Manager.Context.SaveChanges();
+            }
         }
 
         readonly Random random = new Random();
+        /// <summary>
+        /// Inserts random types of car into database.
+        /// </summary>
         private void CreateRandomTypeOfCar()
         {
             string[] charsPartOne = { "A", "B", "C", "D", "E" };
@@ -50,6 +67,9 @@ namespace CarRepairShopApp.View
             Manager.Context.SaveChanges();
         }
 
+        /// <summary>
+        /// Inserts random models into services from database.
+        /// </summary>
         private void CreateRandomModelsOfServices()
         {
             foreach (Service service in Manager.Context.Service.ToList())
@@ -66,6 +86,9 @@ namespace CarRepairShopApp.View
             }
         }
 
+        /// <summary>
+        /// Creates random services in database.
+        /// </summary>
         private void CreateRandomServices()
         {
             string[] servicePartOne = { "Установка", "Замена", "Починка", "Покраска", "Ремонт" };
@@ -92,6 +115,9 @@ namespace CarRepairShopApp.View
             Manager.Context.SaveChanges();
         }
 
+        /// <summary>
+        /// Initializes user photo.
+        /// </summary>
         private void InitializeUserPhoto()
         {
             if (Manager.CurrentUser.USER_PHOTO != null)
@@ -110,6 +136,9 @@ namespace CarRepairShopApp.View
             }
         }
 
+        /// <summary>
+        /// Opens a window for adding a new service.
+        /// </summary>
         private void BtnAddService_Click(object sender, RoutedEventArgs e)
         {
             AddEditServiceWindow addEditServiceWindow = new AddEditServiceWindow(null)
@@ -143,6 +172,9 @@ namespace CarRepairShopApp.View
             ButtonName.Text = null;
         }
 
+        /// <summary>
+        /// Makes button enabled if and only if selected items count is greather than 1.
+        /// </summary>
         private void ServiceGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (ServiceGrid.SelectedItems.Count > 1)
@@ -156,6 +188,9 @@ namespace CarRepairShopApp.View
             BtnDeleteService.IsEnabled = DeleteServiceItem.IsEnabled = true;
         }
 
+        /// <summary>
+        /// Open a window for editing the service.
+        /// </summary>
         private void BtnEditService_Click(object sender, RoutedEventArgs e)
         {
             Service service = ServiceGrid.SelectedItem as Service;
@@ -167,6 +202,9 @@ namespace CarRepairShopApp.View
             UpdateEntries();
         }
 
+        /// <summary>
+        /// Updates the datagrids.
+        /// </summary>
         private void UpdateEntries()
         {
             ServiceGrid.ItemsSource = Manager.Context.Service.ToList();
@@ -206,18 +244,29 @@ namespace CarRepairShopApp.View
             }
         }
 
+        /// <summary>
+        /// Changes user picture.
+        /// </summary>
         private void ChangePictureItem_Click(object sender, RoutedEventArgs e)
         {
             PictureChanger.ChangePicture();
             InitializeUserPhoto();
         }
 
+        /// <summary>
+        /// Deletes user picture.
+        /// </summary>
         private void DeletePictureItem_Click(object sender, RoutedEventArgs e)
         {
             PictureChanger.DeletePicture();
             InitializeUserPhoto();
         }
 
+        /// <summary>
+        /// Closes current window and goes back to the login window.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainAdminWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (MessageBox.Show("Точно завершить текущую сессию пользователя "
@@ -236,11 +285,21 @@ namespace CarRepairShopApp.View
             }
         }
 
+        /// <summary>
+        /// Closes current window.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
+        /// <summary>
+        /// Checks if the selected items count is greater than one, otherwise the edit buttons are disabled.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MastersGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (MastersGrid.SelectedItems.Count > 1)
@@ -383,6 +442,9 @@ namespace CarRepairShopApp.View
             }
         }
 
+        /// <summary>
+        /// Calls the service report method from ServiceReportFormer class.
+        /// </summary>
         private void ServicesReportForm_Click(object sender, RoutedEventArgs e)
         {
             ServiceReportFormer.FormReport();

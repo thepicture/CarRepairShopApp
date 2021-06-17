@@ -68,7 +68,7 @@ namespace CarRepairShopApp.View
             {
                 PhotoOfService service = (sender as Button).DataContext as PhotoOfService;
                 _currentService.PhotoOfService.Remove(service);
-                Manager.Context.PhotoOfService.Remove(service);
+                Manager.Context.Entry(service).State = System.Data.Entity.EntityState.Deleted;
                 MessageBox.Show("Выбранное фото успешно удалено!",
                     "Успешно!",
                     MessageBoxButton.OK,

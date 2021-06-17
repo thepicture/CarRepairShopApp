@@ -35,5 +35,16 @@ namespace CarRepairShopApp.Model
                     + " руб.";
             }
         }
+        public int GetRawMiddlePrice
+        {
+            get
+            {
+                if (ServiceOfModel.Count == 0)
+                {
+                    return 0;
+                }
+                return Convert.ToInt32(Math.Round(ServiceOfModel.Sum(s => s.COST) / ServiceOfModel.Count));
+            }
+        }
     }
 }

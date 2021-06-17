@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="CustomerWindow"
         Height="650"
-        Width="900"
+        Width="1000"
         MinHeight="450"
-        MinWidth="900"
+        MinWidth="1000"
         WindowStartupLocation="CenterScreen">
     <Grid Name="MainGrid"
           MouseMove="MainGrid_MouseMove"
@@ -74,6 +74,16 @@
                          Margin="5"
                          FontSize="15"
                          VerticalAlignment="Center"></TextBox>
+                <TextBlock Text="Цена"
+                           Margin="5"
+                           FontSize="15"
+                           VerticalAlignment="Center"></TextBlock>
+                <ComboBox Width="200"
+                         Name="ComboPrice"
+                         SelectionChanged="ComboPrice_SelectionChanged"
+                         Margin="5"
+                         FontSize="15"
+                         VerticalAlignment="Center"></ComboBox>
             </StackPanel>
             <TextBlock FontSize="15"
                        Margin="5"
@@ -219,7 +229,11 @@
                           VerticalAlignment="Center"
                           DisplayMemberPath="T_NAME"></ComboBox>
             </StackPanel>
-                <Button Content="Подать заявку на выбранные услуги"
+        </Grid>
+            <Grid Grid.Row="4"
+                  Grid.RowSpan="2"
+                  Panel.ZIndex="1">
+            <Button Content="Подать заявку на выбранные услуги"
                     RenderTransformOrigin=".5,.5"
                     FontSize="20"
                     Grid.Row="4"
@@ -248,11 +262,17 @@
                                                  RepeatBehavior="Forever"
                                                  Duration="0:0:5"
                                                  Storyboard.TargetProperty="(Image.RenderTransform).(ScaleTransform.ScaleY)"></DoubleAnimation>
+                                <ColorAnimation From="Yellow"
+                                                To="LightYellow"
+                                                Duration="0:0:2"
+                                                AutoReverse="True"
+                                                RepeatBehavior="Forever"
+                                                Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"></ColorAnimation>
                             </Storyboard>
                         </BeginStoryboard>
                     </EventTrigger>
                 </Button.Triggers>
-                </Button>
+            </Button>
         </Grid>
         <!--StatusBar for MainWindow-->
         <DockPanel VerticalAlignment="Bottom"

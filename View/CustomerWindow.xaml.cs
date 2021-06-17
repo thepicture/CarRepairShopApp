@@ -13,6 +13,13 @@ namespace CarRepairShopApp.View
     /// </summary>
     public partial class CustomerWindow : Window
     {
+        private readonly List<string> comboPrices = new List<string> {
+            "Все цены",
+            "До 1000 руб.",
+            "От 1000 до 1500 руб.",
+            "От 1500 руб. до 2000 руб.",
+            "От 2000 руб."
+        };
         public CustomerWindow()
         {
             InitializeComponent();
@@ -20,6 +27,8 @@ namespace CarRepairShopApp.View
             List<Auto> autos = Manager.Context.Auto.ToList();
             autos.Insert(0, new Auto { A_NAME = "Не указано" });
             ComboCar.ItemsSource = autos;
+            ComboPrice.ItemsSource = comboPrices;
+            ComboPrice.SelectedIndex = 0;
         }
 
         private int pageNum = 0;
@@ -30,6 +39,22 @@ namespace CarRepairShopApp.View
         {
             List<Service> services = Manager.Context.Service.ToList();
             services = services.Where(s => s.SE_NAME.ToLower().Contains(TBoxServiceName.Text.ToLower())).ToList();
+            switch (ComboPrice.SelectedIndex)
+            {
+                case 0: break;
+                case 1: services = services.Where(s => s.GetRawMiddlePrice < 1000).ToList(); break;
+                case 2:
+                    services = services.Where(s => s.GetRawMiddlePrice >= 1000
+            && s.GetRawMiddlePrice < 1500)
+                    .ToList(); break;
+                case 3:
+                    services = services.Where(s => s.GetRawMiddlePrice >= 1500
+            && s.GetRawMiddlePrice < 2000)
+                    .ToList(); break;
+                case 4:
+                    services = services.Where(s => s.GetRawMiddlePrice >= 2000)
+                    .ToList(); break;
+            }
             if (ComboCar.SelectedIndex != 0 && ComboModel.SelectedItem != null)
             {
                 services = services.Where(s => s.ServiceOfModel.Select(t => t.TypeOfCar).Contains(ComboModel.SelectedItem as TypeOfCar)).ToList();
@@ -191,8 +216,6 @@ namespace CarRepairShopApp.View
         /// <summary>
         /// Navigates to a next page.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void BtnNextPage_Click(object sender, RoutedEventArgs e)
         {
             if (ServicesList.Items.Count >= 20)
@@ -217,8 +240,6 @@ namespace CarRepairShopApp.View
         /// <summary>
         /// Updates navigation bar.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ComboCar_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             pageNum = 0;
@@ -252,7 +273,19 @@ namespace CarRepairShopApp.View
             ButtonName.Text = null;
         }
 
+        /// <summary>
+        /// Updates the ListView when the searching by a service name.
+        /// </summary>
         private void TBoxServiceName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            BtnFirst_Click(null, null);
+            UpdateServiceView(null, null);
+        }
+
+        /// <summary>
+        /// Price filtration for the ListView.
+        /// </summary>
+        private void ComboPrice_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             BtnFirst_Click(null, null);
             UpdateServiceView(null, null);
