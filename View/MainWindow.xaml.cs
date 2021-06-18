@@ -212,6 +212,9 @@ namespace CarRepairShopApp
             }
         }
 
+        /// <summary>
+        /// Register a new user.
+        /// </summary>
         private void BtnRegisterConfirm_Click(object sender, RoutedEventArgs e)
         {
             User user = new User
@@ -230,6 +233,9 @@ namespace CarRepairShopApp
             CloseRegistration();
         }
 
+        /// <summary>
+        /// Closes current window.
+        /// </summary>
         private void CloseRegistration()
         {
             if (MessageBox.Show("Точно покинуть окно регистрации?\n" +
@@ -246,6 +252,9 @@ namespace CarRepairShopApp
             }
         }
 
+        /// <summary>
+        /// Opens a window to recover the password.
+        /// </summary>
         private void BtnForgotPassword_Click(object sender, RoutedEventArgs e)
         {
             RecoveryPasswordPanel.Visibility = Visibility.Visible;
@@ -271,6 +280,9 @@ namespace CarRepairShopApp
             }
         }
 
+        /// <summary>
+        /// Gives the recovered password if it exists. Otherwise shows the error message.
+        /// </summary>
         private void BtnRecover_Click(object sender, RoutedEventArgs e)
         {
             User user = Manager.Context.User.ToList().Where(u => u.USER_LOGIN.Equals(TBoxRecoveryLogin.Text)).FirstOrDefault();
@@ -295,6 +307,9 @@ namespace CarRepairShopApp
             }
         }
 
+        /// <summary>
+        /// Closes the password recovery section.
+        /// </summary>
         private void BtnCloseRecovery_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Точно покинуть окно восстановления пароля?\n" +
@@ -307,6 +322,9 @@ namespace CarRepairShopApp
             }
         }
 
+        /// <summary>
+        /// Actions for returning to the main window.
+        /// </summary>
         private void CloseRecoverySection()
         {
 
@@ -316,6 +334,9 @@ namespace CarRepairShopApp
             TBoxRecoveryLogin.Text = null;
         }
 
+        /// <summary>
+        /// Asks if user wants to close current application.
+        /// </summary>
         private void LoginRegisterRecoveryWindow_Closing(object sender, CancelEventArgs e)
         {
             if (MessageBox.Show("Точно выйти из программы?",
