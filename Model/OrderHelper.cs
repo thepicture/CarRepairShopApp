@@ -13,6 +13,11 @@ namespace CarRepairShopApp.Model
                 return O_ISCHECKED ? "Подтвержден" : "Не подтвержден";
             }
         }
+        /// <summary>
+        /// Gets status list which can be selected via ComboBox
+        /// through the master panel
+        /// in the order DataGrid.
+        /// </summary>
         public List<Status> GetStatusList
         {
             get
@@ -34,11 +39,23 @@ namespace CarRepairShopApp.Model
                 return Master.Count == 0 ? "Не указано" : Master.FirstOrDefault().M_NAME;
             }
         }
+        /// <summary>
+        /// Gets a price sum of the order.
+        /// </summary>
         public string GetPrice
         {
             get
             {
-                return Service.Sum(s => s.ServiceOfModel.Sum(t => t.COST)).ToString() + " руб.";
+                decimal sum = 0;
+                List<Service> services = Service.ToList();
+                List<ICollection<ServiceOfModel>> allModels = services.Select(s => s.ServiceOfModel).ToList();
+                ICollection<ServiceOfModel> serviceOfModels = allModels.First();
+                List<ServiceOfModel> contextModels = serviceOfModels.Where(m => m.T_ID.Equals(T_ID)).ToList();
+                foreach (ServiceOfModel model in contextModels)
+                {
+                    sum += model.COST;
+                }
+                return sum == 0 ? "По договорённости" : sum + " руб.";
             }
         }
     }

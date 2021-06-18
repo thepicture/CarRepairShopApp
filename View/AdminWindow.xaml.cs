@@ -37,7 +37,7 @@ namespace CarRepairShopApp.View
                 for (int i = 0; i < random.Next(0, 5); i++)
                 {
                     Manager.Context.Entry(service).Entity.PhotoOfService
-                        .Add(new PhotoOfService {PHOTO= Manager.Context.PhotoOfService.ToList().OrderBy(r => random.Next()).First().PHOTO });
+                        .Add(new PhotoOfService { PHOTO = Manager.Context.PhotoOfService.ToList().OrderBy(r => random.Next()).First().PHOTO });
                 }
                 Manager.Context.SaveChanges();
             }
@@ -231,6 +231,10 @@ namespace CarRepairShopApp.View
                         UpdateEntries();
                         BtnEditService.IsEnabled = BtnDeleteService.IsEnabled = false;
                         ModifyServiceItem.IsEnabled = DeleteServiceItem.IsEnabled = false;
+                        MessageBox.Show("Выбранные услуги успешно удалены!",
+                            "Успешно!",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Information);
                     }
                     catch (Exception ex)
                     {

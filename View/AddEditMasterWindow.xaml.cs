@@ -35,6 +35,9 @@ namespace CarRepairShopApp.View
             DataContext = _currentMaster;
         }
 
+        /// <summary>
+        /// Adds a picture to the master.
+        /// </summary>
         private void BtnAddMasterPhoto_Click(object sender, RoutedEventArgs e)
         {
             if (PhotoGetter.OpenDialog())
@@ -45,6 +48,9 @@ namespace CarRepairShopApp.View
             }
         }
 
+        /// <summary>
+        /// Saves the changes.
+        /// </summary>
         private void BtnSaveMaster_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder errors = new StringBuilder();
@@ -97,6 +103,9 @@ namespace CarRepairShopApp.View
             }
         }
 
+        /// <summary>
+        /// Closes current window.
+        /// </summary>
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Действительно отменить редактирование механика?",

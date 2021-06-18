@@ -61,6 +61,7 @@ namespace CarRepairShopApp.View
                     CL_PASSCODE = int.Parse(TBoxPassCode.Text)
                 };
                 client.TypeOfCar.Add(_currentModel);
+                order.TypeOfCar = _currentModel;
                 Manager.Context.Client.Add(client);
                 Manager.Context.SaveChanges();
             }

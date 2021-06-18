@@ -23,6 +23,9 @@ namespace CarRepairShopApp.View
             DataContext = _currentCustomer;
         }
 
+        /// <summary>
+        /// Attaches an image to the customer.
+        /// </summary>
         private void AttachCustomerPhoto_Click(object sender, RoutedEventArgs e)
         {
             if (PhotoGetter.OpenDialog())
@@ -33,6 +36,9 @@ namespace CarRepairShopApp.View
             }
         }
 
+        /// <summary>
+        /// Opens the customer's cars window.
+        /// </summary>
         private void BtnAddCarForCustomer_Click(object sender, RoutedEventArgs e)
         {
             Manager.CurrentCustomer = _currentCustomer;
@@ -43,6 +49,11 @@ namespace CarRepairShopApp.View
             carWindow.ShowDialog();
         }
 
+        /// <summary>
+        /// Opens the customer's phone numbers window.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnAddCustomerPhoneNumber_Click(object sender, RoutedEventArgs e)
         {
             Manager.CurrentCustomer = _currentCustomer;
@@ -53,6 +64,9 @@ namespace CarRepairShopApp.View
             phoneWindow.ShowDialog();
         }
 
+        /// <summary>
+        /// Saves the changes and closes the window when all is OK.
+        /// </summary>
         private void BtnSaveChanges_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder builder = new StringBuilder();
@@ -97,6 +111,11 @@ namespace CarRepairShopApp.View
             }
         }
 
+        /// <summary>
+        /// Checks if the entered chars are digits. Tab is allowed to go to the next TextBox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CheckPassportNumbers(object sender, KeyEventArgs e)
         {
             if ((!(e.Key >= Key.D0) || !(e.Key <= Key.D9)) && (e.Key != Key.Tab))
@@ -106,6 +125,9 @@ namespace CarRepairShopApp.View
             }
         }
 
+        /// <summary>
+        /// Discards all the changes which were made to the customer.
+        /// </summary>
         private void BtnDiscardChanges_Click(object sender, RoutedEventArgs e)
         {
             if(MessageBox.Show("Действительно отменить "

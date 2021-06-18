@@ -20,6 +20,9 @@ namespace CarRepairShopApp.View
             ComboModel.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// Updates the DataGrids and the ComboBox.
+        /// </summary>
         private void UpdateDataGridsAndComboBox()
         {
             CustomerModelsGrid.ItemsSource = Manager.CurrentCustomer.TypeOfCar.ToList();
@@ -27,11 +30,17 @@ namespace CarRepairShopApp.View
             ComboModel.ItemsSource = Manager.Context.Auto.ToList();
         }
 
+        /// <summary>
+        /// Updates the add button state.
+        /// </summary>
         private void ModelGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             BtnAddSelectedModelsToCustomer.IsEnabled = true;
         }
 
+        /// <summary>
+        /// Adds a new model to the customer.
+        /// </summary>
         private void BtnAddNewModel_Click(object sender, RoutedEventArgs e)
         {
             Manager.Context.TypeOfCar.Add(new TypeOfCar
@@ -58,6 +67,9 @@ namespace CarRepairShopApp.View
             }
         }
 
+        /// <summary>
+        /// Adds selected models to the customer.
+        /// </summary>
         private void BtnAddSelectedModelsToCustomer_Click(object sender, RoutedEventArgs e)
         {
             List<TypeOfCar> models = ModelGrid.SelectedItems.Cast<TypeOfCar>().ToList();
@@ -81,6 +93,9 @@ namespace CarRepairShopApp.View
             UpdateDataGridsAndComboBox();
         }
 
+        /// <summary>
+        /// Closes current window.
+        /// </summary>
         private void CloseCarOfCustomerWindow_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Точно закрыть окно указания автомобилей клиента?",
@@ -93,11 +108,17 @@ namespace CarRepairShopApp.View
             }
         }
 
+        /// <summary>
+        /// Updates the delete button state.
+        /// </summary>
         private void CustomerModelsGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             BtnDeleteModelsOfCustomer.IsEnabled = true;
         }
 
+        /// <summary>
+        /// Deletes the selected models from the customer.
+        /// </summary>
         private void BtnDeleteModelsOfCustomer_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Действительно удалить выбранные автомобили клиента?",
@@ -131,6 +152,9 @@ namespace CarRepairShopApp.View
             BtnDeleteModelsOfCustomer.IsEnabled = false;
         }
 
+        /// <summary>
+        /// Check if the entered model name is correct.
+        /// </summary>
         private void ModelName_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (ModelName.Text.Length > 0 || !(ComboModel.SelectedItem is null))

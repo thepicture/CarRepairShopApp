@@ -48,6 +48,9 @@ namespace CarRepairShopApp.View
             ButtonName.Text = null;
         }
 
+        /// <summary>
+        /// Adds scan to the contract.
+        /// </summary>
         private void BtnAddContractImage_Click(object sender, RoutedEventArgs e)
         {
             if (PhotoGetter.OpenDialog())
@@ -58,6 +61,9 @@ namespace CarRepairShopApp.View
             }
         }
 
+        /// <summary>
+        /// Saves current contract.
+        /// </summary>
         private void BtnSaveContract_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder errors = new StringBuilder();
@@ -100,6 +106,9 @@ namespace CarRepairShopApp.View
             }
         }
 
+        /// <summary>
+        /// Closes current window.
+        /// </summary>
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Действительно отменить " + Title.ToLower() + "?",
@@ -113,6 +122,9 @@ namespace CarRepairShopApp.View
             }
         }
 
+        /// <summary>
+        /// Adds the contract to a customer.
+        /// </summary>
         private void BtnAddContractToCustomer_Click(object sender, RoutedEventArgs e)
         {
             Manager.CurrentContract = _currentContract;
