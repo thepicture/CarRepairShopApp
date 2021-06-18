@@ -42,7 +42,8 @@
                  VerticalAlignment="Center"
                  FontSize="20"
                  Name="TBoxPassNum"
-                 KeyDown="TBoxPassNum_KeyDown"></TextBox>
+                 KeyDown="TBoxPassNum_KeyDown"
+                 TextChanged="TBoxPassNum_TextChanged"></TextBox>
         <TextBlock Style="{StaticResource CommonBlock}"
                    Grid.Row="2"
                    Text="Номер паспорта"
@@ -51,6 +52,7 @@
         <TextBox Style="{StaticResource CommonBox}"
                  Grid.Row="2"
                  Grid.Column="1"
+                 TextChanged="TBoxPassNum_TextChanged"
                  MaxLength="6"
                  VerticalAlignment="Center"
                  FontSize="20"

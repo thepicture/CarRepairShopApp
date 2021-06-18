@@ -105,5 +105,17 @@ namespace CarRepairShopApp.View
                 Close();
             }
         }
+
+        private void TBoxPassNum_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            if (TBoxPassCode.Text.Length == 4 && TBoxPassNum.Text.Length == 6)
+            {
+                BtnSendRequest.IsEnabled = true;
+            }
+            else
+            {
+                BtnSendRequest.IsEnabled = false;
+            }
+        }
     }
 }
