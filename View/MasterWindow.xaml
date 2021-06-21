@@ -8,7 +8,7 @@
         Title="MasterWindow"
         Height="550"
         Width="1100"
-        MinHeight="350"
+        MinHeight="550"
         MinWidth="1100"
         WindowStartupLocation="CenterScreen"
         Closing="MasterWindow_Closing"
@@ -17,7 +17,7 @@
               MouseLeave="MainGrid_MouseLeave">
         <Grid.RowDefinitions>
             <RowDefinition Height="20"></RowDefinition>
-            <RowDefinition Height="150"></RowDefinition>
+            <RowDefinition Height="200"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
@@ -132,9 +132,34 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
-                        <StackPanel Orientation="Horizontal">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Показывать договоры с"
+                                   VerticalAlignment="Center"
+                           Style="{StaticResource CommonBlock}"></TextBlock>
+                            <DatePicker Margin="5"
+                         Grid.Column="1"
+                         Name="ContractPickerFromDate"
+                         SelectedDateChanged="ContractPickerFromDate_SelectedDateChanged"></DatePicker>
+                            <TextBlock Text="по"
+                                   VerticalAlignment="Center"
+                                   Grid.Column="2"
+                           Style="{StaticResource CommonBlock}"></TextBlock>
+                            <DatePicker Margin="5"
+                         Grid.Column="3"
+                         Name="ContractPickerToDate"
+                         SelectedDateChanged="ContractPickerFromDate_SelectedDateChanged"></DatePicker>
+                        </Grid>
+                        <StackPanel Orientation="Horizontal"
+                                    Grid.Row="1">
                             <Button Width="90"
                             Content="Сформировать"
                             Name="BtnAddContract"
@@ -152,7 +177,7 @@
                         </StackPanel>
                         <DataGrid Name="ContractGrid"
                                   SelectionChanged="ContractGrid_SelectionChanged"
-                                  Grid.Row="1">
+                                  Grid.Row="2">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Дата формирования"
                                             Binding="{Binding CO_DATE}"
@@ -182,12 +207,36 @@
                           Margin="5"
                           Grid.Row="1"
                           Grid.Column="0">
-                <Grid>
+                <Grid Grid.Row="2">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <StackPanel Grid.Row="0"
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Показывать заказы с"
+                                   VerticalAlignment="Center"
+                           Style="{StaticResource CommonBlock}"></TextBlock>
+                        <DatePicker Margin="5"
+                         Grid.Column="1"
+                         Name="OrderPickerFromDate"
+                         SelectedDateChanged="OrderPickerFromDate_SelectedDateChanged"></DatePicker>
+                        <TextBlock Text="по"
+                                   VerticalAlignment="Center"
+                                   Grid.Column="2"
+                           Style="{StaticResource CommonBlock}"></TextBlock>
+                        <DatePicker Margin="5"
+                         Grid.Column="3"
+                         Name="OrderPickerToDate"
+                         SelectedDateChanged="OrderPickerFromDate_SelectedDateChanged"></DatePicker>
+                    </Grid>
+                    <StackPanel Grid.Row="1"
                     Orientation="Horizontal"
                     HorizontalAlignment="Center">
                         <Button Width="80"

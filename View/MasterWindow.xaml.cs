@@ -443,5 +443,28 @@ namespace CarRepairShopApp.View
         {
             ServiceReportFormer.FormReport();
         }
+
+        /// <summary>
+        /// Finds contracts by its date.
+        /// </summary>
+        private void TBoxContractSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ContractGrid.ItemsSource = Manager.Context.Contract.ToList().Where(o => o.CO_DATE > ContractPickerFromDate.SelectedDate
+            && o.CO_DATE < ContractPickerToDate.SelectedDate);
+        }
+
+        /// <summary>
+        /// Finds orders by date interval.
+        /// </summary>
+        private void OrderPickerFromDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            OrdersGrid.ItemsSource = Manager.Context.Order.ToList().Where(o => o.O_CREATEDATE > OrderPickerFromDate.SelectedDate
+            && o.O_CREATEDATE < OrderPickerToDate.SelectedDate);
+        }
+
+        private void ContractPickerFromDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
