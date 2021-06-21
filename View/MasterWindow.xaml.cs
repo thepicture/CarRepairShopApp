@@ -42,6 +42,9 @@ namespace CarRepairShopApp.View
             DatabaseBackupSaver.Save(filePath);
         }
 
+        /// <summary>
+        /// Updates all datagrids and removes selection.
+        /// </summary>
         private void UpdateEntries()
         {
             OrdersGrid.SelectedItems.Clear();
@@ -103,11 +106,19 @@ namespace CarRepairShopApp.View
             InitializeUserPhoto();
         }
 
+        /// <summary>
+        /// Closes current window.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
+        /// <summary>
+        /// Creates the report about customers.
+        /// </summary>
         private void CustomersReportForm_Click(object sender, RoutedEventArgs e)
         {
             string filePath = FolderGetter.GetSelectedPath();
@@ -182,6 +193,9 @@ namespace CarRepairShopApp.View
             }
         }
 
+        /// <summary>
+        /// Add a new contract.
+        /// </summary>
         private void BtnAddContract_Click(object sender, RoutedEventArgs e)
         {
             AddEditContractWindow contractWindow = new AddEditContractWindow(null)
@@ -192,6 +206,9 @@ namespace CarRepairShopApp.View
             UpdateEntries();
         }
 
+        /// <summary>
+        /// Edit the selected contract.
+        /// </summary>
         private void BtnEditContract_Click(object sender, RoutedEventArgs e)
         {
             Contract selectedContract = ContractGrid.SelectedItem as Contract;
@@ -203,6 +220,9 @@ namespace CarRepairShopApp.View
             UpdateEntries();
         }
 
+        /// <summary>
+        /// Delete the selected contracts.
+        /// </summary>
         private void BtnDeleteContract_Click(object sender, RoutedEventArgs e)
         {
             List<Contract> contracts = ContractGrid.SelectedItems.Cast<Contract>().ToList();
@@ -235,6 +255,9 @@ namespace CarRepairShopApp.View
             }
         }
 
+        /// <summary>
+        /// If selected items is 1, then edit is enabled, otherwise no.
+        /// </summary>
         private void ContractGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (ContractGrid.SelectedItems.Count != 1)
@@ -248,6 +271,9 @@ namespace CarRepairShopApp.View
             BtnDeleteContract.IsEnabled = DeleteContractItem.IsEnabled = true;
         }
 
+        /// <summary>
+        /// Add a new order.
+        /// </summary>
         private void BtnAddOrder_Click(object sender, RoutedEventArgs e)
         {
             AddEditOrderWindow orderWindow = new AddEditOrderWindow(null)
@@ -258,6 +284,9 @@ namespace CarRepairShopApp.View
             UpdateEntries();
         }
 
+        /// <summary>
+        /// Edit the selected order.
+        /// </summary>
         private void BtnEditOrder_Click(object sender, RoutedEventArgs e)
         {
             Order order = OrdersGrid.SelectedItem as Order;
@@ -269,6 +298,9 @@ namespace CarRepairShopApp.View
             UpdateEntries();
         }
 
+        /// <summary>
+        /// Deletes the selected orders.
+        /// </summary>
         private void BtnDeleteOrder_Click(object sender, RoutedEventArgs e)
         {
             List<Order> orders = OrdersGrid.SelectedItems.Cast<Order>().ToList();
@@ -305,6 +337,9 @@ namespace CarRepairShopApp.View
             }
         }
 
+        /// <summary>
+        /// User can edit the selected order only if selected items count is 1.
+        /// </summary>
         private void OrdersGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (OrdersGrid.SelectedItems.Count != 1)
@@ -321,6 +356,9 @@ namespace CarRepairShopApp.View
             }
         }
 
+        /// <summary>
+        /// Checks if user really wants to close current session.
+        /// </summary>
         private void MasterWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (MessageBox.Show("Точно завершить текущую сессию пользователя "
@@ -369,6 +407,9 @@ namespace CarRepairShopApp.View
             }
         }
 
+        /// <summary>
+        /// Add a new customer.
+        /// </summary>
         private void BtnAddCustomer_Click(object sender, RoutedEventArgs e)
         {
             AddEditCustomerWindow customerWindow = new AddEditCustomerWindow(null)
@@ -379,6 +420,9 @@ namespace CarRepairShopApp.View
             UpdateEntries();
         }
 
+        /// <summary>
+        /// Opens edit window for selected customer.
+        /// </summary>
         private void BtnEditCustomer_Click(object sender, RoutedEventArgs e)
         {
             Client client = CustomersGrid.SelectedItem as Client;
@@ -390,6 +434,9 @@ namespace CarRepairShopApp.View
             UpdateEntries();
         }
 
+        /// <summary>
+        /// Deletes selected customers.
+        /// </summary>
         private void BtnDeleteCustomer_Click(object sender, RoutedEventArgs e)
         {
             List<Client> clients = CustomersGrid.SelectedItems.Cast<Client>().ToList();
@@ -426,6 +473,9 @@ namespace CarRepairShopApp.View
             }
         }
 
+        /// <summary>
+        /// Enables edit buttons if count is 1.
+        /// </summary>
         private void CustomersGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (CustomersGrid.SelectedItems.Count != 1)
@@ -445,15 +495,6 @@ namespace CarRepairShopApp.View
         }
 
         /// <summary>
-        /// Finds contracts by its date.
-        /// </summary>
-        private void TBoxContractSearch_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            ContractGrid.ItemsSource = Manager.Context.Contract.ToList().Where(o => o.CO_DATE > ContractPickerFromDate.SelectedDate
-            && o.CO_DATE < ContractPickerToDate.SelectedDate);
-        }
-
-        /// <summary>
         /// Finds orders by date interval.
         /// </summary>
         private void OrderPickerFromDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
@@ -462,9 +503,13 @@ namespace CarRepairShopApp.View
             && o.O_CREATEDATE < OrderPickerToDate.SelectedDate);
         }
 
+        /// <summary>
+        /// Finds contracts by its date.
+        /// </summary>
         private void ContractPickerFromDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            ContractGrid.ItemsSource = Manager.Context.Contract.ToList().Where(o => o.CO_DATE > ContractPickerFromDate.SelectedDate
+           && o.CO_DATE < ContractPickerToDate.SelectedDate);
         }
     }
 }
