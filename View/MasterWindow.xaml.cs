@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using Word = Microsoft.Office.Interop.Word;
 
 namespace CarRepairShopApp.View
@@ -17,6 +18,10 @@ namespace CarRepairShopApp.View
     /// </summary>
     public partial class MasterWindow : Window
     {
+        private readonly DispatcherTimer timer = new DispatcherTimer
+        {
+            Interval = TimeSpan.FromHours(3) // Every three hours
+        };
         public MasterWindow()
         {
             InitializeComponent();
@@ -24,6 +29,17 @@ namespace CarRepairShopApp.View
             UserNameBlock.Text = Manager.CurrentUser.USER_NAME;
             UserRoleBlock.Text = "Роль: " + Manager.CurrentUser.Role.NAME;
             UpdateEntries();
+            timer.Tick += Timer_Tick;
+            timer.Start();
+        }
+
+        private readonly string filePath = "C:\\Users\\user\\Documents"; // Path for saving the backup.
+        /// <summary>
+        /// Creates backup of the database for every three hours without ability to change this process.
+        /// </summary>
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            DatabaseBackupSaver.Save(filePath);
         }
 
         private void UpdateEntries()

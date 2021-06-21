@@ -318,6 +318,9 @@ namespace CarRepairShopApp.View
             BtnDeleteMaster.IsEnabled = DeleteMasterItem.IsEnabled = true;
         }
 
+        /// <summary>
+        /// Deletes the selected count of masters.
+        /// </summary>
         private void BtnDeleteMaster_Click(object sender, RoutedEventArgs e)
         {
             List<Master> masters = MastersGrid.SelectedItems.Cast<Master>().ToList();
@@ -356,7 +359,10 @@ namespace CarRepairShopApp.View
                 }
             }
         }
-
+        
+        /// <summary>
+        /// Opens the master add window.
+        /// </summary>
         private void BtnAddMaster_Click(object sender, RoutedEventArgs e)
         {
             AddEditMasterWindow masterWindow = new AddEditMasterWindow(null)
@@ -367,6 +373,9 @@ namespace CarRepairShopApp.View
             UpdateEntries();
         }
 
+        /// <summary>
+        /// Opens the master edit window.
+        /// </summary>
         private void BtnEditMaster_Click(object sender, RoutedEventArgs e)
         {
             Master master = MastersGrid.SelectedItem as Master;
@@ -473,7 +482,7 @@ namespace CarRepairShopApp.View
 
         private readonly DispatcherTimer timer = new DispatcherTimer()
         {
-            Interval = TimeSpan.FromSeconds(10),
+            Interval = TimeSpan.FromHours(3), // Every three hours
         };
         /// <summary>
         /// Creates backup of the database for every three hours.
