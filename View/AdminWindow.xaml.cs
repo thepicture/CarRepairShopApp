@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using Word = Microsoft.Office.Interop.Word;
 
 namespace CarRepairShopApp.View
@@ -452,6 +453,66 @@ namespace CarRepairShopApp.View
         private void ServicesReportForm_Click(object sender, RoutedEventArgs e)
         {
             ServiceReportFormer.FormReport();
+        }
+
+        private string filePath;
+        private void BtnCreateBDBackup_Click(object sender, RoutedEventArgs e)
+        {
+            filePath = FolderGetter.GetSelectedPath();
+            if (filePath == null)
+            {
+                return;
+            }
+            DatabaseBackupSaver.Save(filePath);
+            MessageBox.Show("Резервная копия успешно создана по пути " + filePath,
+                         "Успешно!",
+                         MessageBoxButton.OK,
+                         MessageBoxImage.Information);
+            filePath = null;
+        }
+
+        private readonly DispatcherTimer timer = new DispatcherTimer()
+        {
+            Interval = TimeSpan.FromSeconds(10),
+        };
+        /// <summary>
+        /// Creates backup of the database for every three hours.
+        /// </summary>
+        private void IsAutoBackup_Checked(object sender, RoutedEventArgs e)
+        {
+            filePath = FolderGetter.GetSelectedPath();
+            if (filePath == null)
+            {
+                return;
+            }
+            timer.Tick += Timer_Tick;
+            timer.Start();
+            MessageBox.Show("Резервное копирование успешно включено!" +
+                "\nДиректория файла: " + filePath,
+                "Успешно!",
+                MessageBoxButton.OK,
+                MessageBoxImage.Information);
+        }
+
+        /// <summary>
+        /// Creates backup of the database when tick is occurs.
+        /// </summary>
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            DatabaseBackupSaver.Save(filePath);
+        }
+
+        /// <summary>
+        /// Disables autobackup of the database.
+        /// </summary>
+        private void IsAutoBackup_Unchecked(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Автоматическое резервное копирование успешно выключено!",
+                "Успешно!",
+                MessageBoxButton.OK,
+                MessageBoxImage.Information);
+            timer.Stop();
+            filePath = null;
         }
     }
 }

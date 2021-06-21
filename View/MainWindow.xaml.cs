@@ -3,6 +3,8 @@ using CarRepairShopApp.View;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -24,8 +26,12 @@ namespace CarRepairShopApp
         {
             InitializeComponent();
             ComboLogin.ItemsSource = Manager.Context.User.ToList();
-            /// A code above uses recurrent formula. The code loads all except Administrator role.
-            ComboRole.ItemsSource = Manager.Context.Role.ToList().Take(Manager.Context.Role.ToList().Count).Reverse().Take(Manager.Context.Role.ToList().Count - 2).Reverse();
+            /// The code above uses recurrent formula. The code loads all except administrator role.
+            ComboRole.ItemsSource = Manager.Context.Role.ToList()
+                .Take(Manager.Context.Role.ToList().Count)
+                .Reverse()
+                .Take(Manager.Context.Role.ToList().Count - 2)
+                .Reverse();
         }
 
         /// <summary>

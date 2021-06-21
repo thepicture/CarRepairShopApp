@@ -63,6 +63,15 @@
                                   Click="BtnDeleteMaster_Click"
                                   IsEnabled="False"></MenuItem>
                     </MenuItem>
+                    <MenuItem Header="Резервное копирование">
+                        <MenuItem Header="Создать резервную копию базы данных"
+                                  Name="BtnCreateBDBackup"
+                                  Click="BtnCreateBDBackup_Click"></MenuItem>
+                        <CheckBox Content="Автоматическое создание резервной копии каждые 3 часа"
+                                  Name="IsAutoBackup"
+                                  Checked="IsAutoBackup_Checked"
+                                  Unchecked="IsAutoBackup_Unchecked"></CheckBox>
+                    </MenuItem>
                 </MenuItem>
                 <MenuItem Header="Отчеты">
                     <MenuItem Header="Механики">

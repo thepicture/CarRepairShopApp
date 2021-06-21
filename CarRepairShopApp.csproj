@@ -46,6 +46,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
@@ -129,6 +130,7 @@
     <Compile Include="Model\User.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\DatabaseBackupSaver.cs" />
     <Compile Include="ViewModel\FolderGetter.cs" />
     <Compile Include="ViewModel\ReportExceptionHandler.cs" />
     <Compile Include="ViewModel\PhotoGetter.cs" />
