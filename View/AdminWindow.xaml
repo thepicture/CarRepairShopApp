@@ -6,11 +6,11 @@
         xmlns:local="clr-namespace:CarRepairShopApp.View"
         mc:Ignorable="d"
         Title="AdminWindow"
-        Height="450"
+        Height="550"
         Width="800"
         WindowStartupLocation="CenterScreen"
         Name="MainAdminWindow"
-        MinHeight="450"
+        MinHeight="550"
         MinWidth="700"
         Closing="MainAdminWindow_Closing"
         Background="WhiteSmoke">
@@ -18,7 +18,7 @@
           MouseLeave="MainGrid_MouseLeave">
         <Grid.RowDefinitions>
             <RowDefinition Height="20"></RowDefinition>
-            <RowDefinition Height="150"></RowDefinition>
+            <RowDefinition Height="200"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
@@ -123,9 +123,23 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <StackPanel Orientation="Horizontal">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Поиск по наименованию"
+                           Style="{StaticResource CommonBlock}"></TextBlock>
+                        <TextBox Margin="5"
+                         Grid.Column="1"
+                         Name="TBoxServiceSearch"
+                         TextChanged="TBoxServiceSearch_TextChanged"></TextBox>
+                    </Grid>
+                    <StackPanel Orientation="Horizontal"
+                                Grid.Row="1">
                         <Button Width="80"
                             Content="Добавить"
                             Name="BtnAddService"
@@ -142,7 +156,7 @@
                             Click="BtnDeleteService_Click"></Button>
                     </StackPanel>
                     <DataGrid Name="ServiceGrid"
-                          Grid.Row="1"
+                          Grid.Row="2"
                           SelectionChanged="ServiceGrid_SelectionChanged">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Услуга"
@@ -160,71 +174,88 @@
                 </Grid>
             </GroupBox>
         </Grid>
+       
         <GroupBox Header="Список мастеров"
                       Margin="5"
                       Grid.Row="2">
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                <StackPanel Orientation="Horizontal"
-                                HorizontalAlignment="Center">
-                    <Button Width="80"
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Поиск по ФИО"
+                           Style="{StaticResource CommonBlock}"></TextBlock>
+                        <TextBox Margin="5"
+                         Grid.Column="1"
+                         Name="TBoxMasterSearch"
+                         TextChanged="TBoxMasterSearch_TextChanged"></TextBox>
+                    </Grid>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Grid.Row="1">
+                        <Button Width="80"
                                 Height="20"
                                 Content="Добавить"
                                 Name="BtnAddMaster"
                                 Click="BtnAddMaster_Click"></Button>
-                    <Button Width="80"
+                        <Button Width="80"
                                 Height="20"
                                 Content="Изменить"
                                 Name="BtnEditMaster"
                                 IsEnabled="False"
                                 Click="BtnEditMaster_Click"></Button>
-                    <Button Width="80"
+                        <Button Width="80"
                                 Height="20"
                                 Content="Удалить"
                                 Name="BtnDeleteMaster"
                                 Click="BtnDeleteMaster_Click"
                                 IsEnabled="False"></Button>
-                </StackPanel>
-                <Grid Grid.Row="3">
-                    <DataGrid Name="MastersGrid"
+                    </StackPanel>
+                    <Grid Grid.Row="3">
+                        <DataGrid Name="MastersGrid"
                                   SelectionChanged="MastersGrid_SelectionChanged"
                                   Grid.Row="1">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="ФИО мастера"
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ФИО мастера"
                                         Binding="{Binding M_NAME}"
                                         Width="*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Стаж работы"
+                                <DataGridTextColumn Header="Стаж работы"
                                         Binding="{Binding M_EXPERIENCE}"
                                         Width="*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Номер серии паспорта"
+                                <DataGridTextColumn Header="Номер серии паспорта"
                                         Binding="{Binding M_PASSNUM}"
                                         Width="*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Код паспорта"
+                                <DataGridTextColumn Header="Код паспорта"
                                         Binding="{Binding M_PASSCODE}"
                                         Width="*"></DataGridTextColumn>
-                            <DataGridTemplateColumn Header="Фотография">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Image Width="100"
+                                <DataGridTemplateColumn Header="Фотография">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Image Width="100"
                                        Height="100"
                                        Margin="5"
                                        Stretch="UniformToFill">
-                                            <Image.Source>
-                                                <Binding Path="M_PHOTO">
-                                                    <Binding.TargetNullValue>
-                                                        <ImageSource>pack://application:,,,/Resources/user_picture.png</ImageSource>
-                                                    </Binding.TargetNullValue>
-                                                </Binding>
-                                            </Image.Source>
-                                        </Image>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                                                <Image.Source>
+                                                    <Binding Path="M_PHOTO">
+                                                        <Binding.TargetNullValue>
+                                                            <ImageSource>pack://application:,,,/Resources/user_picture.png</ImageSource>
+                                                        </Binding.TargetNullValue>
+                                                    </Binding>
+                                                </Image.Source>
+                                            </Image>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
                 </Grid>
             </Grid>
         </GroupBox>

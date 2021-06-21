@@ -359,7 +359,7 @@ namespace CarRepairShopApp.View
                 }
             }
         }
-        
+
         /// <summary>
         /// Opens the master add window.
         /// </summary>
@@ -522,6 +522,24 @@ namespace CarRepairShopApp.View
                 MessageBoxImage.Information);
             timer.Stop();
             filePath = null;
+        }
+
+        /// <summary>
+        /// Finds services by its name.
+        /// </summary>
+        private void TBoxServiceSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ServiceGrid.ItemsSource = Manager.Context.Service.ToList().Where(s => s.SE_NAME.ToLower()
+            .Contains(TBoxServiceSearch.Text.ToLower()));
+        }
+
+        /// <summary>
+        /// Finds masters by their name.
+        /// </summary>
+        private void TBoxMasterSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            MastersGrid.ItemsSource = Manager.Context.Master.ToList().Where(m => m.M_NAME.ToLower()
+            .Contains(TBoxMasterSearch.Text.ToLower()));
         }
     }
 }
