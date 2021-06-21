@@ -105,5 +105,21 @@ namespace CarRepairShopApp.View
                 Close();
             }
         }
+
+        /// <summary>
+        /// Finds cars by model name.
+        /// </summary>
+        private void CarFinder_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ModelGrid.ItemsSource = Manager.Context.TypeOfCar.ToList().Where(t => t.T_NAME.ToLower().Contains(CarFinder.Text.ToLower()));
+        }
+
+        /// <summary>
+        /// Finds cars of current service by model name.
+        /// </summary>
+        private void ServiceOfCarFinder_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ServiceModelGrid.ItemsSource = Manager.CurrentService.ServiceOfModel.ToList().Where(t => t.TypeOfCar.T_NAME.ToLower().Contains(ServiceOfCarFinder.Text.ToLower()));
+        }
     }
 }

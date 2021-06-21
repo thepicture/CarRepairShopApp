@@ -1,5 +1,4 @@
 ﻿using CarRepairShopApp.Model;
-using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -80,6 +79,24 @@ namespace CarRepairShopApp.View
             }
             BtnDeleteCustomerFromContract.IsEnabled = false;
             UpdateDataGrids();
+        }
+
+        /// <summary>
+        /// Finds the customer by name.
+        /// </summary>
+        private void CustomerFinder_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CustomerGrid.ItemsSource = Manager.Context.Client.ToList()
+                .Where(c => c.CL_NAME.ToLower().Contains(CustomerFinder.Text.ToLower()));
+        }
+
+        /// <summary>
+        /// Finds the customer of contract by name.
+        /// </summary>
+        private void ContractOfCustomerFinder_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ContractsOfCustomersGrid.ItemsSource = Manager.Context.Client.ToList()
+                .Where(c => c.CL_NAME.ToLower().Contains(ContractOfCustomerFinder.Text.ToLower()));
         }
     }
 }

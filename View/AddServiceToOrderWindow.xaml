@@ -19,10 +19,24 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <GroupBox Header="Список всех услуг">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Поиск по наименованию"
+                           Style="{StaticResource CommonBlock}"></TextBlock>
+                <TextBox Margin="5"
+                         Grid.Column="1"
+                         Name="ServiceFinder"
+                         TextChanged="ServiceFinder_TextChanged"></TextBox>
+            </Grid>
+            <GroupBox Header="Список всех услуг"
+                      Grid.Row="1">
                 <DataGrid Name="ServiceGrid"
                           SelectionChanged="ServiceGrid_SelectionChanged">
                     <DataGrid.Columns>
@@ -38,21 +52,30 @@
             <Button Content="Добавить выбранные услуги в заказ"
                     Name="BtnAddSelectedServicesToOrder"
                     IsEnabled="False"
-                    Grid.Row="1"
+                    Grid.Row="2"
                     Click="BtnAddSelectedServicesToOrder_Click"></Button>
         </Grid>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <Button Content="Закрыть"
-                    VerticalAlignment="Top"
-                    Grid.Row="2"
-                    Name="CloseWindow"
-                    Click="CloseWindow_Click"></Button>
-            <GroupBox Header="Список услуг текущего заказа">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Поиск по наименованию"
+                           Style="{StaticResource CommonBlock}"></TextBlock>
+                <TextBox Margin="5"
+                         Grid.Column="1"
+                         Name="ServiceOfOrderFinder"
+                         TextChanged="ServiceOfOrderFinder_TextChanged"></TextBox>
+            </Grid>
+            <GroupBox Header="Список услуг текущего заказа"
+                      Grid.Row="1">
                 <DataGrid Name="ServicesOfOrderGrid"
                   SelectionChanged="ServicesOfOrderGrid_SelectionChanged"
                   Grid.Column="1"
@@ -71,10 +94,15 @@
                 </DataGrid>
             </GroupBox>
             <Button Content="Удалить выбранные услуги из текущего заказа"
-                    Grid.Row="1"
+                    Grid.Row="2"
                     IsEnabled="False"
                     Name="BtnDeleteServicesFromOrder"
                     Click="BtnDeleteServicesFromOrder_Click"></Button>
+            <Button Content="Закрыть"
+                    VerticalAlignment="Top"
+                    Grid.Row="3"
+                    Name="CloseWindow"
+                    Click="CloseWindow_Click"></Button>
         </Grid>
     </Grid>
 </Window>

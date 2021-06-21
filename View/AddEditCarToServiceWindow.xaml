@@ -19,11 +19,25 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Поиск по модели"
+                           Style="{StaticResource CommonBlock}"></TextBlock>
+                <TextBox Margin="5"
+                         Grid.Column="1"
+                         Name="CarFinder"
+                         TextChanged="CarFinder_TextChanged"></TextBox>
+            </Grid>
             <GroupBox Header="Все модели автомобилей"
-                      Margin="5">
+                      Margin="5"
+                      Grid.Row="1">
                 <DataGrid Name="ModelGrid"
                       SelectionMode="Single"
                       SelectionChanged="ModelGrid_SelectionChanged">
@@ -37,7 +51,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </GroupBox>
-            <StackPanel Grid.Row="1">
+            <StackPanel Grid.Row="2">
                 <GroupBox Header="Цена услуги для выбранной модели (руб.)"
                           Margin="5">
                     <TextBox MaxLength="20"
@@ -52,17 +66,26 @@
         </Grid>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <Button Content="Закрыть"
-                    VerticalAlignment="Top"
-                    Grid.Row="2"
-                    Name="CloseEditCarToServiceWindow"
-                    Click="CloseEditCarToServiceWindow_Click"></Button>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Поиск по модели"
+                           Style="{StaticResource CommonBlock}"></TextBlock>
+                <TextBox Margin="5"
+                         Grid.Column="1"
+                         Name="ServiceOfCarFinder"
+                         TextChanged="ServiceOfCarFinder_TextChanged"></TextBox>
+            </Grid>
             <GroupBox Header="Цена услуги для конкретных моделей"
-                      Margin="5">
+                      Margin="5"
+                      Grid.Row="1">
                 <DataGrid Name="ServiceModelGrid"
                   SelectionChanged="ServiceModelGrid_SelectionChanged"
                   Grid.Column="1"
@@ -81,10 +104,15 @@
                 </DataGrid>
             </GroupBox>
             <Button Content="Убрать выбранные модели из текущей услуги"
-                    Grid.Row="1"
+                    Grid.Row="2"
                     IsEnabled="False"
                     Name="BtnDeleteModelFromService"
                     Click="BtnDeleteModelFromService_Click"></Button>
+            <Button Content="Закрыть"
+                    VerticalAlignment="Top"
+                    Grid.Row="3"
+                    Name="CloseEditCarToServiceWindow"
+                    Click="CloseEditCarToServiceWindow_Click"></Button>
         </Grid>
     </Grid>
 </Window>

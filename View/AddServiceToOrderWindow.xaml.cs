@@ -62,5 +62,23 @@ namespace CarRepairShopApp.View
             UpdateDataGrids();
             BtnDeleteServicesFromOrder.IsEnabled = false;
         }
+
+        /// <summary>
+        /// Finds services by its name.
+        /// </summary>
+        private void ServiceFinder_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ServiceGrid.ItemsSource = Manager.Context.Service.ToList().Where(s => s.SE_NAME.ToLower()
+            .Contains(ServiceFinder.Text.ToLower()));
+        }
+
+        /// <summary>
+        /// Finds services of order by its name.
+        /// </summary>
+        private void ServiceOfOrderFinder_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ServicesOfOrderGrid.ItemsSource = Manager.CurrentOrder.Service.ToList().Where(s => s.SE_NAME.ToLower()
+            .Contains(ServiceOfOrderFinder.Text.ToLower()));
+        }
     }
 }

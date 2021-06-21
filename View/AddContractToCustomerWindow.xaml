@@ -19,10 +19,24 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <GroupBox Header="Список всех клиентов">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Поиск по ФИО"
+                           Style="{StaticResource CommonBlock}"></TextBlock>
+                <TextBox Margin="5"
+                         Grid.Column="1"
+                         Name="CustomerFinder"
+                         TextChanged="CustomerFinder_TextChanged"></TextBox>
+            </Grid>
+            <GroupBox Header="Список всех клиентов"
+                      Grid.Row="1">
                 <DataGrid Name="CustomerGrid"
                       SelectionChanged="CustomerGrid_SelectionChanged">
                     <DataGrid.Columns>
@@ -41,25 +55,34 @@
             <Button Content="Добавить выбранных клиентов"
                     Name="BtnAddSelectedClientsToContract"
                     IsEnabled="False"
-                    Grid.Row="1"
+                    Grid.Row="3"
                     Click="BtnAddSelectedClientsToContract_Click"></Button>
         </Grid>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <Button Content="Закрыть"
-                    VerticalAlignment="Top"
-                    Grid.Row="2"
-                    Name="CloseWindow"
-                    Click="CloseWindow_Click"></Button>
-            <GroupBox Header="Список клиентов для текущего договора">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Поиск по ФИО"
+                           Style="{StaticResource CommonBlock}"></TextBlock>
+                <TextBox Margin="5"
+                         Grid.Column="1"
+                         Name="ContractOfCustomerFinder"
+                         TextChanged="ContractOfCustomerFinder_TextChanged"></TextBox>
+            </Grid>
+            <GroupBox Header="Список клиентов для текущего договора"
+                      Grid.Row="1">
                 <DataGrid Name="ContractsOfCustomersGrid"
                   SelectionChanged="ContractsOfCustomersGrid_SelectionChanged"
                   Grid.Column="1"
-                  Grid.Row="0">
+                  Grid.Row="1">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="ФИО"
                                         Binding="{Binding CL_NAME}"
@@ -74,10 +97,15 @@
                 </DataGrid>
             </GroupBox>
             <Button Content="Отменить контракт с выбранными клиентами"
-                    Grid.Row="1"
+                    Grid.Row="2"
                     IsEnabled="False"
                     Name="BtnDeleteCustomerFromContract"
                     Click="BtnDeleteCustomerFromContract_Click"></Button>
+            <Button Content="Закрыть"
+                    VerticalAlignment="Top"
+                    Grid.Row="3"
+                    Name="CloseWindow"
+                    Click="CloseWindow_Click"></Button>
         </Grid>
     </Grid>
 </Window>
