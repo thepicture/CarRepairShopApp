@@ -126,7 +126,7 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <GroupBox Header="Список контрактов"
+                <GroupBox Header="Список договоров"
                               Margin="5"
                               Grid.Row="1">
                     <Grid>
@@ -302,9 +302,22 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Поиск по ФИО"
+                           Style="{StaticResource CommonBlock}"></TextBlock>
+                            <TextBox Margin="5"
+                         Grid.Column="1"
+                         Name="TBoxClientSearch"
+                         TextChanged="TBoxClientSearch_TextChanged"></TextBox>
+                        </Grid>
+                        <StackPanel Grid.Row="1"
                                         Grid.Column="1"
                                         Orientation="Horizontal"
                                         HorizontalAlignment="Center">
@@ -328,7 +341,7 @@
                         </StackPanel>
                         <DataGrid Name="CustomersGrid"
                                       SelectionChanged="CustomersGrid_SelectionChanged"
-                                      Grid.Row="1">
+                                      Grid.Row="2">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="ФИО"
                                         Binding="{Binding CL_NAME}"

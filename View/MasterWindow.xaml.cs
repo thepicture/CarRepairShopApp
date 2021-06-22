@@ -504,12 +504,20 @@ namespace CarRepairShopApp.View
         }
 
         /// <summary>
-        /// Finds contracts by its date.
+        /// Finds contracts by date interval.
         /// </summary>
         private void ContractPickerFromDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             ContractGrid.ItemsSource = Manager.Context.Contract.ToList().Where(o => o.CO_DATE > ContractPickerFromDate.SelectedDate
            && o.CO_DATE < ContractPickerToDate.SelectedDate);
+        }
+
+        /// <summary>
+        /// Finds client by the entered name.
+        /// </summary>
+        private void TBoxClientSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CustomersGrid.ItemsSource = Manager.Context.Client.ToList().Where(c => c.CL_NAME.ToLower().Contains(TBoxClientSearch.Text.ToLower()));
         }
     }
 }
