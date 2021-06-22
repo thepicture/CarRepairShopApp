@@ -126,7 +126,7 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <GroupBox Header="Контракты"
+                <GroupBox Header="Список контрактов"
                               Margin="5"
                               Grid.Row="1">
                     <Grid>
@@ -203,7 +203,7 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <GroupBox Header="Заказы"
+            <GroupBox Header="Список заказов"
                           Margin="5"
                           Grid.Row="1"
                           Grid.Column="0">
@@ -259,7 +259,7 @@
                     </StackPanel>
                     <DataGrid Name="OrdersGrid"
                               SelectionChanged="OrdersGrid_SelectionChanged"
-                              Grid.Row="1">
+                              Grid.Row="2">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Дата создания"
                                         Binding="{Binding O_CREATEDATE}"
@@ -295,7 +295,7 @@
             </GroupBox>
             <Grid Grid.Row="1"
                       Grid.Column="1">
-                <GroupBox Header="Клиенты"
+                <GroupBox Header="Список клиентов"
                               Margin="5"
                               Grid.Row="1"
                               Grid.Column="1">

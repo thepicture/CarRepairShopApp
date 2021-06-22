@@ -117,7 +117,7 @@
                     </Grid>
                 </Grid>
             </GroupBox>
-            <GroupBox Header="Услуги"
+            <GroupBox Header="Список услуг"
                           Margin="5"
                           Grid.Column="1">
                 <Grid>

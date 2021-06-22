@@ -1,4 +1,5 @@
 ﻿using CarRepairShopApp.Model;
+using System;
 using System.Windows;
 
 namespace CarRepairShopApp.ViewModel
@@ -10,10 +11,22 @@ namespace CarRepairShopApp.ViewModel
             if (PhotoGetter.OpenDialog())
             {
                 Manager.CurrentUser.USER_PHOTO = PhotoGetter.ImageInBytes;
-                MessageBox.Show("Аватар успешно изменён!",
-                    "Успешно!",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Information);
+                try
+                {
+                    Manager.Context.SaveChanges();
+                    MessageBox.Show("Аватар успешно изменён!",
+                        "Успешно!",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Information);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("При прикреплении аватара произошла ошибка!" +
+                        "\nПожалуйста, попробуйте прикрепить фото ещё раз.",
+                        "Ошибка",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                }
             }
         }
         public static void DeletePicture()
